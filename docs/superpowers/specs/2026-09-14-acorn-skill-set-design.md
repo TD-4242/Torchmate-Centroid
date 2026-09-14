@@ -33,13 +33,14 @@ Sub-project sequence for the whole effort (each gets its own spec):
 ## Sources
 
 Stored in `docs/official/`. Page citations use the **printed page number** in the manual's
-footer, not the PDF page index.
+footer, not the PDF page index. The PLC manual prints no page numbers, so its citations use
+the PDF page index, written `PDF p.N`.
 
 | File | Document | Revision | Pages | Tracked |
 | --- | --- | --- | --- | --- |
 | `centroid_acorn_install_manual.pdf` | Acorn CNC Installation Manual | rev6 11-9-23, CNC12 v5.0+ | 138 | yes (16 MB) |
 | `paired_axes_acorn_user_guide.pdf` | Acorn CNC12 Axis Pairing and Squaring | rev19 10-27-25, CNC12 v5.2x+ | 41 | yes (21 MB) |
-| `centroid_plc_programming_manual.pdf` | CNC12 PLC Programming Manual | CNC12 v5.x+, created 2026-07-24 | 132 | yes (3 MB) |
+| `centroid_plc_programming_manual.pdf` | CNC12 PLC Programming Manual | rev8 07/24/26, CNC12 v5.x+ | 132 | yes (3 MB) |
 | `centroid_vcp_users_manual.pdf` | VCP 2.0 Users Manual | rev28 5-14-26, CNC12 v5.22+ | 64 | yes (12 MB) |
 | `centroid-cnc12-router-operator-manual.pdf` | CNC12 Router Operators Manual | CNC12 v5.42+, created 2026-07-06 | 511 | **no** (63 MB, gitignored) |
 
