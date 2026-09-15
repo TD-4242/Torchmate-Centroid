@@ -18,11 +18,11 @@ and CNC control/Wizard preferences (Acorn Install §6.1, p.71). Open it from the
 
 **Drive type**: pre-set configuration matching a specific axis motor drive make/model;
 selecting one and clicking `Load Drive` pre-populates the I/O map and other Wizard screens to
-match that drive's schematic (Acorn Install §6.2, p.72). Default on a new install is
+match that drive's schematic (Acorn Install §6.2, p.73). Default on a new install is
 `Bench Test 'Screw Terminal'`, for communication bench testing with no axis drives connected
-(Acorn Install §6.2, p.72).
+(Acorn Install §6.2, p.73).
 **Create new…**: builds a `Custom` drive type from the Wizard's current settings; custom
-drive types can be exported/imported (Acorn Install §6.2, p.72).
+drive types can be exported/imported (Acorn Install §6.2, p.73).
 
 > **IMPORTANT:** Click `Write Settings to CNC Control Configuration` after any Wizard page
 > change for it to take effect, then follow any on-screen prompts (Acorn Install §6.2, p.73).
@@ -55,9 +55,10 @@ p.76).
 p.76).
 **Label**: axis label shown on the main-screen DRO (Acorn Install §6.5, p.76).
 **Steps/Revolution**: number of motor steps (or microsteps) per one full motor-shaft
-revolution; must match the drive's own setting, not be used to tune commanded distance — e.g.
-`2000` for a 10x-microstepping drive (200 x 10), or encoder line count x 4 for a closed-loop
-drive, e.g. `4000` for a 1000-line encoder (Acorn Install §6.5, p.76).
+revolution — e.g. `2000` for a 10x-microstepping drive (200 x 10), or encoder line count x 4
+for a closed-loop drive, e.g. `4000` for a 1000-line encoder (Acorn Install §6.5, p.76); must
+match the drive's own setting, not be used to tune commanded distance (Acorn Install §6.5,
+p.77).
 **Overall Turns Ratio**: physical constant — motor turns per unit of linear travel, set by
 ballscrew/rack pitch and motor-to-ballscrew pulley reduction; see §7.11 for fine-tuning by
 measurement (Acorn Install §6.5, p.77).
@@ -228,8 +229,8 @@ Install §6.14, p.92).
 **Touchscreen**: enables touchscreen input (values: `Yes`/`No`) (Acorn Install §6.15, p.92).
 **USB Operator Control Pad**: enables a USB keyboard-emulator control pad, e.g. X-Keys (Acorn
 Install §6.15, p.92).
-**Virtual Control Panel**: shows the VCP on the display (values: `On`/`Off`) (Acorn Install
-§6.15, p.92).
+**Virtual Control Panel**: set `On` to show the VCP on the display (Acorn Install §6.15,
+p.92).
 
 ## Control Peripheral Wireless MPG Configuration (§6.16)
 
