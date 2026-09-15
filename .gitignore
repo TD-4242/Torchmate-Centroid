@@ -1,0 +1,17 @@
+# Repo root doubles as the CNC12 install directory (c:\cncr): track only allowlisted paths.
+/*
+
+!/.claude/
+/.claude/settings.local.json
+!/docs/
+!/tools/
+/tools/__pycache__/
+!/.gitattributes
+!/.gitignore
+!/CLAUDE.md
+!/LICENSE.md
+!/README.md
+
+# 63 MB vendor manual kept local-only; its .md stub is tracked.
+/docs/official/centroid-cnc12-router-operator-manual.pdf
+.superpowers/
