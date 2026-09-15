@@ -112,7 +112,9 @@ stress test (§3.4) to resolve it.
 1. Start CNC12 with the Acorn powered up.
 2. Press Reset on the Virtual Control Panel.
 3. Set home with Cycle Start; the XYZ DRO reads `0.0000` for each axis.
-4. Load `spindlebenchtest.cnc` (`F2` Load) from `C:/cncm/ncfiles`.
+4. Load `spindlebenchtest.cnc` (`F2` Load) from `C:/cncm/ncfiles` (the manual's walkthrough
+   of this step assumes a mill install; on a Router install this is `c:\cncr\ncfiles`
+   (Router Manual §1.8, p.13)).
 5. Set a digital voltage meter (DVM) to VDC and insert its leads into the H8 screw
    terminals, tightened to firmly grip the probes.
 6. With `spindlebenchtest.cnc` loaded, press Cycle Start to begin (a second press may be

@@ -60,10 +60,20 @@ for a closed-loop drive, e.g. `4000` for a 1000-line encoder (Acorn Install §6.
 match the drive's own setting, not be used to tune commanded distance (Acorn Install §6.5,
 p.77).
 **Overall Turns Ratio**: physical constant — motor turns per unit of linear travel, set by
-ballscrew/rack pitch and motor-to-ballscrew pulley reduction; see §7.11 for fine-tuning by
-measurement (Acorn Install §6.5, p.77).
+ballscrew/rack pitch and motor-to-ballscrew pulley reduction; for fine-tuning by measurement,
+see [commissioning.md](commissioning.md#fine-adjustment-of-overall-turns-ratio-73) (Acorn
+Install §6.5, p.77).
+
+> p.77 calls this section "7.11", but the manual's Chapter 7 ends at §7.5; the fine-adjustment
+> procedure it refers to is §7.3.
+
 **Lash Comp**: backlash compensation, set last, once the machine is fully configured; typical
 values zero-`.0015"` for mills, zero-`.005"` for routers; see §7.4 (Acorn Install §6.5, p.77).
+
+> The manual gives two different typical mill values: zero-`.0015"` in this field description
+> (Acorn Install §6.5, p.77) and zero-`.002"` in §7.4 (Acorn Install §7.4, p.108). Both cite
+> zero-`.005"` for routers.
+
 **Max Rate**: maximum rapid (`G0`) rate for the axis; rough estimate via
 `(max motor RPM / overall turns ratio) x 0.85` (Acorn Install §6.5, p.77).
 **Fast Jog**: axis speed in RAPID (Hare) continuous jog on the VCP (Acorn Install §6.5, p.77).
@@ -100,7 +110,9 @@ the VCP `Park` button; `Edit` opens the default `park.mac` (Acorn Install §6.6,
 See [wiring.md](wiring.md#home-and-limit-switches-57) for home/limit switch wiring and the
 Wizard input-name tables (`HomeAll`, `FirstAxishomeOk` … `FourthAxishomeOk`, etc).
 
-**Axis Pairing (§6.7).** See [axis-pairing.md](axis-pairing.md).
+## Axis Pairing (§6.7)
+
+See [axis-pairing.md](axis-pairing.md).
 
 ## Advanced Axis Configuration (§6.8)
 
@@ -244,6 +256,8 @@ p.92).
 **Step and direction output**: `Screw Terminal` (default; for AC servo drives accepting 24V
 open-collector signals, pins fixed per the Acorn schematics) or `DB25 Port` (for stepper
 drives using 5V step/direction signals — used in most cases) (Acorn Install §6.17, p.94).
+**Screw Terminal pins**: cannot be re-mapped — follow the provided Acorn schematics (Acorn
+Install §6.17, p.94).
 **DB25 pin mapping**: `Enable DB25 use default pin mapping` (the long-standing Gecko
 G540/Mach3 standard, used by most installs) or create a custom DB25 pin map for non-standard
 drives/breakout boards, avoiding a custom cable (Acorn Install §6.17, p.95).

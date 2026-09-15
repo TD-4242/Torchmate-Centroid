@@ -82,6 +82,10 @@ E-stop switch and signals (Acorn Install §5.5, p.47):
 - Wire a normally-closed E-stop button: one NC terminal to Acorn power-supply `COM` (or the spare
   `COM` on `H9`), the other NC terminal to `H1 IN8`.
 
+> The manual gives a different Output 1 relay rating elsewhere: `0.01-10A` at 125VAC or `0.01-10A`
+> at 28VDC in the App D electrical specifications (Acorn Install App D, p.129), versus up to `10A`
+> at 125VAC or `5A` at 30VDC here (Acorn Install §5.5, p.47).
+
 E-stop contactor (Acorn Install §5.5, p.47):
 - Power the E-stop contactor from a separate supply (never the Acorn logic supply) and energize it
   from Acorn Output Relay 1's NO contacts (`NoFaultOut`); fit a snubber across the contactor coil.

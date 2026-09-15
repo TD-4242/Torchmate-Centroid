@@ -106,10 +106,11 @@ booting, then settles to one pulse per second once booted and running.
 
 ## Bench test hardware setup
 
-Needed (Acorn Install §2.1, p.8): a large, well-lit bench near outlets (wood surface ideal;
-avoid bare metal, surfaces with metal shavings, and fabric/anti-static mats, which risk ESD
-damage to powered boards); a Windows 10/11 PC meeting the Centroid CNCPC minimum specs, or
-a Centroid-supplied CNCPC; a small screwdriver set; a digital multimeter.
+Needed (Acorn Install §2.1, p.8): a large, well-lit bench near outlets (a wooden surface is
+ideal; do not use metal or plastic surfaces, surfaces that may contain metal scraps or
+shavings, or fabric-covered surfaces, which risks ESD damage to powered boards); a Windows
+10/11 PC meeting the Centroid CNCPC minimum specs, or a Centroid-supplied CNCPC; a small
+screwdriver set; a digital multimeter.
 
 (Acorn Install §2.2, p.9-10)
 
