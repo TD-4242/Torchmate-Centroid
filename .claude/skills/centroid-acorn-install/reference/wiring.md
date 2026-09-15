@@ -59,6 +59,9 @@ The Acorn has 8 relay outputs; each output toggles one SPDT relay (Acorn Install
 Jumper the spare `+24VDC` terminal on `H9` to either `H1` or `H4 24V IN` (`H1` and `H4` are tied
 together internally on the Acorn) (Acorn Install §5.4, p.45).
 
+> The manual names this +24VDC junction `H4`/`H5` in §5.2 (p.44) but `H1`/`H4` in §5.4 (p.45) and
+> App D (p.129); see [hardware.md](hardware.md#io-map).
+
 ## E-Stop circuit (§5.5)
 
 E-stop basics (Acorn Install §5.5, p.46):
@@ -89,7 +92,7 @@ E-stop contactor (Acorn Install §5.5, p.47):
 Test the E-stop wiring from the Wizard's Input Definitions menu: set the `IN8 EstopOk` input to
 normally-closed (green) and write settings; cycling the switch should toggle CNC12's message
 `406 Estop detected` / `335 released`, and the PLC Diagnostic app (`Alt+I`) shows the input live
-(Acorn Install §5.5, p.48-51).
+(Acorn Install §5.5, p.49-51).
 
 ## Axis drive wiring (§5.6)
 
@@ -109,7 +112,7 @@ Two ways to connect an axis drive (Acorn Install §5.6, p.52):
 The DB25 can also connect directly to legacy PC-parallel-port-based controls via a straight-through
 cable (compatible with, e.g., the Gecko G540); for non-standard DB25 pin configurations, the Wizard
 can reassign the Acorn's DB25 pin functions instead of requiring a custom cable
-(Acorn Install §5.6, p.54). See [hardware.md](hardware.md#db25-h6-connector-pinout) for the DB25
+(Acorn Install §5.6, p.55). See [hardware.md](hardware.md#db25-h6-connector-pinout) for the DB25
 pinout.
 
 ## Home and limit switches (§5.7)
