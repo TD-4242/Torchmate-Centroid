@@ -37,6 +37,9 @@ def check_tree(root):
 
 def main(argv):
     root = Path(argv[0]) if argv else Path(__file__).resolve().parent.parent
+    if not any((root / p).exists() for p in (".claude/skills", "CLAUDE.md", "README.md")):
+        print(f"error: {root} has no .claude/skills, CLAUDE.md or README.md", file=sys.stderr)
+        return 2
     misses = check_tree(root)
     for miss in misses:
         print(miss)
