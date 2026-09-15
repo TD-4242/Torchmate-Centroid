@@ -63,6 +63,9 @@ Cautions that recur throughout:
 See [reference/troubleshooting.md](reference/troubleshooting.md) for the full symptom->fix
 table; the top-level links (Acorn Install p.5; App C, p.118):
 
+> The manual gives the knowledge base and video library links as `http://` on p.5 but
+> `https://` on App C, p.118; shown below as `https://` (Acorn Install p.5, App C, p.118).
+
 - Acorn knowledge base: https://centroidcncforum.com/viewforum.php?f=63
 - Acorn knowledge base video library: https://centroidcncforum.com/viewforum.php?f=61
 - All Acorn documentation: https://centroidcncforum.com/viewtopic.php?f=60&t=3397
