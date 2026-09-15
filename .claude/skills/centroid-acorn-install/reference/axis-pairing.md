@@ -16,6 +16,9 @@ p.3). Both motors must share the same `Steps per revolution` and `Overall Turns 
 paired motors face each other and would spin opposite ways when paired, set
 `Reverse direction of 4th axis motor` in the Wizard (Pairing Guide p.3).
 
+> Always bench test paired axis motors before connecting them to the machine tool (Pairing
+> Guide p.3).
+
 **Hardware Pairing**: two drives are wired in parallel to one Acorn axis output, freeing the
 4th axis drive port for other use (e.g. a rotary table) — effectively turning Acorn into a
 5-axis drive output board (Pairing Guide p.4). Same `steps per rev`/`turns ratio` requirement,
@@ -73,21 +76,21 @@ Wizard homing menu, and in the Wizard Axis Pairing menu choose `No Software Pair
 hardware-paired axis number (Pairing Guide p.5).
 
 > Adjust the machine mechanically so the gantry naturally rests near square, with no spring
-> or windup, before starting (Pairing Guide p.5).
+> or windup, before starting (Pairing Guide p.6).
 
 1. Power off; manually square the gantry; mark the square position or install hard stops
-   (Pairing Guide p.5).
+   (Pairing Guide p.6).
 2. Power up the Acorn; the hardware-paired gantry motors move in unison from power-up
-   (Pairing Guide p.5).
+   (Pairing Guide p.6).
 3. Jog all axes to the desired home position and press cycle start to set home there (Pairing
-   Guide p.5).
+   Guide p.6).
 4. Set `Software Travel Limits` per axis in the Wizard axis configuration menu, in machine
-   coordinates measured from home (Pairing Guide p.5).
+   coordinates measured from home (Pairing Guide p.6).
 5. `Park` the machine at the home position before shutdown, so the gantry stays square and
    near home for the next power-up (Pairing Guide p.6).
 
 Daily use: if not parked at home, manually re-square the gantry against the marks, jog to home
-and press cycle start (Pairing Guide p.6-7).
+and press cycle start (Pairing Guide p.7).
 
 **b. Auto homing, manual squaring** — three home switches (axes 1-3) wired into `HomeAll`
 (Pairing Guide p.9).
@@ -114,15 +117,19 @@ other use (Pairing Guide p.13).
    switch into its own input (`SlavedHomeInput`), the master switch in series with the other
    axes' switches into `HomeAll` (Pairing Guide p.13).
 2. Assign `AutoSquareRelayForHardPair` to an output (Pairing Guide p.16).
-3. Mechanically square the gantry and install both switches in line with it; then unbolt and
-   offset the master switch away from the gantry (commonly 0.025") so the slave switch trips
-   first — the slave must trip before the master (Pairing Guide p.14, p.19).
+3. Mechanically square the gantry and install both switches in line with it, then offset one
+   switch so the slave switch trips first (Pairing Guide p.19).
+
+   > The guide gives two descriptions of this offset: the Rules for Auto Square Homing say to
+   > "offset slave switch 0.025" closer to the Gantry" (Pairing Guide p.14), while the switch
+   > mounting steps say to unbolt the master switch and "offset it AWAY from the gantry
+   > typically .025"" (Pairing Guide p.19). Both move the slave switch ahead of the master by
+   > the same amount; which physical switch is described as moving differs between the two
+   > pages.
 4. Home program sequence: home Z first, then X, then drive the paired gantry (in unison) until
    the slave switch trips and clears; unpair the gantry motors, seek the master switch
    independently, back off by the squaring distance, re-pair the motors, and set machine home
    for all axes (Pairing Guide p.18).
-5. If the drive uses an enable signal, jumper the paired axes' enable lines so the non-moving
-   side holds position during the independent squaring move (Pairing Guide p.33).
 
 **d. Clearpath hard-stop homing with auto squaring** — an alternative for Teknic Clearpath
 motors: each axis homes to a mechanical hard stop instead of a switch, still frees the 4th
@@ -143,16 +150,20 @@ p.25, p.28-32).
 > Normally-open home/limit switches are not recommended: they are more susceptible to noise
 > and false trips, and give no protection on a wire break (Pairing Guide p.41).
 
-1. Measure gantry side-to-side play, then mechanically square the gantry (Pairing Guide p.23).
+If the paired axes' drives use an enable signal, jumper the master and slave axis enable lines
+together so the non-moving motor holds position during the independent master/slave squaring
+move (Pairing Guide p.33).
+
+1. Measure gantry side-to-side play, then mechanically square the gantry (Pairing Guide p.24).
 2. Home temporarily with MDI `M26/X/Y/Z` and jog the paired gantry to the switch-install
    location; mount the master and slave switches in line with the now-square gantry (Pairing
-   Guide p.23).
+   Guide p.24).
 3. Unbolt the master switch and offset it away from the gantry (commonly 0.025"-0.15", up to
    about two-thirds of the play measured in step 1) so the slave switch trips first; set
-   `Master Axis squaring/alignment distance` in the Wizard to that offset (Pairing Guide p.23).
+   `Master Axis squaring/alignment distance` in the Wizard to that offset (Pairing Guide p.24).
 4. Run the Wizard-generated home program, check squareness, and trim
    `Master Axis squaring/alignment distance` up or down until the gantry homes square (Pairing
-   Guide p.23).
+   Guide p.24).
 5. First-time procedure: power off and roughly square the gantry, power up, jog near the
    switches and press cycle start; the machine homes Z, then X, then seeks the slave switch,
    then squares the master independently against the squaring distance; set
@@ -170,6 +181,11 @@ p.25, p.28-32).
 **Auto homing, manual squaring** — three home switches (axes 1-3) wired into `HomeAll`; the
 Wizard `Paired Axis Alignment type` field set to `No Auto Squaring` prompts the operator to
 square manually before each homing cycle (Pairing Guide p.35-36).
+
+> Pairing Guide p.37's heading reads "Auto Homing and Manual Squaring with Software Pairing"
+> but its own body and procedure title say "...with Hardware Pairing"; the steps below follow
+> the heading and treat this as the software-pairing procedure (Pairing Guide p.37).
+
 1. In the Wizard, choose `Automatic Homing` and configure directions, sequence and travel
    limits; set `Paired Axis Alignment type` to `No Auto Squaring` (`Slave Axis Home Switch PLC
    Input` is unused with manual squaring) (Pairing Guide p.35-36).
