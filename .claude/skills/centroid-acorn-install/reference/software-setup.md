@@ -28,8 +28,8 @@ heartbeat (§2.2), install as follows:
    it, and copy the extracted installer to the desktop.
 2. The CNC PC and Acorn must be powered up and connected via the shielded Ethernet cable
    for the entire install. Double-click the installer to start.
-3. Past Windows Defender SmartScreen ("More info" -> "Run anyway") and User Account
-   Control ("Yes"), accept the software license agreement ("I Agree").
+3. Past Windows Defender SmartScreen (click More info, then Run anyway) and User Account
+   Control (click Yes), accept the software license agreement (click I Agree).
 4. Choose whether to install a desktop shortcut icon.
 5. Select **Acorn** as the control board, then select the machine type: `CNC12 Mill`,
    `Lathe`, `Router`, or `Plasma` (the manual documents the rest of the install assuming a
@@ -75,8 +75,8 @@ cable, or a shielded cable that is itself bad; a USB-to-Ethernet adapter; outdat
 adapter drivers (use the manufacturer's drivers); any anti-virus software installed (must
 be uninstalled, not just disabled); the Windows Firewall blocking `cncm.exe`, `cncr.exe`,
 or `cnct.exe`; power-saving or auto-IP behavior resetting the adapter's address (uncheck
-"Obtain an IP address automatically" and select "Use the following IP address" instead);
-and on some Intel adapters, the advanced "speed and duplex" setting needing to be changed
+`Obtain an IP address automatically` and select `Use the following IP address` instead);
+and on some Intel adapters, the advanced `speed and duplex` setting needing to be changed
 from auto-negotiate to `100Mbps half duplex`.
 
 ## Configuration reports
@@ -119,7 +119,7 @@ stress test (§3.4) to resolve it.
    needed).
 7. Enter each requested voltage reading in the Voltage Reading box and press Cycle Start
    to continue; the program flags an error if the spindle output is off. It exits with
-   "Job finished" on success.
+   `Job finished` on success.
 
 The Acorn's analog output for VFD spindle-speed control is 0 to +10VDC. With the default
 3000 rpm max spindle speed, that range maps 0-3000rpm to 0-10V, so `S1500` outputs

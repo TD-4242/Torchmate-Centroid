@@ -35,7 +35,7 @@ The Acorn CNC Controller Kit (Part# 14455) includes (Acorn Install Ch 1, p.7):
 
 ### DB25 (H6) connector pinout
 
-(Acorn Install App D, p.124)
+(Acorn Install App D, p.125)
 
 | Pin | Signal | Pin | Signal |
 | --- | --- | --- | --- |
@@ -106,12 +106,12 @@ booting, then settles to one pulse per second once booted and running.
 
 ## Bench test hardware setup
 
-(Acorn Install §2.2, p.8-10)
+Needed (Acorn Install §2.1, p.8): a large, well-lit bench near outlets (wood surface ideal;
+avoid bare metal, surfaces with metal shavings, and fabric/anti-static mats, which risk ESD
+damage to powered boards); a Windows 10/11 PC meeting the Centroid CNCPC minimum specs, or
+a Centroid-supplied CNCPC; a small screwdriver set; a digital multimeter.
 
-Needed: a large, well-lit bench near outlets (wood surface ideal; avoid bare metal,
-surfaces with metal shavings, and fabric/anti-static mats, which risk ESD damage to
-powered boards); a Windows 10/11 PC meeting the Centroid CNCPC minimum specs, or a
-Centroid-supplied CNCPC; a small screwdriver set; a digital multimeter.
+(Acorn Install §2.2, p.9-10)
 
 1. Connect the relay board to the Acorn with the included flat white 10-conductor cable.
 2. Connect the power supply to Acorn header H9 (5-pin terminal block), leaving the
