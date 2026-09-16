@@ -21,6 +21,7 @@ manual section and page. Skills land one per PR, and each adds its row here.
 | Skill | Covers |
 | --- | --- |
 | [`centroid-acorn-install`](.claude/skills/centroid-acorn-install/SKILL.md) | Acorn hardware, wiring, Wizard, axis pairing, motion tuning, troubleshooting |
+| [`centroid-plc-programming`](.claude/skills/centroid-plc-programming/SKILL.md) | PLC stage language, Acorn I/O, SV_* catalog, messages, Wizard-generated PLC |
 
 ## Official documentation
 

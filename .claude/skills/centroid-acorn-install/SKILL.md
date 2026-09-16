@@ -14,10 +14,8 @@ final motion tuning and troubleshooting. It is a faithful, generic capture of th
 **Acorn Installation Manual** (rev6 11-9-23) and **Acorn Axis Pairing and Squaring guide**
 (rev19 10-27-25) — not specific to any one machine.
 
-**Do not use this skill** for PLC **stage-language** or **M-code macro** authoring or
-debugging — see the **PLC Manual**
-(`docs/official/centroid_plc_programming_manual.pdf`). This skill covers wiring and Wizard
-*configuration*, not PLC program logic.
+**Do not use this skill** for PLC stage-language (`.src`) or macro work -- use
+`centroid-plc-programming` ([SKILL.md](../centroid-plc-programming/SKILL.md)).
 
 ## Essentials
 
