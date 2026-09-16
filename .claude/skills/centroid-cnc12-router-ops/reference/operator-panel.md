@@ -46,22 +46,22 @@ increment is active at a time, for all axes together (Router Manual §2.4, p.18)
 
 ## 2.5 MPG
 
-Housed in a separate hand-held unit (Router Manual §2.5, p.18). Press **MPG** to make jogging
+Housed in a separate hand-held unit (Router Manual §2.5, p.18). Press `MPG` to make jogging
 respond to the MPG handwheel (LED on); select the jog increment and axis, then turn the wheel
 slowly. When the LED is off, the MPG is disabled and the jog panel is active.
 
 ## 2.6 Single Block
 
 Toggles between auto and single block mode (LED on = single block) (Router Manual §2.6, p.18).
-In single block mode, the program runs one line at a time, pressing **CYCLE START** after each
-block. Auto mode (the default, LED off) runs the loaded program continuously after **CYCLE
-START**; auto mode can be selected at any time while in single block mode, but single block mode
+In single block mode, the program runs one line at a time, pressing `CYCLE START` after each
+block. Auto mode (the default, LED off) runs the loaded program continuously after `CYCLE
+START`; auto mode can be selected at any time while in single block mode, but single block mode
 cannot be selected while auto mode is running a program.
 
 ## 2.7 Cycle Start
 
-Begins processing the current program at the beginning, then prompts for a second **CYCLE
-START** press to begin execution (Router Manual §2.7, p.19). After an M0, M1, M2, or M6, the
+Begins processing the current program at the beginning, then prompts for a second `CYCLE
+START` press to begin execution (Router Manual §2.7, p.19). After an M0, M1, M2, or M6, the
 message "Press CYCLE START to continue" appears and the control waits for another press.
 
 > **WARNING** Pressing CYCLE START will cause the M-series Control to start moving the axes
@@ -78,7 +78,7 @@ Controls the percentage (0-200%) of the programmed feed rate used during feed-ra
 
 ## 2.9 Feed Hold
 
-Decelerates the current movement to a stop, pausing the running job; **CYCLE START** resumes
+Decelerates the current movement to a stop, pausing the running job; `CYCLE START` resumes
 motion from the stopped location (Router Manual §2.9, p.19).
 
 > **CAUTION** Feed Hold is temporarily disabled during tapping cycles (G74 and G84) and
@@ -94,8 +94,8 @@ offsets, etc.) can be changed before resuming with the new tool settings.
 ## 2.11 Cycle Cancel
 
 Aborts the running program immediately — stops movement, clears all M-functions, and returns to
-the Main Screen (Router Manual §2.11, p.19). Press **FEED HOLD** first if possible. After
-**CYCLE CANCEL**, resuming requires rerunning the entire program or using the search function
+the Main Screen (Router Manual §2.11, p.19). Press `FEED HOLD` first if possible. After
+`CYCLE CANCEL`, resuming requires rerunning the entire program or using the search function
 (see Ch 3 or Ch 6).
 
 ## 2.12 Emergency Stop
@@ -239,7 +239,7 @@ The VCP legend below covers this router build's default skin (Router Manual §2.
 
 ## 2.26 Keyboard Jog Panel
 
-The PC keyboard can serve as a jog panel; press **ALT+J** to display and enable it (Router
+The PC keyboard can serve as a jog panel; press `ALT+J` to display and enable it (Router
 Manual §2.26, p.28-30). Coolant on/off, spindle on/off, feed rate, and spindle override work
 without the panel displayed; full functionality, including jogging, needs the panel displayed
 on screen, which requires Parameter 170 set to `1`.
@@ -281,14 +281,14 @@ on screen, which requires Parameter 170 set to `1`.
 | `Spacebar` | Feedhold | Enables Feedhold; press Cycle Start to resume | Always, with few exceptions |
 
 > Note: keyboard jogging disables and re-enables itself when leaving and entering the main menu,
-> to avoid unexpected movement; it can still be enabled in any menu with **ALT+J** (even after
+> to avoid unexpected movement; it can still be enabled in any menu with `ALT+J` (even after
 > being disabled by CNC12) (Router Manual §2.26, p.34).
 
 ## 2.27 MDI and the Keyboard Jog Panel
 
 Many keyboard jog panel keys double as MDI commands (Router Manual §2.27, p.34). To use jog
-panel functions in MDI, press **ALT+J**; jog, use the handwheels, or use any other jog panel
-function, then press **ALT+J** or **Esc** to return to MDI.
+panel functions in MDI, press `ALT+J`; jog, use the handwheels, or use any other jog panel
+function, then press `ALT+J` or `Esc` to return to MDI.
 
 ---
 
@@ -319,7 +319,7 @@ Manual §2.28, p.34).
 | `Ctrl E` | Launch PLC Detective | Launches the PLC Detective application |
 | `Ctrl H` | Enable G-code Display | Shows the G-code display if a job is running and it is hidden |
 | `Ctrl I` | Save PLC state to file | While on the Live PLC I/O screen, prints the current PLC I/O state to `plcstate.txt` |
-| `Ctrl Q` | Probing Cycles History | Shows recorded probing-cycle positions (from F9 – Digitize > F4 – Probe); enter a description, delete history, or copy positions to the clipboard; close with **CTRL+Q** again or a click outside the window |
+| `Ctrl Q` | Probing Cycles History | Shows recorded probing-cycle positions (from F9 – Digitize > F4 – Probe); enter a description, delete history, or copy positions to the clipboard; close with `CTRL+Q` again or a click outside the window |
 | `Shift F1` | Switch to Old-style Graphics Backplot | While in the accelerated backplot, switches to the old-style backplot that does not use OpenGL |
 | `Shift F2` | Erase Log File | From Utility > Logs > Errors (or Stats), erases the log file after a confirmation dialog |
 | `Ctrl Alt X` | Go to Shutdown Screen | From the main menu, opens the CNC12 shutdown screen |
@@ -332,7 +332,7 @@ Manual §2.28, p.34).
 > follows the heading's key.
 
 With proper PLC support, `Alt I`'s Live PLC I/O screen also accepts `Ctrl Alt I` to toggle
-Inputs 1-80 and `Ctrl Alt F` to toggle outputs (Router Manual §2.28, p.34-35). For the Enhanced
-PLC Diagnostics view: open **F7 – Utility**, then **F10 – Acorn Wizard**, select "CNC Control"
+Inputs 1-80 and `Ctrl Alt F` to toggle outputs (Router Manual §2.28.3, p.35). For the Enhanced
+PLC Diagnostics view: open `F7 – Utility`, then `F10 – Acorn Wizard`, select "CNC Control"
 under Preferences, and toggle "Enable Simple PLC Diagnostic as default"; then use the Arrow,
-**F11**, and **F12** keys to navigate.
+`F11`, and `F12` keys to navigate.
