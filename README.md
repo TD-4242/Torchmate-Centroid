@@ -20,6 +20,7 @@ manual section and page. Skills land one per PR, and each adds its row here.
 
 | Skill | Covers |
 | --- | --- |
+| [`centroid-acorn-install`](.claude/skills/centroid-acorn-install/SKILL.md) | Acorn hardware, wiring, Wizard, axis pairing, motion tuning, troubleshooting |
 
 ## Official documentation
 

@@ -25,12 +25,15 @@ the router works. See [README.md](README.md) for status.
 2. **Sourced.** Every fact cites document and section/page. Uncitable facts are dropped.
 3. **Field-verified exception.** A board-agnostic lesson no manual states is kept only when
    labeled `Field-verified (CNC12, YYYY-MM)`.
-4. **No dangling pointers.** Name only skills that exist in `.claude/skills/`; otherwise cite
+4. **Advisory exception.** Electrical-safety guidance that no manual states is allowed only as a
+   line labeled `**Advisory (not in the manual):**`. Security and software advice stays as the
+   manual gives it.
+5. **No dangling pointers.** Name only skills that exist in `.claude/skills/`; otherwise cite
    the manual chapter and page. `python3 tools/check_skill_links.py` must exit 0.
-5. **Current state.** Describe what the software does now; no tombstones.
-6. **Shape.** `SKILL.md` (frontmatter, when to use / when not, essentials, reference router,
+6. **Current state.** Describe what the software does now; no tombstones.
+7. **Shape.** `SKILL.md` (frontmatter, when to use / when not, essentials, reference router,
    useful resources) plus `reference/*.md` at roughly 100-250 lines; index files are exempt.
-7. **Paths.** CNC12 Router lives in `c:\cncr`, not the mill's `c:\cncm`.
+8. **Paths.** CNC12 Router lives in `c:\cncr`, not the mill's `c:\cncm`.
 
 ## Page citations
 

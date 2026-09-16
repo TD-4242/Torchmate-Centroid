@@ -37,12 +37,17 @@ def check_tree(root):
 
 def main(argv):
     root = Path(argv[0]) if argv else Path(__file__).resolve().parent.parent
+    files = _doc_files(root)
+    if not files:
+        print(f"error: {root} has no Markdown files to check "
+              "(.claude/skills/**/*.md, CLAUDE.md, README.md)", file=sys.stderr)
+        return 2
     misses = check_tree(root)
     for miss in misses:
         print(miss)
     if misses:
         return 1
-    print(f"OK: {len(_doc_files(root))} files checked")
+    print(f"OK: {len(files)} files checked")
     return 0
 
 
