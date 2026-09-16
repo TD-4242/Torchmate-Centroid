@@ -28,10 +28,14 @@ has a fixed range (PLC Manual, PDF p.13):
 | `FSTG` | Fast stage bit | `FSTG1`-`FSTG256` | Behaves like `STG` but runs up to 1000 scans/s instead of the standard 50 scans/s, provided the rest of the program finishes under 1ms (PLC Manual, PDF p.16). |
 | `T` | Timer | `T1`-`T128` | `T1`-`T64` before CNC12 v4.22, `T1`-`T128` from v4.22. Counts up in milliseconds to the stored value, then evaluates true until RST (PLC Manual, PDF p.15). Buffered at the start of the scan like Inputs. |
 | `PD` | One-shot (positive differential) | `PD1`-`PD256` | SET on the coil line's rising edge; the same line's condition must go false to RST it before it can trigger again — holding a button down will not retrigger it (PLC Manual, PDF p.15). |
-| `W` | 32-bit signed integer word | `W1`-`W128` | `W1`-`W88` visible on the PLC Diagnostic screen and readable as macro variables. |
-| `DW` | 64-bit signed integer | `DW1`-`DW128` | `DW1`-`DW22` visible on the PLC Diagnostic screen and readable as macro variables. |
-| `FW` | 32-bit floating-point word | `FW1`-`FW128` | `FW1`-`FW44` visible on the PLC Diagnostic screen and readable as macro variables. |
-| `DFW` | 64-bit floating-point word | `DFW1`-`DFW128` | `DFW1`-`DFW22` visible on the PLC Diagnostic screen and readable as macro variables. |
+| `W` | 32-bit signed integer word | `W1`-`W128` | `W1`-`W88` "available for PLC Detective and G-code variables" (PLC Manual, PDF p.13). |
+| `DW` | 64-bit signed integer | `DW1`-`DW128` | `DW1`-`DW22` "available for PLC Detective and G-code variables" (PLC Manual, PDF p.13). |
+| `FW` | 32-bit floating-point word | `FW1`-`FW128` | `FW1`-`FW44` "available for PLC Detective and G-code variables" (PLC Manual, PDF p.13)[^fw-typo]. |
+| `DFW` | 64-bit floating-point word | `DFW1`-`DFW128` | `DFW1`-`DFW22` "available for PLC Detective and G-code variables" (PLC Manual, PDF p.13). |
+
+[^fw-typo]: PDF p.13 prints this range as `FW1-FDW44`, an evident typo; the Router Manual's
+    independent macro-variable table (§11.2.16, p.205, `98001-98044 FW1-FW44`) confirms the
+    intended range is `FW1`-`FW44`.
 
 ### Addressing form
 
@@ -51,8 +55,14 @@ BigNumber_DW IS DW3     ; PLC Manual, PDF p.14
 The Acorn has 8 physical inputs. They are sourcing 24VDC: the Acorn supplies +24VDC at the input
 pin, and an external switch or sensor must sink it to `COM` to activate it — the "contact
 closure to ground (COM)" method (Acorn Install §5.2, p.44). The Acorn has 8 relay outputs; each
-output toggles one SPDT relay (Acorn Install §5.3, p.45). See
-[wiring.md](../../centroid-acorn-install/reference/wiring.md#inputs-52) and
+output toggles one SPDT relay (Acorn Install §5.3, p.45).
+
+> App D describes the same outputs differently: the `H10` outputs are 8 open-collector drivers
+> that normally drive an external 8-relay board over ribbon cable (Acorn Install App D, p.126).
+> Its I/O map lists the `H10` output type as `Open Collector`, not relay (Acorn Install App D, p.129).
+> See [wiring.md](../../centroid-acorn-install/reference/wiring.md#outputs-53) for the full note.
+
+See [wiring.md](../../centroid-acorn-install/reference/wiring.md#inputs-52) and
 [wiring.md](../../centroid-acorn-install/reference/wiring.md#outputs-53) for terminal wiring, and
 [hardware.md](../../centroid-acorn-install/reference/hardware.md#io-map) for the per-terminal
 input and output tables.
@@ -96,11 +106,12 @@ Message-number constants and their `Word Value` encoding are covered in
 
 ## Naming-suffix convention
 
-The manual gives a suggested type-suffix per resource, `PascalCase` with the suffix appended
-(PLC Manual, PDF p.30-31): `_C` (Constant), `_I` (`INP`), `_O` (`OUT`), `_M` (`MEM`), `_W` (`W`),
-`_DW` (`DW`), `_FW` (`FW`), `_DFW` (`DFW`), `_T` (`T`), `_PD` (`PD`), `Stage` or `_STG` (`STG`),
-`_FSTG` (`FSTG`). The full table, including the System Variable and Stage-naming conventions, is
-in [syntax.md](syntax.md#programming-conventions). It is presented as a suggestion, not a
+The manual's suggested naming table (PLC Manual, PDF p.30-31) uses `SCREAMING_SNAKE_CASE` ending
+`_C` for Constants, and `PascalCase` with a type suffix for the resource types: `_I` (`INP`),
+`_O` (`OUT`), `_M` (`MEM`), `_W` (`W`), `_DW` (`DW`), `_FW` (`FW`), `_DFW` (`DFW`), `_T` (`T`),
+`_PD` (`PD`), `Stage` or `_STG` (`STG`), `_FSTG` (`FSTG`). The full table, including the System
+Variable and Stage-naming conventions, is in
+[syntax.md](syntax.md#programming-conventions). It is presented as a suggestion, not a
 compiler rule: "Whether you put an underscore between the name and type... is up to you" (PLC
 Manual, PDF p.30).
 
