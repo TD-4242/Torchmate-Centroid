@@ -81,7 +81,7 @@ IF 1==1 THEN FW1 = 2.5  ; PLC Manual, PDF p.21
 
 Parentheses on the action side of `THEN` form a coil: the variable is SET if the condition is
 true and RST if it is false. Coils cannot be used on Words or on Timers, since a Timer coiled
-this way is guaranteed to be turned off again on the next pass (PLC Manual, PDF p.22).
+this way is generally guaranteed to be turned off again on the next pass (PLC Manual, PDF p.22).
 
 ```
 IF 1==1 THEN (OUT1)   ; always SET OUT1        — PLC Manual, PDF p.22
@@ -142,15 +142,17 @@ Operator checks its current elapsed count in milliseconds, not whether it has ex
 
 ### Arithmetic Operators
 
-`*`, `/`, `+`, `-`, `%` apply to Word types only, evaluated on the right-hand side of an
-assignment (PLC Manual, PDF p.23). Assigning a floating-point result to an integer Word
-truncates the decimal portion: `IF 1==1 THEN W1 = 2.5*1` sets `W1` to `2`
-(PLC Manual, PDF p.23).
+`*`, `/`, `+`, `-`, `%` are binary operators that apply to Word types only (PLC Manual, PDF p.23).
+Assigning a floating-point result to an integer Word truncates the decimal portion:
+`IF 1==1 THEN W1 = 2.5*1` sets `W1` to `2` (PLC Manual, PDF p.23). Arithmetic can also appear
+inside a Relational expression in a condition, e.g.
+`IF !((ErrorCode_W % 256 == 1) || (ErrorCode_W % 256 == 2)) THEN JMP BadErrorStage`
+(PLC Manual, PDF p.98).
 
 ### Assignment Operator
 
-`=` assigns a Word, Timer, or numeric value on the right to a Word or Timer on the left; it may
-only appear as an action, never in a condition (PLC Manual, PDF p.21).
+`=` sets a Word or Timer on the left to a Word, Timer, or numeric value on the right
+(PLC Manual, PDF p.21).
 
 ---
 
@@ -187,9 +189,15 @@ cannot be `SET` or `RST` directly and may only be turned on or off with a coil
 
 ## Comments
 
-A comment begins with `;` and runs to the end of the line, as used throughout the manual's own
-examples, e.g. `IF MEM1 THEN SET T1  ;Set the value that the timer counts to`
-(PLC Manual, PDF p.15). Section explanations shorter than about five lines are prefixed `;` with
+A comment begins with `;` and runs to the end of the line; a comment that continues onto the next
+physical line starts that line with `;` again, as in this manual example (PLC Manual, PDF p.15):
+
+```
+IF MEM1 THEN SET T1                  ;Set the value that the timer counts to before evaluating to
+                                     ;true.
+```
+
+Section explanations shorter than about five lines are prefixed `;` with
 no space; longer ones are bracketed above and below by a full-width line of `-` characters, with
 every line inside starting with `;` (PLC Manual, PDF p.31).
 
