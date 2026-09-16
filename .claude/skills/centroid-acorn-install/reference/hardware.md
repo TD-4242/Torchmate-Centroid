@@ -65,6 +65,32 @@ at H10, with outputs 1-4 duplicated as 5V logic outputs on DB25 (H6); outputs 5-
 screw-terminal only. Analog output is a 12-bit DAC on H8 pin 1. (Acorn Install App D,
 p.129)
 
+Inputs (Acorn Install App D, p.129):
+
+| Input | Function | Type | Screw terminal connector | Pin | 5V-logic type | DB25 connector | Pin |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | General Purpose | Sourcing | H4 | 5 | Logic w/ 5V Pullup | H6 | 10 |
+| 2 | General Purpose | Sourcing | H4 | 4 | Logic w/ 5V Pullup | H6 | 11 |
+| 3 | General Purpose | Sourcing | H4 | 3 | Logic w/ 5V Pullup | H6 | 12 |
+| 4 | General Purpose | Sourcing | H4 | 2 | Logic w/ 5V Pullup | H6 | 13 |
+| 5 | General Purpose | Sourcing | H1 | 5 | Logic w/ 5V Pullup | H6 | 15 |
+| 6 | General Purpose | Sourcing | H1 | 4 | - | - | - |
+| 7 | General Purpose | Sourcing | H1 | 3 | - | - | - |
+| 8 | General Purpose | Sourcing | H1 | 2 | - | - | - |
+
+Outputs (Acorn Install App D, p.129):
+
+| Output | Function | Type | Screw terminal connector | Pin | 5V-logic type | DB25 connector | Pin |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | General Purpose | Open Collector | H10 | 2 | 5V Logic | H6 | 1 |
+| 2 | General Purpose | Open Collector | H10 | 3 | 5V Logic | H6 | 14 |
+| 3 | General Purpose | Open Collector | H10 | 4 | 5V Logic | H6 | 16 |
+| 4 | General Purpose | Open Collector | H10 | 5 | 5V Logic | H6 | 17 |
+| 5 | General Purpose | Open Collector | H10 | 6 | - | - | - |
+| 6 | General Purpose | Open Collector | H10 | 7 | - | - | - |
+| 7 | General Purpose | Open Collector | H10 | 8 | - | - | - |
+| 8 | General Purpose | Open Collector | H10 | 9 | - | - | - |
+
 ### Electrical specifications
 
 (Acorn Install App D, p.129)

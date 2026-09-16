@@ -1,6 +1,6 @@
 ---
 name: centroid-acorn-install
-description: Use when installing, wiring, configuring, commissioning, or troubleshooting a Centroid Acorn CNC controller - kit and board I/O, LEDs, bench test, Windows/CNC12 install and license, cabinet wiring (inputs/outputs, E-stop, step/dir drives, home/limit switches, spindle), every Acorn Wizard page including Custom PLC, software/hardware axis pairing and auto-squaring, motion tuning, backlash, travel limits, and symptom-to-fix troubleshooting. Generic to any Acorn machine. Source: Acorn Installation Manual rev6 and Acorn Axis Pairing and Squaring guide rev19.
+description: "Use when installing, wiring, configuring, commissioning, or troubleshooting a Centroid Acorn CNC controller - kit and board I/O, LEDs, bench test, Windows/CNC12 install and license, cabinet wiring (inputs/outputs, E-stop, step/dir drives, home/limit switches, spindle), every Acorn Wizard page including Custom PLC, software/hardware axis pairing and auto-squaring, motion tuning, backlash, travel limits, and symptom-to-fix troubleshooting. Generic to any Acorn machine. Source: Acorn Installation Manual rev6 and Acorn Axis Pairing and Squaring guide rev19."
 ---
 
 # Centroid Acorn Install & Commissioning

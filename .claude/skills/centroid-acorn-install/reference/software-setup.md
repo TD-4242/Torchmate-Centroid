@@ -17,7 +17,10 @@ CNC PC Tuner** app; Tech Bulletin TB309 covers the same configuration.
 Before installing CNC12, uninstall (not just disable) all anti-virus, anti-malware, and
 3rd-party firewall software, then reboot — about 99% of CNC12-to-Acorn communication
 problems are caused by such software. The built-in Windows Firewall works fine with CNC12
-if access is allowed as specified in Appendix B.
+if access is allowed as specified in Appendix B. If corporate policy requires anti-virus
+software, a third-party firewall, or certain Windows security features to be enabled to
+connect to the network, these tools will need special configuration attention or they will
+interfere with the control system (Acorn Install §3.1, p.13).
 
 ## CNC12 installation
 

@@ -54,6 +54,11 @@ per-terminal input assignments.
 The Acorn has 8 relay outputs; each output toggles one SPDT relay (Acorn Install §5.3, p.45). See
 [hardware.md](hardware.md#io-map) for per-terminal output assignments.
 
+> App D describes the same outputs differently: the Acorn's `H10` outputs are 8 open-collector
+> drivers (max `50 mA`) normally wired by ribbon cable to an external 8-relay board, and it is
+> that board's relays that are SPDT (Acorn Install App D, p.126, p.129). See
+> [hardware.md](hardware.md#io-map) for the output terminal table.
+
 ## +24VDC jumper to inputs (§5.4)
 
 Jumper the spare `+24VDC` terminal on `H9` to either `H1` or `H4 24V IN` (`H1` and `H4` are tied
@@ -85,6 +90,10 @@ E-stop switch and signals (Acorn Install §5.5, p.47):
 > The manual gives a different Output 1 relay rating elsewhere: `0.01-10A` at 125VAC or `0.01-10A`
 > at 28VDC in the App D electrical specifications (Acorn Install App D, p.129), versus up to `10A`
 > at 125VAC or `5A` at 30VDC here (Acorn Install §5.5, p.47).
+>
+> **Advisory (not in the manual):** because the manual gives two DC ratings for this relay, design
+> the E-stop contactor circuit to the lower one (`5A` at `30VDC`), or confirm against the rating of
+> the relay board actually installed.
 
 E-stop contactor (Acorn Install §5.5, p.47):
 - Power the E-stop contactor from a separate supply (never the Acorn logic supply) and energize it

@@ -82,7 +82,7 @@ class CheckTreeTest(unittest.TestCase):
         err = io.StringIO()
         with contextlib.redirect_stderr(err), contextlib.redirect_stdout(io.StringIO()):
             self.assertEqual(csl.main([str(self.root / "no-such-dir")]), 2)
-        self.assertIn("has no .claude/skills, CLAUDE.md or README.md", err.getvalue())
+        self.assertIn("has no Markdown files to check", err.getvalue())
 
     def test_main_rejects_root_with_nothing_to_check(self):
         empty = self.root / "empty"
@@ -91,6 +91,12 @@ class CheckTreeTest(unittest.TestCase):
         with contextlib.redirect_stderr(err), contextlib.redirect_stdout(io.StringIO()):
             self.assertEqual(csl.main([str(empty)]), 2)
         self.assertIn("error:", err.getvalue())
+
+    def test_main_rejects_empty_skills_dir(self):
+        err = io.StringIO()
+        with contextlib.redirect_stderr(err), contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(csl.main([str(self.root)]), 2)
+        self.assertIn("has no Markdown files to check", err.getvalue())
 
 
 if __name__ == "__main__":

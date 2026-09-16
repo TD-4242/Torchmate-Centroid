@@ -59,10 +59,13 @@ revolution — e.g. `2000` for a 10x-microstepping drive (200 x 10), or encoder 
 for a closed-loop drive, e.g. `4000` for a 1000-line encoder (Acorn Install §6.5, p.76); must
 match the drive's own setting, not be used to tune commanded distance (Acorn Install §6.5,
 p.77).
-**Overall Turns Ratio**: physical constant — motor turns per unit of linear travel, set by
-ballscrew/rack pitch and motor-to-ballscrew pulley reduction; for fine-tuning by measurement,
-see [commissioning.md](commissioning.md#fine-adjustment-of-overall-turns-ratio-73) (Acorn
-Install §6.5, p.77).
+**Overall Turns Ratio**: physical constant, set by ballscrew/rack pitch and motor-to-ballscrew
+pulley reduction; for fine-tuning by measurement, see
+[commissioning.md](commissioning.md#fine-adjustment-of-overall-turns-ratio-73). Its meaning is
+unit-dependent: for imperial machine configurations, it is the number of motor revolutions
+required to move the axis 1" (Acorn Install §6.5, p.77; §7.2, p.104); for metric machine
+configurations, it is the number of mm traveled during one revolution of the motor (Acorn
+Install §7.2, p.104).
 
 > p.77 calls this section "7.11", but the manual's Chapter 7 ends at §7.5; the fine-adjustment
 > procedure it refers to is §7.3.
@@ -75,7 +78,10 @@ values zero-`.0015"` for mills, zero-`.005"` for routers; see §7.4 (Acorn Insta
 > zero-`.005"` for routers.
 
 **Max Rate**: maximum rapid (`G0`) rate for the axis; rough estimate via
-`(max motor RPM / overall turns ratio) x 0.85` (Acorn Install §6.5, p.77).
+`(max motor RPM / overall turns ratio) x 0.85` (Acorn Install §6.5, p.77). This estimate is
+given alongside p.77's imperial definition of the Overall Turns Ratio; §7.2 (p.104) defines
+the metric ratio as mm per motor revolution, and the manual gives no metric form of this
+estimate (Acorn Install §6.5, p.77; §7.2, p.104).
 **Fast Jog**: axis speed in RAPID (Hare) continuous jog on the VCP (Acorn Install §6.5, p.77).
 **Slow Jog**: axis speed in SLOW (Tortoise) continuous jog on the VCP; also the homing speed
 (Acorn Install §6.5, p.77).

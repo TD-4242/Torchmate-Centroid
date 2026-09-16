@@ -6,7 +6,11 @@ Source: Acorn Install App B, App C, and the "Useful Technical Resources" list (C
 
 | Symptom | Fix |
 |---|---|
-| `CNC12 Acorn Communication Time Out` at startup (Acorn Install App B, p.115) | Set the Ethernet adapter used for Acorn to a manual IPv4 address `10.168.41.1` / subnet `255.255.255.0` (Acorn Install App B, p.115). Allow `CNCM.EXE`/`CNCT.EXE` through Windows Defender Firewall for both Public and Private networks, or turn the firewall off entirely via Windows Search -> `Windows Defender Firewall` -> `Turn Windows Defender Firewall On or Off` (Acorn Install App B, p.115-116). Uninstall (not just disable) any antivirus/antispyware software — it can slow Acorn communication even while allowed to run (Acorn Install App B, p.116). Reboot the CNCPC, power-cycle the Acorn, and restart CNC12, letting any firmware update finish (Acorn Install App B, p.116). If it still won't start, update the CNCPC's Ethernet port drivers or try another shielded cable (Acorn Install App B, p.116). |
+| `CNC12 Acorn Communication Time Out` at startup (Acorn Install App B, p.115) | Set the Ethernet adapter used for Acorn to a manual IPv4 address `10.168.41.1` / subnet `255.255.255.0` (Acorn Install App B, p.115). Allow `CNCM.EXE`/`CNCT.EXE`/`CNCR.EXE` through Windows Defender Firewall for both Public and Private networks, or turn the firewall off entirely via Windows Search -> `Windows Defender Firewall` -> `Turn Windows Defender Firewall On or Off` (Acorn Install App B, p.115-116; `CNCR.EXE` per Acorn Install §3.4, p.26). Uninstall (not just disable) any antivirus/antispyware software — it can slow Acorn communication even while allowed to run (Acorn Install App B, p.116). Reboot the CNCPC, power-cycle the Acorn, and restart CNC12, letting any firmware update finish (Acorn Install App B, p.116). If it still won't start, update the CNCPC's Ethernet port drivers or try another shielded cable (Acorn Install App B, p.116). |
+
+> App B (p.115) names only `CNCM.EXE`/`CNCT.EXE` for the firewall allow-list; §3.4 (p.26) also
+> lists `cncr.exe`. See [software-setup.md](software-setup.md#windows-1011-configuration) for the
+> manual's corporate-policy caveat on anti-virus/firewall software.
 
 ## PLC diagnostic screen (App B)
 
