@@ -1,8 +1,9 @@
 # Centroid CNC12 SV_* System Variable Catalog
 
-This catalog covers every `SV_*` name documented in the PLC Manual's Appendix D system-variable
-tables (PLC Manual, PDF p.102-120) and Appendices H-K (PDF p.128-132), grouped by function. Types:
-`M` memory bit, `I32`/`I64` signed integer, `F32`/`F64` floating-point (PLC Manual, PDF p.102).
+This catalog is a re-verified subset of the `SV_*` system variables documented in the PLC
+Manual's Appendix D (PLC Manual, PDF p.102-120) and Appendices H-K (PDF p.128-132), grouped by
+function; Appendix D itself is the full list. Types: `M` memory bit, `I32`/`I64` signed integer,
+`F32`/`F64` floating-point (PLC Manual, PDF p.102).
 
 Appendix D splits variables into two write-direction tables, **CNC Software Write-Controlled**
 (CNC → PLC, starting PDF p.104) and **PLC Write-Controlled** (PLC → CNC, starting PDF p.113).
@@ -52,7 +53,7 @@ page).
 | `SV_ATC_TOOL_IN_SPINDLE` | I32 | CNC→PLC | Sent by CNC software at startup when the `.job` file is parsed, or as part of an "enhanced ATC" reset. | p.107 |
 | `SV_PLC_CAROUSEL_POSITION` | I32 | PLC→CNC | Carousel bin position; the carousel must not be allowed to turn unless CNC software is running. When Parameter 160 = 0, CNC uses this to determine Active Tool and expects a BCD value; when Parameter 160 != 0, CNC also uses it for carousel position and tool putback, and expects normal binary. | p.117 |
 | `SV_SYS_MACRO` | I32 | PLC→CNC | Setting a non-zero value while CNC software is at the main menu makes CNC software load and run the G-code program `MPGmacro#.mac` from the system directory (e.g. `\cncm\system\MPGmacro3.mac` for `SV_SYS_MACRO = 3` on a Mill system); can be set negative. | p.119 |
-| `SV_M94_M95_1-128` | M | CNC→PLC | Used for M-codes needing PLC interaction (M3, M4, M6, M7, M8, M10, M11 and custom M-codes); set/reset from M/G-code programs with `M94`/`M95`. Also settable by the PLC program itself, even though the table labels them Read Only for the PLC. CNC11 has built-in default actions for the first 16 bits, e.g. `IF !SV_PROGRAM_RUNNING THEN RST M3, RST M4, RST M7, RST M8`. | p.104 |
+| `SV_M94_M95_1-128` | M | CNC→PLC | Used for M-codes needing PLC interaction (M3, M4, M6, M7, M8, M10, M11 and custom M-codes); set/reset from M/G-code programs with `M94`/`M95`. Also settable by the PLC program itself, even though the table labels them Read Only for the PLC. CNC11 has built-in default actions for some M-codes that control the first 16 of these variables, e.g. `IF !SV_PROGRAM_RUNNING THEN RST M3, RST M4, RST M7, RST M8`. See [resources.md](resources.md#triggering-plc-actions-with-m94m95) for which requests those default actions cover (Router Manual §13.28, p.290). | p.104 |
 
 ---
 
@@ -239,12 +240,13 @@ Rows below are drawn from PLC Manual, PDF p.102-117.
 
 ## Axis validity, drive status, and power
 
-Rows below are drawn from PLC Manual, PDF p.103-107, p.115.
+Rows below are drawn from PLC Manual, PDF p.103-107, p.110, p.115.
 
 | SV_ name | Type | Dir | Meaning | Page |
 |---|---|---|---|---|
 | `SV_AXIS_VALID_1-8` / `SV_?_AXIS_VALID` | M | CNC→PLC | 1 = the Motor Parameters screen axis label allows motion; allowed labels are X, Y, Z, A, B, C, U, V, W. | p.104 |
 | `SV_DRIVE_ONLINE_1-8` / `SV_?_AXIS_DRIVE_ONLINE` | M | CNC→PLC | 1 = the drive for the axis is detected. | p.104 |
+| `SV_DRIVE_TYPE_x` (1-8) / `SV_?_AXIS_DRIVE_TYPE` | I32 | CNC→PLC | Type of drive connected to the axis; values include `13 = ACORN` and `24 = ACORNSIX`. | p.110 |
 | `SV_ENABLE_AXIS_x` (1-8) | M | PLC→CNC | Obsolete. Do not use. | p.115 |
 | `SV_PC_POWER_AXIS_x` (1-8) / `SV_?_AXIS_POWERED` | M | CNC→PLC | 1 = the axis is powered and holding position. Read only once per PLC pass — written externally. | p.103-104 |
 | `SV_PC_CYCLONE_STATUS_x` (1-16) | I32 | CNC→PLC | PLC and drive status bits; bit meanings by board generation are in [Appendix H](#appendix-h-cyclone--mcu-status-sv-information). | p.107 |
@@ -262,13 +264,14 @@ Rows below are drawn from PLC Manual, PDF p.103-107, p.115.
 
 ## Override and feedrate
 
-Rows below are drawn from PLC Manual, PDF p.102-104, p.107, p.120.
+Rows below are drawn from PLC Manual, PDF p.102-105, p.107, p.120.
 
 | SV_ name | Type | Dir | Meaning | Page |
 |---|---|---|---|---|
 | `SV_PLC_FEEDRATE_KNOB` | I32 | PLC→CNC | Feedrate knob as the PLC would have CNC11 see it. Write only once per PLC pass. | p.102, p.117 |
 | `SV_PLC_FEEDRATE_OVERRIDE` | F32 | PLC→CNC | Feedrate factor for MPU11 motion control, 0-2.0; 1.0 = no change to the programmed or jog-rate value. The MPU caps the feedrate to the Machine Setup maximum. Never apply a negative value. Write only once per PLC pass. | p.102, p.120 |
 | `SV_PLC_RAPID_FEEDRATE_OVERRIDE` | F32 | PLC→CNC | Rapid-rate factor for MPU motion control, 0 (exclusive) to 1.0; 1.0 = no change to the programmed rapid rate. When set to 0, the MPU reverts to using `SV_PLC_FEEDRATE_OVERRIDE` for rapid rates. The MPU caps the rapid rate to the machine-configuration maximum. | p.120 |
+| `SV_PC_TOGGLE_RAPID_OVERRIDE` | M | CNC→PLC | CNC software SETs this bit when the state of Rapid Override needs to change; the PLC should RST it after toggling Rapid Override. Named by `SV_PLC_FUNCTION_34` as its replacement (see [PLC function commands](#plc-function-commands-jog-panel--cycle-control)). | p.105 |
 | `SV_PC_FEEDRATE_PERCENTAGE` | I32 | CNC→PLC | 0-200% adjustment for axis motion control, sent for machine parameter 78 bit 1 checking and on-screen display; not needed if `SV_PC_OVERRIDE_CONTROL_FEEDRATE_OVERRIDE` is not SET. Read only once per PLC pass — written externally. | p.103, p.107 |
 | `SV_PC_OVERRIDE_CONTROL_FEEDRATE_OVERRIDE` | M | CNC→PLC | 1 = the Feedrate Override Knob is allowed to change the feedrate on axis motion. | p.104 |
 | `SV_PC_OVERRIDE_CONTROL_FEEDHOLD` | M | CNC→PLC | 1 = Feedhold pauses the G-code program. | p.104 |

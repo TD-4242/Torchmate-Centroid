@@ -33,16 +33,17 @@ outside any Stage run up to 1000 times per second, provided the rest of the prog
 under 1ms (PLC Manual, PDF p.13, p.16). `STG1` is SET automatically at startup (PLC Manual, PDF
 p.13).
 
-Inputs and Timers are buffered for the whole pass; Memory Bits, Outputs, Words, One-Shots,
-Stages and System Variables update immediately, so a later line in the same pass sees an earlier
-line's write (PLC Manual, PDF p.13).
+Inputs and Timers are buffered for the whole pass; physical Output state is buffered too, but the
+in-program image of the Outputs updates immediately, along with Memory Bits, Words, One-Shots,
+Stages and System Variables, so a later line in the same pass sees an earlier line's write
+(PLC Manual, PDF p.13).
 
 Every action follows `THEN`, comma-separated: `SET`/`RST` turn a bit-type variable
 unconditionally on or off, `(<bit-var>)` coils it to the condition, `<word> = <expr>` assigns a
 Word or Timer, and `JMP <stage>` RSTs the current Stage and SETs another (PLC Manual, PDF
 p.21-22). There is no `ELSE` keyword; the manual's stated workaround is a second line with the
 condition negated by `!` (PLC Manual, PDF p.17). See [syntax.md](reference/syntax.md) for the
-full statement-form, operator and comment-style reference.
+statement-form, operator and comment-style reference.
 
 A macro reads PLC resource state through fixed variable ranges (for example `OUT` n at
 `#(60000+n)`), and `M94`/`M95` set/reset `SV_M94_M95_1`-`128` for the PLC program to read -- see
@@ -60,6 +61,16 @@ A macro reads PLC resource state through fixed variable ranges (for example `OUT
 
 Example PLC projects are not indexed here; the Acorn Wizard's own generated template is
 described in [acorn-plc.md](reference/acorn-plc.md).
+
+## Not covered here
+
+- Compiler Errors (PLC Manual, PDF p.52-59).
+- Keywords beyond the basic statement forms above: Indexes, Range `..`, DUMP, BTW/WTB, BCD/BIN,
+  BITSET/BITRST/BITTST, LSHIFT/RSHIFT, and the math functions (PLC Manual, PDF p.20-28).
+- SV and data-type names cannot be used as constant or variable labels (PLC Manual, PDF p.20).
+- There are no bitwise operators (PLC Manual, PDF p.21).
+- Standard PLC Program Layout, the manual's full worked example program (PLC Manual, PDF
+  p.30-51).
 
 ## Useful resources
 

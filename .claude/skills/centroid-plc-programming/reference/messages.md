@@ -10,8 +10,8 @@ manual prints no page numbers; citations below are PDF page numbers, verified wi
 
 There are two kinds of PLC message (PLC Manual, PDF p.18):
 
-- **Synchronous** — displayed only while `SV_STOP` is SET, sent from a dedicated Stage that is
-  the last Stage in the program and is SET only when a message needs to be printed.
+- **Synchronous** — displayed only while `SV_STOP` is SET, sent from a dedicated Stage that
+  should be the last Stage in the program and is SET only when a message needs to be printed.
 - **Asynchronous** — printed immediately, usually inline with the rest of the code.
 
 Only one message can be displayed per pass of the PLC program; a new `MSG` overwrites whatever
@@ -72,6 +72,10 @@ Sync_Cleared_M  IS MEM1
 Sync_W          IS W1
 Async_W         IS W2
 
+InitialStage    IS STG1
+MainStage       IS STG2
+SetErrorStage   IS STG3
+
 ;=============================================================================
 InitialStage
 ;=============================================================================
@@ -96,7 +100,11 @@ IF 1==1 THEN MSG Sync_W
 IF Sync_W == NO_SYNC_MSG && Sync_Cleared_M THEN RST SetError
 ```
 
-(PLC Manual, PDF p.19; trimmed to the message-relevant lines.)
+(PLC Manual, PDF p.19; trimmed to the message-relevant lines — the manual's `MainStage` also has
+`EStopOk_I`-driven lines that SET and RST `SV_STOP`, omitted here.)
+
+> The manual's own last line reads `RST SetError` [sic]; p.19 defines the Stage as
+> `SetErrorStage` (PLC Manual, PDF p.19).
 
 The corresponding `plcmsg.txt` for this example (PLC Manual, PDF p.19-20):
 

@@ -16,8 +16,8 @@ statement syntax — see [syntax.md](syntax.md) — or message encoding — see
 ## Resource Types
 
 The `IS` keyword in the definition section binds a symbolic name to a hardware or internal
-resource; the resource type and instance number together fully specify the address. Every type
-has a fixed range (PLC Manual, PDF p.13):
+resource, given by its resource type and instance number. Every type has a fixed range
+(PLC Manual, PDF p.13):
 
 | Keyword | Type | Instance range | Notes |
 |---------|------|----------------|-------|
@@ -98,8 +98,11 @@ allowed, but only for integer values (PLC Manual, PDF p.14):
 ```
 PI_C         IS 3.1415926535897932384626433832795   ; PLC Manual, PDF p.14
 MULTIPLIER_C IS 256                                  ; PLC Manual, PDF p.14
-FAULT_C      IS (SYNC_C+5*MULTIPLIER_C)              ; PLC Manual, PDF p.14
+FAULT_C      IS (SYNC+5*MULTIPLIER)                  ; PLC Manual, PDF p.14 [sic]
 ```
+
+> The manual's own `FAULT_C` line omits the `_C` suffix its naming convention calls for
+> (`SYNC`, `MULTIPLIER` rather than `SYNC_C`, `MULTIPLIER_C`) (PLC Manual, PDF p.14).
 
 Message-number constants and their `Word Value` encoding are covered in
 [messages.md](messages.md).

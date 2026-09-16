@@ -1,7 +1,7 @@
 # Acorn Wizard PLC Reference
 
 Source: `docs/official/centroid_plc_programming_manual.pdf` (PLC Manual, rev8 07/24/26), PDF
-p.6-11; `docs/official/centroid_acorn_install_manual.pdf` (Acorn Install), §6.19;
+p.6-12, p.110, p.128; `docs/official/centroid_acorn_install_manual.pdf` (Acorn Install), §6.19;
 `docs/official/centroid-cnc12-router-operator-manual.pdf` (Router Manual), §1.8. The PLC Manual
 prints no page numbers; citations below are PDF page numbers, verified with
 `pdftotext -layout -f N -l N docs/official/centroid_plc_programming_manual.pdf -`. Router Manual
@@ -31,11 +31,12 @@ cncm\resources\wizard\default\plc\acorn_universal_template.src
 
 (PLC Manual, PDF p.8)
 
-Source code for the Wizard-generated PLC program appears in the CNC12 installation's root
-directory, for example `acorn_mill_plc.src` (PLC Manual, PDF p.8). The manual shows only the mill
-example, with the mill's `cncm` directory prefix; it does not show a router example. CNC12
-Router's install directory is `c:\cncr` (Router Manual §1.8, p.13), not `c:\cncm` — no manual page
-gives the router-specific generated-PLC filename, so none is stated here.
+Source code for the Wizard-generated PLC program appears in the root `cncm` or `cnct` directory,
+for example `acorn_mill_plc.src` (PLC Manual, PDF p.8). The manual shows only the mill example,
+with the mill's `cncm` directory prefix; it does not show a router example. CNC12 Router's
+install directory is `c:\cncr` (Router Manual §1.8, p.13), not `c:\cncm` — no manual page gives
+the router-specific generated-PLC filename or confirms whether `cnct` applies to it, so none is
+stated here.
 
 ## Hand-editing safely
 
@@ -44,6 +45,13 @@ so the Wizard does not overwrite the edit. The "Custom PLC" in-use setting is in
 Preferences menu (PLC Manual, PDF p.8) — see
 [Custom PLC preference](../../centroid-acorn-install/reference/wizard.md#custom-plc-preference)
 (Acorn Install §6.19, p.98).
+
+Before editing, make a `report.zip` ("create report" in the CNC12 utility menu) and keep a copy
+in case the change needs to be reverted (PLC Manual, PDF p.11). Compile an edited source with
+`mpucomp.exe ProgramName.src mpu.plc`; the output file must be named exactly `mpu.plc`
+(lowercase), which is the name CNC software looks for and loads (PLC Manual, PDF p.11). After a
+successful compile, power the system off completely and back on for the change to take full
+effect (PLC Manual, PDF p.12).
 
 ## Tools
 
@@ -56,5 +64,11 @@ Preferences menu (PLC Manual, PDF p.8) — see
 
 ## Board identification
 
-`SV_DRIVE_TYPE_x (1-8)` reports the type of drive connected to each axis. Its values include
-`13 = ACORN` and `24 = ACORNSIX` (PLC Manual, PDF p.110).
+`SV_DRIVE_TYPE_x` (1-8) / `SV_?_AXIS_DRIVE_TYPE` reports the type of drive connected to each
+axis — see the
+[Axis validity, drive status, and power](system-variables.md#axis-validity-drive-status-and-power)
+row for its values, including `13 = ACORN` and `24 = ACORNSIX` (PLC Manual, PDF p.110).
+
+[Appendix H](system-variables.md#appendix-h-cyclone--mcu-status-sv-information)'s
+`SV_PC_CYCLONE_STATUS_x` bit tables print columns for MPU13 (Hickory), MPU12 (AcornSix) and
+MPU11 (MPU11, ALLIN1DC, OAK) — there is no column for the original Acorn (PLC Manual, PDF p.128).

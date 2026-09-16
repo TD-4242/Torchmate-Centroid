@@ -88,15 +88,16 @@ IF 1==1 THEN (OUT1)   ; always SET OUT1        — PLC Manual, PDF p.22
 IF MEM1 THEN (OUT2)   ; SET/RST with MEM1      — PLC Manual, PDF p.22
 ```
 
-Do not coil a variable on one line and also `SET`/`RST` it elsewhere — the last line to run each
-pass wins, and results are described as surprising (PLC Manual, PDF p.22).
+Do not coil a variable on one line and also `SET`/`RST` it elsewhere: the value "will change while
+moving through the PLC program and may have surprising results." All the logic to turn a coiled
+variable on or off must be on the same line (PLC Manual, PDF p.22).
 
 ### 5. Jump — `JMP <stage>`
 
 RSTs the current Stage and SETs the named Stage. Execution does not jump within the pass; it
-continues on the next line and picks up the newly SET Stage on a later pass
-(PLC Manual, PDF p.22). The manual advises against `JMP`-ing out of `MainStage`, but expects it
-from `InitialStage` (PLC Manual, PDF p.22).
+continues on the next line, and "typically the stages are written one after the other so in
+essence it will move to that one" (PLC Manual, PDF p.22). The manual advises against `JMP`-ing
+out of `MainStage`, but expects it from `InitialStage` (PLC Manual, PDF p.22).
 
 ```
 IF 1==1 THEN JMP MainStage   ; PLC Manual, PDF p.23
@@ -160,9 +161,10 @@ inside a Relational expression in a condition, e.g.
 
 ### What may appear in the condition (between `IF` and `THEN`)
 
-Any bit-type variable directly (Input, Output, Memory Bit, Stage, Fast Stage), or a Relational
-expression on a Word, Double Word or Floating-point Word, combined with Logical Operators
-(PLC Manual, PDF p.17):
+Any bit-type variable directly (Input, Output, Memory Bit, Stage, Fast Stage, SV bit, One-Shot), a
+Timer directly or with a Relational Operator, or a Relational expression on a Word, Double Word,
+Floating-point Word, Double-Floating-point Word or SV Word, combined with Logical Operators
+(PLC Manual, PDF p.17-18):
 
 ```
 IF INP50 THEN (OUT50)          ; PLC Manual, PDF p.17
@@ -181,9 +183,13 @@ IF FW1 > 5.432 THEN SET OUT3   ; PLC Manual, PDF p.17
 | `JMP <stage>` | RSTs the current Stage, SETs the named Stage (PLC Manual, PDF p.22) |
 | `MSG <word-var>` | Sends the Word's message value to the CNC operator display (PLC Manual, PDF p.18) |
 
-`SET` and `RST` apply to Outputs, Memory Bits, Inputs, Timers, Stages and Fast Stages; One-Shots
-cannot be `SET` or `RST` directly and may only be turned on or off with a coil
-(PLC Manual, PDF p.15, p.21-22).
+`SET` and `RST` apply to Outputs, Memory Bits, Inputs, Timers, Stages, Fast Stages and System
+Variables that are bits; One-Shots cannot be `SET` or `RST` directly and may only be turned on or
+off with a coil (PLC Manual, PDF p.15, p.21-22).
+
+> p.21-22's prose says One-Shots cannot be `SET` or `RST`, but the "Data Types that can be used
+> with SET/RST" tables on those same pages list `One-Shots | IF 1==1 THEN SET PD2` and
+> `One-Shots | IF 1==1 THEN RST PD2` (PLC Manual, PDF p.21-22). The manual contradicts itself.
 
 ---
 
