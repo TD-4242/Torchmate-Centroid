@@ -57,9 +57,9 @@ pin, and an external switch or sensor must sink it to `COM` to activate it — t
 closure to ground (COM)" method (Acorn Install §5.2, p.44). The Acorn has 8 relay outputs; each
 output toggles one SPDT relay (Acorn Install §5.3, p.45).
 
-> App D describes the same outputs differently: the `H10` outputs are 8 open-collector drivers
-> that normally drive an external 8-relay board over ribbon cable (Acorn Install App D, p.126).
-> Its I/O map lists the `H10` output type as `Open Collector`, not relay (Acorn Install App D, p.129).
+> App D describes the same outputs differently: 8 open-collector drivers normally drive an
+> external 8-relay board over ribbon cable (Acorn Install App D, p.126). Its I/O map lists these
+> as the `H10` outputs, with output type `Open Collector`, not relay (Acorn Install App D, p.129).
 > See [wiring.md](../../centroid-acorn-install/reference/wiring.md#outputs-53) for the full note.
 
 See [wiring.md](../../centroid-acorn-install/reference/wiring.md#inputs-52) and
