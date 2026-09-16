@@ -248,6 +248,7 @@ Rows below are drawn from PLC Manual, PDF p.103-107, p.115.
 | `SV_ENABLE_AXIS_x` (1-8) | M | PLC→CNC | Obsolete. Do not use. | p.115 |
 | `SV_PC_POWER_AXIS_x` (1-8) / `SV_?_AXIS_POWERED` | M | CNC→PLC | 1 = the axis is powered and holding position. Read only once per PLC pass — written externally. | p.103-104 |
 | `SV_PC_CYCLONE_STATUS_x` (1-16) | I32 | CNC→PLC | PLC and drive status bits; bit meanings by board generation are in [Appendix H](#appendix-h-cyclone--mcu-status-sv-information). | p.107 |
+| `SV_PC_MCU_STATUS_x` (1-16) | I32 | CNC→PLC | MPU13 EtherCAT-processor status bits; bit meanings are in [Appendix H](#appendix-h-cyclone--mcu-status-sv-information). | p.111 |
 | `SV_PC_MINI_PLC_ONLINE` | I32 | CNC→PLC | Online bits for PLCADD1616 and other expansion PLC modules: bit 0 = miniPLC1 online, ... bit 15 = miniPLC16 online; bits 16-31 reserved. | p.107 |
 | `SV_PLC_BUS_ONLINE` | M | CNC→PLC | 1 = valid MPU11 PLC detected; checked as part of the Fiber Checking PLC program section. | p.104 |
 | `SV_PLC_IO2_ONLINE` | M | CNC→PLC | 1 = IO2 Legacy PLC detected. | p.104 |
