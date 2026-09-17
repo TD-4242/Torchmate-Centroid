@@ -87,7 +87,7 @@ of setting up each work coordinate.
 
 ## 4.2 Part Setup Examples (Router Manual §4.2, p.53-54)
 
-### Example 1: Setting the X-axis Part Zero with No Offset (p.53)
+### Example 1: Setting the X-axis Part Zero with No Offset (p.53-54)
 
 Scenario: set the left edge of the part as the X-axis origin, using a `0.25` diameter edge finder approaching from
 the left (`-X`) side.
@@ -107,9 +107,9 @@ Since no offset is applied, Part Position is zero. Once `F10 – Set` is pressed
 center of the Edge Finder sits to the left (minus) of the part by 0.125 inches (half the Edge Finder Diameter).
 
 Formula: `Position (Approach from) Edge Finder Diameter / 2`, where `(Approach from)` is the sign of the approach
-direction: `0.0 - .25/2 = -0.125` (p.53).
+direction: `0.0 - .25/2 = -0.125` (p.54).
 
-### Example 2: X-axis Origin Offset Into the Part by One Inch (p.53-54)
+### Example 2: X-axis Origin Offset Into the Part by One Inch (p.54-55)
 
 Scenario: offset the X-axis origin one inch into the part from the left edge, using the same edge finder and
 approach.
@@ -128,7 +128,7 @@ Steps:
 Part Position equals `-1.0` because the Edge Finder is one inch to the left (minus direction) of the desired
 X-axis origin. Once `F10 – Set` is pressed, the X-axis DRO reads `-1.125`.
 
-Formula: `Position - Edge Finder Diameter/2 = -1.0 - .25/2 = -1.125` (p.54).
+Formula: `Position - Edge Finder Diameter/2 = -1.0 - .25/2 = -1.125` (p.55).
 
 ---
 
@@ -231,8 +231,12 @@ To change the WCS in use (p.61):
 - Select a WCS coordinate and press `F9 – Set as Active WCS`.
 - Or use `ALT+=` for the next WCS coordinate and `ALT+-` for the previous.
 
-After selecting a new WCS, set it up using the part setup menus for X, Y, Z (see §4.1-§4.7) to define a new Part
-Zero for that WCS. Once set, the control remembers the WCS's Part Zero until changed, even after shutdown (p.61).
+After selecting a new WCS, "you can set up the WCS using the part setup menus for X and Z to define a new Part
+Zero position with this WCS" (Router Manual §4.8, p.61) — see §4.1-§4.7. Once set, the control remembers the
+WCS's Part Zero until changed, even after shutdown (p.61).
+
+> Note: the manual's own wording names only X and Z here (Router Manual §4.8, p.61), though the surrounding
+> Part Setup sections (§4.1-§4.7) cover X, Y, and Z. Quoted as printed; no reconciliation attempted.
 
 WCS CSR Table softkeys (p.61-62):
 

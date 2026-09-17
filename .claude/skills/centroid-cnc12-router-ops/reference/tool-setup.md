@@ -39,6 +39,11 @@ Offset Library softkeys (screen, p.65):
 > Wizard, `Touch Devices > Tool Touch Off > Tool Measurement Reference Method`). `F4 – Batch` only appears with an
 > ATC configured (Wizard `ATC > ATC Setup`) and a fixed Tool Touch Off device installed (p.65).
 
+> Note: the same page's closing sentence calls the batch-measuring key "the `F4 – Auto Measure` key to perform
+> batch tool measuring by entering a list of multiple tool numbers", where the rest of the page (and the F3 row
+> above) calls `F4` `Batch` and `F3` `Auto Measure` (Router Manual §5.1, p.65). Quoted as printed; the table
+> above follows the page's own `F3`/`F4` row labels, not this closing sentence.
+
 ### Height Offset (p.66)
 
 The distance the control adjusts Z-axis positions when tool length compensation (`G43` or `G44`) is used with a
@@ -65,7 +70,10 @@ Establishing the Z-reference position (p.66):
 1. Press `F1 – Z-ref` to select the Z-reference setting function.
 2. Insert the longest tool into the tool holder (`Jog` or `TOOL CHECK` keys can assist).
 3. Jog the tip of the tool to the top of the work surface.
-4. Press `F10 – Save` to set the Z-ref to the current Z position.
+4. "Press `4` to Set the Z Ref to the current Z position" (Router Manual §5.1, p.66).
+
+> Note: this page prints `4` for the key that sets the Z-ref, where the same screen's softkey bar labels the
+> action `F10 – Save` (Router Manual §5.1, p.65). Quoted as printed; no reconciliation attempted.
 
 Measuring each tool height (p.66-67):
 
@@ -224,11 +232,11 @@ format by pressing `F5`; choose `txt` or `csv` for the desired format.
 
 ---
 
-## 5.3 Tool Life Management Menu (Router Manual §5.3, p.71-75)
+## 5.3 Tool Life Management Menu (Router Manual §5.3, p.71-74)
 
 Sets up each tool's pre-determined life and tracks its usage toward an end-of-life condition. Off by default;
 enabled per tool. Screen columns: `Tool#`, `Type`, `Total Life`, `Used`, `Remaining`, `Units`, `Mode`,
-`Description` (p.71-72).
+`Description` (p.71).
 
 Softkeys (p.71-72):
 
@@ -266,7 +274,7 @@ Field definitions (p.72-73):
 
 ### 5.3.1 Effect on Job Run and Backplot (p.73-74)
 
-At Start of Job (p.73-74): tool life expiration is checked at job start. If any managed tool is expired, a
+At Start of Job (p.73): tool life expiration is checked at job start. If any managed tool is expired, a
 dialog appears:
 
 ```
@@ -278,9 +286,9 @@ F2 = Continue to run job   F3 = Cancel job
 ```
 
 > Note: at job start the CNC software does not yet know which tools will be used, so the listed tools are all
-> expired tools, whether or not the job actually uses them (p.74).
+> expired tools, whether or not the job actually uses them (p.73).
 
-At Job Restart (p.74): expirations are also checked on job restart (`M2` or `M102`). The dialog is similar,
+At Job Restart (p.73): expirations are also checked on job restart (`M2` or `M102`). The dialog is similar,
 but lists only tools used since the previous restart.
 
 At End of Job (p.74): expiration during a job does not cancel it. On successful completion:
@@ -299,12 +307,12 @@ Using Backplot Graphics to Predict Tool Expirations (p.74): press `F8 – Graph`
 If the graphed job would expire a tool, the message `Tool life will expire on this job:` appears with the tool
 number.
 
-### 5.3.2 Using G-code User Variables (p.74-75)
+### 5.3.2 Using G-code User Variables (p.74)
 
 If a tool's `Mode` is `Manual`, the `Used` field is not updated during a job run unless the G-code is programmed
 to modify it (p.74).
 
-User variable for a tool's Used Life field (p.75):
+User variable for a tool's Used Life field (p.74):
 
 ```
 #[19000+[#4120-1]*5+2]
@@ -322,7 +330,7 @@ IF #4120 < 1 || #4120 > 200 THEN GOTO 100  ; Skip to N100 if T number not valid
 N100                               ; Destination of gotos
 ```
 
-See Ch 11 for more on User or System Variables (p.75).
+See Ch 11 for more on User or System Variables (p.74).
 
 ---
 
@@ -384,9 +392,9 @@ These two programs test for and adjust backlash in laser table axes, by creating
 Y-direction, moving back and forth in that axis while firing the laser in short `0.006` inch pulses at specific
 points in each direction (p.80).
 
-- Good alignment: four separate vertical lines, straight and aligned.
+- Good alignment: four separate vertical lines, straight and aligned (p.80).
 - Backlash present: lines appear as clusters of "dots" offset when direction changes; each dot is `0.006`
-  inches long, giving a reference for estimating the needed backlash compensation (p.80-81).
+  inches long, giving a reference for estimating the needed backlash compensation (p.81).
 
 Procedure:
 1. Run the ZigZagSyncTest program and observe the result.
