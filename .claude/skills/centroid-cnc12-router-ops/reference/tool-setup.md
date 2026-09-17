@@ -44,7 +44,7 @@ Offset Library softkeys (screen, p.65):
 > above) calls `F4` `Batch` and `F3` `Auto Measure` (Router Manual §5.1, p.65). Quoted as printed; the table
 > above follows the page's own `F3`/`F4` row labels, not this closing sentence.
 
-### Height Offset (p.66)
+### Height Offset (p.66-67)
 
 The distance the control adjusts Z-axis positions when tool length compensation (`G43` or `G44`) is used with a
 given `H`-value. For example, if `H001` is `-1.0` and the job contains `G43 H1`, the CNC software shifts all Z-axis
@@ -353,7 +353,7 @@ See Ch 11 for more on User or System Variables (p.74).
 - Simple PWM controls are in the Acorn Wizard, alongside preset buttons for common Jtech configurations matching
   schematics `S15049`, `S15056`, `S15057`.
 
-### 5.4.2 PWM-related I/O in the Wizard (p.75-76)
+### 5.4.2 PWM-related I/O in the Wizard (p.75-79)
 
 Configured under `Primary System > Output Definitions`:
 

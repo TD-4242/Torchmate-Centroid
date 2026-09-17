@@ -85,7 +85,7 @@ of setting up each work coordinate.
 
 ---
 
-## 4.2 Part Setup Examples (Router Manual §4.2, p.53-54)
+## 4.2 Part Setup Examples (Router Manual §4.2, p.53-55)
 
 ### Example 1: Setting the X-axis Part Zero with No Offset (p.53-54)
 
