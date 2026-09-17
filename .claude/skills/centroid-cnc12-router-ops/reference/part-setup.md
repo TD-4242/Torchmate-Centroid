@@ -93,8 +93,8 @@ Scenario: set the left edge of the part as the X-axis origin, using a `0.25` dia
 the left (`-X`) side.
 
 Steps:
-1. Move the Edge Finder to the left edge of the part.
-2. Select the `Edge Finder Diameter` field for the X-axis.
+1. Move the Edge Finder to the left edge of the part (p.53).
+2. Select the `Edge Finder Diameter` field for the X-axis (p.54).
 3. Type `.25` and press `ENTER`.
 4. Press `SPACE` until `Left (-)` is displayed.
 5. Press `F10 – Set` to accept the values.
@@ -114,7 +114,7 @@ direction: `0.0 - .25/2 = -0.125` (p.54).
 Scenario: offset the X-axis origin one inch into the part from the left edge, using the same edge finder and
 approach.
 
-Steps:
+Steps (p.54):
 1. Move the Edge Finder to the left edge of the part.
 2. Select the `Part Position` field for the X-axis.
 3. Type `-1` and press `ENTER`.
@@ -258,7 +258,7 @@ WCS CSR Table softkeys (p.61-62):
 
 ---
 
-## 4.9 Coordinate System Rotation (CSR) (Router Manual §4.9, p.62-64)
+## 4.9 Coordinate System Rotation (CSR) (Router Manual §4.9, p.62-63)
 
 CSR saves setup time: rather than clamping the part and indicating its edge to square it with the machine axes,
 CSR automatically rotates the coordinate system to the angle of the probed part or fixture, compensating for

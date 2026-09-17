@@ -117,9 +117,6 @@ setup (p.67).
 
 > **WARNING** Incorrect setup may cause damage to the machine, tool, and/or cause injury to the Operator (p.67).
 
-> **NOTICE** Before manually jogging any probe to a position, make sure that the machine feed rate is turned down
-> (less than ten in/min) or damage to the probe may result (p.68).
-
 Setting the Z-reference (p.68): using the longest tool (or designated reference tool), press `F1 – Z-ref`,
 then `F3`, then `CYCLE START`. The Z-axis moves down until tool touch-off is detected, and the Z-reference is set
 at that position. `Parameter 3` bit 1 sets Z-reference to the Z-home position (see Ch 15).
@@ -142,6 +139,9 @@ Example: 1-4, 6, 15`. Press `CYCLE START` to run the batch measurement.
 ---
 
 ### 5.1.2 Setting Up Tool Height Offsets (p.68-69)
+
+> **NOTICE** Before manually jogging any probe to a position, make sure that the machine feed rate is turned down
+> (less than ten in/min) or damage to the probe may result (p.68).
 
 #### Using a Probe as the Reference Tool (p.69)
 
@@ -355,14 +355,14 @@ See Ch 11 for more on User or System Variables (p.74).
 
 ### 5.4.2 PWM-related I/O in the Wizard (p.75-79)
 
-Configured under `Primary System > Output Definitions`:
+Configured under `Primary System > Output Definitions` (p.75-76):
 
 | I/O Function | Description |
 |---|---|
-| `PWM Output` | The PWM signal itself; usable only on `Output 2` (DB25 pin `#14`). Related code is the S-command. |
-| `LaserEnable` | Typically used in a safety interlock circuit (see schematic `S15049`). `M37` enables the safety interlock and resets the laser; `M38` disables it after a delay to let the component cool. |
-| `LaserReset` | Momentary output that sends a reset signal to the laser controller (see schematic `S15049`). |
-| `PWMSelect` | Moves the PWM signal from Spindle to Laser. Deactivated = PWM to Spindle; activated = PWM to Laser. On a Standard Layout, connect Spindle PWM to the relay's NC side and the Laser to its NO side. See schematic `S15057` (BLDC Spindle Control). |
+| `PWM Output` | The PWM signal itself; usable only on `Output 2` (DB25 pin `#14`). Related code is the S-command (p.75). |
+| `LaserEnable` | Typically used in a safety interlock circuit (see schematic `S15049`). `M37` enables the safety interlock and resets the laser; `M38` disables it after a delay to let the component cool (p.75). |
+| `LaserReset` | Momentary output that sends a reset signal to the laser controller (see schematic `S15049`) (p.76). |
+| `PWMSelect` | Moves the PWM signal from Spindle to Laser. Deactivated = PWM to Spindle; activated = PWM to Laser. On a Standard Layout, connect Spindle PWM to the relay's NC side and the Laser to its NO side. See schematic `S15057` (BLDC Spindle Control) (p.76). |
 
 Wiring schematics (p.77-79):
 
