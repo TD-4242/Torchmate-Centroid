@@ -17,6 +17,9 @@ final motion tuning and troubleshooting. It is a faithful, generic capture of th
 **Do not use this skill** for PLC stage-language (`.src`) or macro work -- use
 `centroid-plc-programming` ([SKILL.md](../centroid-plc-programming/SKILL.md)).
 
+For operating the control (menus, jogging, part zero, running jobs) and G/M-code, parameter, or
+message lookups, use `centroid-cnc12-router-ops` ([SKILL.md](../centroid-cnc12-router-ops/SKILL.md)).
+
 ## Essentials
 
 The Acorn is a step/direction motion controller: 4 axes, 8 digital PLC inputs, 8 digital PLC
