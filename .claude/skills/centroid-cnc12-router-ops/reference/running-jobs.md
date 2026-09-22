@@ -159,7 +159,7 @@ To run the test (Router Manual §6.7, p.86-87):
    Resent, Generic Communication Errors, Packets Out of Order, NAcks Packets Sent, and NAcks
    Packets Received.
 
-> Note: step 2 names the folder `cncm`, as printed (Router Manual §6.7, p.87), while Ch 7's
+> **Note:** step 2 names the folder `cncm`, as printed (Router Manual §6.7, p.87), while Ch 7's
 > `F6 – User Maint` describes `F3 – Machine Notes` as opening a file "stored in the cncr
 > directory" (Router Manual Ch 7, p.90) — the router's own install directory (§1.8, p.13; see
 > [interface.md](interface.md)). The manual does not reconcile the two names.
@@ -185,14 +185,14 @@ Utility for the top-level F1-F10 purpose table established from Ch 3.
 | `F9` | Digitizing | Access the digitizing features; hidden if the machine is not homed | 90-91 |
 | `F10` | Acorn Wizard | Guided configuration tool for axis motors, I/O, spindle control, and homing routines | 91 |
 
-### F5 – Color Picker (p.88-89)
+### F5 – Color Picker (p.89)
 
 Centroid Classic and other preset themes are selectable. Edit an individual color by clicking
 its square or typing a hex code; clicking a color square opens the Pick Swatch Type screen,
 where a color wheel or RGB/Hex entry sets the color — select `Accept` to confirm it. Select
 `Save` to create a new Color Profile, or `Done` to return to the previous screen. To revert
 saved changes to the Centroid Classic theme, select `File` then `New` (Router Manual Ch 7,
-p.88-89).
+p.89).
 
 ### F6 – User Maint (p.90)
 
@@ -212,7 +212,7 @@ Sub-keys of `F6 – User Maint` (Router Manual Ch 7, p.90):
 
 Hidden if the machine is not homed (Router Manual Ch 7, p.90).
 
-> Note: requires a Probe and Ultimate license for the full feature set (Router Manual Ch 7, p.91).
+> **Note:** requires a Probe and Ultimate license for the full feature set (Router Manual Ch 7, p.91).
 
 ### F10 – Acorn Wizard (p.91)
 
