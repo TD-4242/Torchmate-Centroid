@@ -24,8 +24,8 @@ the section with full syntax.
 | G30 | Return to Secondary Reference Point | Works like G28 but targets the second reference point by default; a P parameter selects either point. | §12.13, p.251 |
 | G37 | PWM Velocity Modulation On/Off | Turns PWM velocity modulation on or off, to reduce over-burn as the tool changes speed through corners. | §12.14, p.251 |
 | G40 | Cutter Compensation Cancel | Cancels G41/G42 cutter compensation. | §12.15, p.251 |
-| G41 | Cutter Compensation Left | Offsets the cutter half the D-code tool diameter to the left of the path, relative to travel direction. | §12.15, p.251 |
-| G42 | Cutter Compensation Right | Offsets the cutter half the D-code tool diameter to the right of the path, relative to travel direction. | §12.15, p.251 |
+| G41 | Cutter Compensation Left | Offsets the cutter half the D-code tool diameter to the left of the work piece, relative to travel direction. | §12.15, p.251 |
+| G42 | Cutter Compensation Right | Offsets the cutter half the D-code tool diameter to the right of the work piece, relative to travel direction. | §12.15, p.251 |
 | G43 | Tool Length Compensation (+) | Applies positive tool length compensation for the selected H-offset tool, from the part surface up. | §12.16, p.254 |
 | G44 | Tool Length Compensation (-) | Applies negative tool length compensation, used only when there is an absolute machine home. | §12.16, p.254 |
 | G49 | Tool Length Compensation Cancel | Cancels tool length compensation (also canceled by G43 H00). | §12.16, p.254 |
@@ -91,13 +91,15 @@ the section with full syntax.
 
 ## Modal notes
 
-- G-codes are organized into groups A-P; if a line specifies two codes from the same group, only
-  the last one specified stays active (Router Manual Ch 12 intro, p.243).
-- Group B codes (`G04`, `G09`, `G10`, `G28`, `G29`, `G30`, `G52`, `G92`) are one-shot, effective
-  only for the line they appear on; every other G-code is modal until superseded by another code
-  from its own group (Router Manual Ch 12 intro, p.243).
+- G-codes are organized into groups A-P (Router Manual Ch 12 group table, p.243-244). If a line
+  specifies two codes from the same group, only the last one specified stays active (Router
+  Manual Ch 12, Note 3, p.244).
+- Group B (`G04`, `G09`, `G10`, `G28`, `G29`, `G30`, `G52`, `G53`, `G92`) codes are one-shot,
+  active only for the line they appear on; every other G-code is modal until superseded by
+  another code from its own group (Router Manual Ch 12 group table, p.243-244; Note 4, p.244).
 - A Group A code (`G00`-`G03`) used while a canned cycle is active cancels the canned cycle;
-  canned-cycle codes have no effect on Group A codes (Router Manual Ch 12 intro, p.243).
-- `G61` is canceled by `G64` in any form, which also cancels itself (Router Manual §12.24, p.257).
+  canned-cycle codes have no effect on Group A codes (Router Manual Ch 12 group table, p.243;
+  Note 5, p.244).
+- `G61` is canceled by any form of `G64` (Router Manual §12.24, p.257).
 - Canned cycles are modal and are canceled by `G80`; `G00`, `G01`, `G02`, or `G03` also cancel them
   (Router Manual §12.28, p.264).
