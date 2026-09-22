@@ -41,8 +41,9 @@ VCP (VCP Manual p.12).
 
 ## Button XML tag reference
 
-Every tag below is a child of the root `<vcp_button>` element. A button can be as small as a bare
-`<skin_event_num>` (VCP Manual p.19); an indicator button may omit even that (VCP Manual p.21).
+Every tag below is a child of the root `<vcp_button>` element (VCP Manual p.18, p.19). A button can
+be as small as a bare `<skin_event_num>` (VCP Manual p.19); an indicator button may omit even that
+(VCP Manual p.21).
 
 | Tag | Purpose | Manual | Detailed in |
 |-----|---------|--------|-------------|
@@ -116,13 +117,12 @@ No manual page states the following; they are board-agnostic behaviors of the VC
 
 - **Field-verified (CNC12, 2026-07):** rendered size tracks the SVG's declared
   `width`/`height`/artboard — the graphic is drawn at its declared size rather than stretched to
-  fill the cell. Keep `width`, `height` and `viewBox` on the `<svg>` element. This is why the
-  manual's "rename an existing button `.svg` so the size/artboard is correct" advice works.
-- **Field-verified (CNC12, 2026-07):** a multi-cell button needs a full-span artboard. The skin's
-  `row_span`/`column_span` enlarge the *cell*; the SVG must declare the spanned size itself or it
-  renders small inside a big cell. Copy a stock SVG of the same span to get the numbers right. To
-  show a normal-size graphic centered in a larger span, declare the full-span artboard and pad
-  around the art rather than stretching it.
+  fill the cell, and the skin's `row_span`/`column_span` enlarge the *cell* only, so a multi-cell
+  button needs a full-span artboard or it renders small inside a big cell. Keep `width`, `height`
+  and `viewBox` on the `<svg>` element; for a span, copy a stock SVG of the same span to get the
+  numbers right, and to show normal-size art centered in a larger span pad the full-span artboard
+  rather than stretching the art. This is why the manual's "rename an existing button `.svg` so
+  the size/artboard is correct" advice works.
 - **Field-verified (CNC12, 2026-07):** `text-anchor` is effectively ignored. Position button text
   with an explicit `x` — either convert the text to paths, or compute the left-edge `x` from the
   character advance widths of a font actually installed on the control PC.

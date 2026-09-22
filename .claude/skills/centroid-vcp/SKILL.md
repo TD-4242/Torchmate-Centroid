@@ -23,8 +23,8 @@ part zeros, running jobs, G/M-code and parameter lookups -- use `centroid-cnc12-
 ([SKILL.md](../centroid-cnc12-router-ops/SKILL.md)).
 
 **Do not use this skill** for Acorn hardware installation, wiring, or Wizard configuration pages
-(including the Wizard `VCP Preferences` skin drop-down and `VCP Aux Keys` assignment) -- use
-`centroid-acorn-install` ([SKILL.md](../centroid-acorn-install/SKILL.md)).
+(including the Wizard `VCP Aux Keys` assignment) -- use `centroid-acorn-install`
+([SKILL.md](../centroid-acorn-install/SKILL.md)).
 
 ## Essentials
 
@@ -77,15 +77,11 @@ From a shell on the control PC:
 type c:\cncr\resources\vcp\options.xml
 dir c:\cncr\resources\vcp\skins
 dir c:\cncr\resources\vcp\Buttons
-findstr /n "<button" c:\cncr\resources\vcp\skins\<skin>.vcp
+findstr /n "<button" "c:\cncr\resources\vcp\skins\<skin>.vcp"
 ```
 
-> The manual prints mill paths under `c:\cncm` -- the skin folder as
-> `c:\cncm\resources\vcp\skins`, the button folders as
-> `c:\cncm\resources\vcp\Buttons\name of button folder` and `options.xml` in
-> `c:\cncm\resources\vcp\` (VCP Manual p.7), and the images folder as
-> `c:\cncm\resources\vcp\images\` (VCP Manual p.27). On CNC12 Router the same tree lives under
-> `c:\cncr`.
+> The manual prints this whole tree as mill paths under `c:\cncm` (VCP Manual p.7, p.27); on CNC12
+> Router it lives under `c:\cncr`.
 
 Which stock skin to use (or start with) is selected on Acorn and AcornSix from the drop-down menu
 in the Wizard `VCP Preferences` menu (VCP Manual p.5); the file the VCP actually loads at startup
@@ -93,24 +89,20 @@ is the `Skin` value in `options.xml` (VCP Manual p.7).
 
 ### Button XML tags at a glance
 
-Every tag below is a child of the root `<vcp_button>` element.
+Every tag is a child of the root `<vcp_button>` element (VCP Manual p.18, p.19). The ones you will
+meet most:
 
 | Tag | Purpose | Manual | Detailed in |
 |-----|---------|--------|-------------|
 | `<skin_event_num>` | Assigns PLC logic to the button -- CNC12 knows what function you want for the button from this number. | p.36 | [actions.md](reference/actions.md) |
-| `<plc_output>` with `<number>`, `<color_on>`, `<color_off>` | LED indicator light color for the output's ON and OFF state. | p.18 | [visual-states.md](reference/visual-states.md) |
-| `<plc_output>` with `<number>`, `<image_on>`, `<image_off>` | Swap the whole graphic on the output function's ON/OFF state. | p.20 | [visual-states.md](reference/visual-states.md) |
-| `<plc_input>` with `<number>`, `<image_on>`, `<image_off>` | Indicator: swap the graphic on a PLC input's state. | p.21 | [visual-states.md](reference/visual-states.md) |
-| `<plc_memory>` with `<number>`, `<image_on>`, `<image_off>` | Indicator: swap the graphic on a PLC memory location's state. | p.44 | [visual-states.md](reference/visual-states.md) |
-| `<on_click_swap>` | Swap the button image while the button is being clicked/pressed. | p.19 | [visual-states.md](reference/visual-states.md) |
-| `<run>` with `<line>` or `<macro>` | Run a single line of G-code, or a macro, immediately. | p.33 | [actions.md](reference/actions.md) |
-| `<app>` | Launch an external program. | p.34 | [actions.md](reference/actions.md) |
-| `<plc_word>` | Display a live PLC word value on top of the button. | p.45 | [advanced.md](reference/advanced.md) |
-| `<switch>` with `<switch_on>`/`<switch_off>`, `<remove>`, `<add>`, `<image_on>`/`<image_off>` | Switch groups of buttons, borders and images in and out on press. | p.53 | [advanced.md](reference/advanced.md) |
+| `<plc_output>`, `<plc_input>`, `<plc_memory>` | LED color, or an image swap, on the state of a PLC output, input or memory bit. | p.18, p.20, p.21, p.44 | [visual-states.md](reference/visual-states.md) |
+| `<run>`, `<app>` | Run a line of G-code or a macro immediately; launch an external program. | p.33, p.34 | [actions.md](reference/actions.md) |
+| `<plc_word>`, `<switch>` | Display a live PLC word on the button; switch groups of objects in and out on press. | p.45, p.53 | [advanced.md](reference/advanced.md) |
 
-Skin-level nodes -- `<background>`, `<border>`, `<image>`, `<on_hover>`, `<on_click>`, `<text>`,
-`<plc_word>`, `<group>` and `<hide_group>` -- are listed with their pages in
-[skin-and-grid.md](reference/skin-and-grid.md).
+The full tag table -- `<on_click_swap>` and every child node of the above -- is in
+[button-anatomy.md](reference/button-anatomy.md). Skin-level nodes -- `<background>`, `<border>`,
+`<image>`, `<on_hover>`, `<on_click>`, `<text>`, `<plc_word>`, `<group>` and `<hide_group>` -- are
+listed with their pages in [skin-and-grid.md](reference/skin-and-grid.md).
 
 The manual's own advice for beginners: make one change at a time and keep backup copies of files,
 so it is easy to revert to a working setup (VCP Manual p.56).
@@ -119,22 +111,21 @@ so it is easy to revert to a working setup (VCP Manual p.56).
 
 | Reference file | Look here when... |
 | --- | --- |
-| `reference/skin-and-grid.md` | You're moving, deleting or re-sizing a button, picking or switching the active skin in `options.xml`, changing the grid's row and column count, or want the list of what else lives at skin level |
+| `reference/skin-and-grid.md` | You're moving, deleting or re-sizing a button, spanning one across several cells with `row_span`/`column_span`, picking or switching the active skin in `options.xml`, changing the grid's row and column count, asking which region of the panel is editable at all, or want the list of what else lives at skin level |
 | `reference/button-anatomy.md` | You're creating a copied button, changing a button's graphic, or need the button folder layout, the `<vcp_button>` tag table, or the SVG practices the VCP expects |
 | `reference/visual-states.md` | You're setting LED colors, swapping images on a PLC output/input/memory bit or on click, or styling the panel with backgrounds, borders, logos, icons and hover/click effects |
 | `reference/actions.md` | You're wiring a button to PLC logic with a skin event number, turning a button into an Aux key that runs a macro, running a line of G-code with `<run>`, or launching an external app with `<app>` |
-| `reference/advanced.md` | You need big multi-cell buttons, live PLC-word displays and their styling nodes, static `<text>`, or `<group>`/`<hide_group>` switching |
+| `reference/advanced.md` | You need live PLC-word displays and their styling nodes, static `<text>`, or `<group>`/`<hide_group>` switching |
 | `reference/troubleshooting.md` | The VCP will not start, shows no panel at all, looks skewed, or lost its lower third after an upgrade -- plus running the VCP offline to check an edit |
 
 ## Field-verified facts
 
-Board-agnostic behaviors of the VCP renderer that no manual page states. Each is labeled
+Board-agnostic behaviors of CNC12 and the VCP that no manual page states. Each is labeled
 `Field-verified (CNC12, 2026-07)` in the reference file that holds it; the full note is there.
 
 | Field-verified claim | Where |
 | --- | --- |
-| Rendered size tracks the SVG's declared `width`/`height`/artboard -- the graphic is drawn at its declared size rather than stretched to fill the cell. | [button-anatomy.md](reference/button-anatomy.md) |
-| A multi-cell button needs a full-span artboard. The skin's `row_span`/`column_span` enlarge the *cell*; the SVG must declare the spanned size itself or it renders small inside a big cell. | [button-anatomy.md](reference/button-anatomy.md) |
+| Rendered size tracks the SVG's declared `width`/`height`/artboard -- the graphic is drawn at its declared size rather than stretched to fill the cell, and `row_span`/`column_span` enlarge the *cell* only, so a spanned button needs a full-span artboard. | [button-anatomy.md](reference/button-anatomy.md) |
 | `text-anchor` is effectively ignored. Position button text with an explicit `x`. | [button-anatomy.md](reference/button-anatomy.md) |
 | Only a subset of SVG renders. `<filter>` is not supported, gradients must use absolute `userSpaceOnUse` coordinates, and transforms are limited to a single `matrix()`. | [button-anatomy.md](reference/button-anatomy.md) |
 | `image_on` means the PLC bit is on, nothing more -- it does not mean "the active choice". | [visual-states.md](reference/visual-states.md) |

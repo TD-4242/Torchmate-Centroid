@@ -31,8 +31,9 @@ ships several stock skins that are very similar but with a few differences — f
 skins with Diagonal Jog Key functionality (VCP Manual p.4).
 
 On Acorn and AcornSix, which stock skin to use (or start with) is selected from the drop-down menu
-in the Wizard `VCP Preferences` menu (VCP Manual p.5) — see
-`centroid-acorn-install`, [wizard.md](../../centroid-acorn-install/reference/wizard.md).
+in the Wizard `VCP Preferences` menu (VCP Manual p.5) — that drop-down is described in
+`centroid-cnc12-router-ops`,
+[operator-panel.md](../../centroid-cnc12-router-ops/reference/operator-panel.md).
 
 On Acorn the VCP is the primary operator control interface. On Oak, Allin1DC, AcornSix, Hickory
 and MPU11 it can replace the hard operator's panel, work alongside it, or not be used at all; set
@@ -58,6 +59,9 @@ with a different name, edit `options.xml` with the name of the skin to be used (
     <Value>acorn_mill_vcp_skin</Value>
 </VcpOption>
 ```
+
+The same file also carries `KeepOnTop`, `DisableSnap`, `AdjustTransparency`, `Transparency` and
+`AutoSize` options, which the manual shows but does not explain (VCP Manual p.7).
 
 > The manual names the same mill skin file differently across its examples:
 > `acorn_mill_vcp_skin.VCP` (VCP Manual p.7, p.8), `acorn_mill_skin.vcp` (p.10),
@@ -135,6 +139,14 @@ row or column. When adding rows and columns, be aware that the buttons scale pro
 the defined size of the VCP, so the more rows and columns, the smaller the buttons will be
 (VCP Manual p.11).
 
+## The Reset and override region
+
+In CNC12 v5.0+ the region holding the Reset, Feedrate Override, VCP options and Push to Free
+buttons is user editable just like the rest of the VCP. In the old VCP — Acorn v4.82, Oak/Allin1DC
+v4.22 and older — these buttons are fixed in size and position: the images and the XML file can be
+changed, but not the size of the button box, the position, or whether the button is there at all
+(VCP Manual p.62).
+
 ## Buttons larger than one cell
 
 Button size is controlled on the grid the same way logo and icon size is: `row span` and
@@ -145,8 +157,9 @@ Button size is controlled on the grid the same way logo and icon size is: `row s
 <button row="3" column="4" row_span="2" column_span="2">m55</button>
 ```
 
-Make room first by deleting the buttons the enlarged one will cover (VCP Manual p.43). Sizing the
-button's SVG to match the span is covered in [button-anatomy.md](button-anatomy.md).
+Make room first by deleting the buttons the enlarged one will cover (VCP Manual p.43). The spans
+enlarge the *cell*; the SVG must declare the spanned size itself or it renders small inside it
+(field-verified note in [button-anatomy.md](button-anatomy.md)).
 
 ## What else lives at skin level
 

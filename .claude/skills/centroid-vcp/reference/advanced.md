@@ -4,10 +4,11 @@ Source: `docs/official/centroid_vcp_users_manual.pdf` (VCP Manual, `rev 28 5-14-
 = PDF page; every citation below was checked against a single-page extract
 (`pdftotext -layout -f N -l N docs/official/centroid_vcp_users_manual.pdf -`).
 
-The heavier, less common features: buttons that span several grid cells, live PLC data on the
-panel, plain text without an image, and groups of objects switched in and out of the same space.
-Skin tags are children of `<vcp_skin>` ([skin-and-grid.md](skin-and-grid.md)); button tags are
-children of `<vcp_button>` ([button-anatomy.md](button-anatomy.md)).
+The heavier, less common features: live PLC data on the panel, plain text without an image, and
+groups of objects switched in and out of the same space. Buttons that span several grid cells are
+a skin-file edit, in [skin-and-grid.md](skin-and-grid.md) — which also holds the skin tags, the
+children of `<vcp_skin>`. Button tags are children of `<vcp_button>`
+([button-anatomy.md](button-anatomy.md)).
 
 > Paths the manual prints are mill paths under `c:\cncm`. On CNC12 Router the same tree lives
 > under `c:\cncr` (Router Manual §1.8, p.13); the manual's own strings are quoted unchanged below.
@@ -77,6 +78,10 @@ example `W31` is Word #31, which equals the current Feedrate Override Percentage
 | Current Carousel Position | `CurrentCarouselPosition_W is W54` |
 | Current Turret Position | `CurrentTurretPosition_W is W52` |
 
+Those five are not the whole list: the manual reprints the stock `Word Definitions` block of a
+typical Acorn Mill PLC program (`cncm/acorn_mill_plc.src`), roughly `W1` to `W89`
+(VCP Manual p.46-47). Take the authoritative list from the machine's own `.src`.
+
 Users can also create their own word values. The manual's example tracks a 4-tool lathe turret:
 define the word in the Word Definitions section (`CurrentTurretPosition_W IS W52`), add the logic
 that assigns it (`IF TurretInput1 THEN CurrentTurretPosition_W = 1` and so on for inputs 2-4),
@@ -113,7 +118,7 @@ All defaults and value lists below are from VCP Manual p.49.
 
 ### Field notes on PLC word display
 
-No manual page states the following; they are board-agnostic behaviors of the VCP renderer.
+No manual page states the following; they are board-agnostic behaviors of CNC12 and the VCP.
 
 - **Field-verified (CNC12, 2026-07):** `<type>Float</type>` reads the `FW` register of the same
   `<number>`, not the integer word — `<number>11</number>` with type float displayed `FW11`, while
@@ -235,11 +240,3 @@ The same page then gives the convention as (VCP Manual p.54):
 There is no limit on how many groups can be hidden, and no limit on how many objects can be added
 to the VCP, but performance may suffer as more objects are added — the manual estimates decreased
 performance would start to become visible at approximately 1000 objects (VCP Manual p.54).
-
-## The Reset and override region
-
-In CNC12 v5.0+ the region holding the Reset, Feedrate Override, VCP options and Push to Free
-buttons is user editable just like the rest of the VCP. In the old VCP — Acorn v4.82, Oak/Allin1DC
-v4.22 and older — these buttons are fixed in size and position: the images and the XML file can be
-changed, but not the size of the button box, the position, or whether the button is there at all
-(VCP Manual p.62).

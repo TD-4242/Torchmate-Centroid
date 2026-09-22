@@ -185,7 +185,7 @@ to change the VCP background color (VCP Manual p.16); it opens from the CNC12 Ut
 
 **Field-verified (CNC12, 2026-07):** saving from CNC12's own VCP options screen rewrites the skin
 file, and has been observed resetting a custom `<background>` back to the stock grey. Keep a
-backup of the skin before touching that screen — see [troubleshooting.md](troubleshooting.md).
+backup of the skin before touching that screen.
 
 ## An image as the background
 
