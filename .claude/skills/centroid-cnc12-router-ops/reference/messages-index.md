@@ -87,7 +87,7 @@ Abnormal stops are detected in this order: PLC, servo drive, spindle drive, lube
 | 408 | Programmed action timer expired | M103's time expired before M104 was encountered; job cancelled. Action: find out why the timer expired before the specified action was completed. | §16.4, p.438 |
 | 409 | _Axis (_) lag | Can be caused by insufficient torque (not enough current) or insufficient speed (not enough voltage) on a given axis. Action: check power and cabling between axis motors, drives, and controller for low voltage, noise, or shorts. | §16.4, p.438 |
 | 410 | _ axis position error | A position error greater than one motor encoder turn was detected on any axis; all axis motion stops, motor power is released, and the CNC program is aborted. Probable causes: a backwards-wired motor, noise on the motor cables, or an encoder error. Action: jog and watch DRO direction to check for backwards wiring, check motor cabling/grounding, or fast-jog to isolate an encoder error by swapping motors between axes (see manual for the full numbered procedure). | §16.4, p.438 |
-| 411 | _ axis full power without motion | Near-full power (PID Output > 115) is applied to an axis with no motion greater than 0.0005 in. for longer than Parameter 61 (default 0.5 sec); all axis motion stops and the CNC program is aborted. Probable causes: a physical stop, a servo drive shutdown from a limit switch input, or the Z-home switch doubling as the Z+ limit switch. Action: slow-jog off a physical stop and set travel limits, check for a tripped limit switch, or check the switch signal for noise (see manual for the full numbered procedure); no motion when jogging toward the error direction indicates a servo drive failure. | §16.4, p.439 |
+| 411 | _ axis full power without motion | 90% Power (a PID Output greater than 115) is applied to an axis with no motion greater than 0.0005 in. for longer than Parameter 61 (default 0.5 sec); all axis motion stops and the CNC program is aborted. Probable causes: a physical stop, a servo drive shutdown from a limit switch input, or the Z-home switch doubling as the Z+ limit switch. Action: slow-jog off a physical stop and set travel limits, check for a tripped limit switch, or check the switch signal for noise (see manual for the full numbered procedure); no motion when jogging toward the error direction indicates a servo drive failure. | §16.4, p.439 |
 | 412 | _ axis encoder differential error | An error was detected in the differential signal levels for this axis encoder, indicating a loose/severed cable or a bad encoder; stops all motion and cancels the job. Action: reconnect/replace the encoder or encoder cable. | §16.4, p.439 |
 | 417 | Abnormal end of job | Job was ended without reason. | §16.4, p.439 |
 | 418 | Search Line or Block not found | The requested search input data was not found in the loaded CNC file. Action: type in the correct search input data or load the correct job. | §16.4, p.439 |
@@ -131,6 +131,12 @@ Abnormal stops are detected in this order: PLC, servo drive, spindle drive, lube
 > "A servo drive configuration parameter was modified"). It also reuses code 453 for two
 > different messages on the same page (p.442, rows above). Neither reuse is resolved here;
 > both are kept as printed.
+
+> The `#__`/`_` placeholder for the limit-switch number is printed inconsistently across
+> pages: p.437 prints `Limit (#__) cleared` (capital L, code 340, §16.3), p.438 prints
+> `limit (#__) tripped` (lowercase l, code 407, §16.4), and p.438 also prints `_Axis (_) lag`
+> (code 409, §16.4, capital A directly after the underscore, no space). Each is kept exactly
+> as its own page prints it.
 
 ## §16.5 CNC Syntax Errors (§16.5, p.443-446)
 
@@ -186,6 +192,9 @@ Abnormal stops are detected in this order: PLC, servo drive, spindle drive, lube
 | 551 | Invalid R value | The value associated with the R-code is invalid. Action: give the correct value. | §16.5, p.445 |
 | 552 | File encryption error | Error while parsing an encrypted G-code file. | §16.5, p.446 |
 | 557 | License Import Error | Imported license doesn't match serial number or software version. Action: check that the correct license is being imported; contact dealer. | §16.5, p.446 |
+
+> Code 526's Action on p.444 prints `See M224 and G225`; the manual is quoted as printed,
+> without asserting whether `G225` should instead read `M225`.
 
 ## §16.6 Cutter Compensation Errors (§16.6, p.446)
 
@@ -257,7 +266,7 @@ Abnormal stops are detected in this order: PLC, servo drive, spindle drive, lube
 | 934 | Warning: Excess precision truncated | A CNC program used axis positioning precision greater than what is displayed, so the actual commanded positions are truncated; happens when the Simultaneous Contouring feature is not enabled. Action: contact Dealer for information about obtaining the Simultaneous Contouring feature. | §16.9, p.449 |
 | 935 | _ axis (#) scale disabled | A scale is enabled for this axis but compensation was disabled. Scale compensation is disabled at initial power up, configuration changes, and during homing moves. Action: home the machine. | §16.9, p.449 |
 | 935 | Probe failed reset retries | Probe failed to reset after three tries; the probing operation may have been started too close to the surface. Action: move the probe further away from the surface and do the probing operation again; if this continues to fail persistently, call dealer. | §16.9, p.449 |
-| 936 | _ axis (#) scale enabled | A scale is enabled for this axis and compensation was enabled; happens after homing the axis. | §16.9, p.449 |
+| 936 | _ axis (#) scale enabled | A scale is enabled for this axis and compensation was enabled; happens after homing the axis. Action: Not Applicable. | §16.9, p.449 |
 | 936 | Probe failed to reset | Probe failed to reset; the probing operation may have been started too close to the surface. Action: move probe further away from surface and do the probing operation again; if this continues to fail persistently, call dealer. | §16.9, p.449 |
 | 944 | MPU requested resend | The MPU requested a resend. (Status Message.) | §16.9, p.449 |
 | 945 | PC requested resend | The PC requested a resend. (Status Message.) | §16.9, p.449 |
