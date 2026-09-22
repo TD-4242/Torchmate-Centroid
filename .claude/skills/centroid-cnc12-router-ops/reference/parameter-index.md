@@ -56,7 +56,7 @@ subtract its value. For example, enabling Parameter 10's bits 0, 3, and 5 (value
 | 57 | Use Generic Load Meter Data from PLC | Sets which axes read load meter data from PLC system variables instead of PID output. | §15.7.42, p.344 |
 | 61–62 | Stall Detection Parameters | Sets the current and time thresholds used to detect low- and high-power axis stall conditions. | §15.7.43, p.344 |
 | 63 | High Power Idle PID Multiplier | Sets a constant used to detect abnormal motor resistance when an axis is idle and holding position. | §15.7.44, p.344 |
-| 64 | Fourth/Fifth-axis Pairing | Configures pairing or slaving of the fourth and fifth axes to another axis. | §15.7.45, p.344 |
+| 64 | Fourth/Fifth-axis Pairing | Removed in CNC12 v5.40.0 and replaced by Parameters 551-558 (see §15.7.253). | §15.7.45, p.344 |
 | 65–67 | Spindle Gear Ratios | Sets the gear ratio of each lower spindle speed range relative to high range on a multi-range spindle drive. | §15.7.46, p.345 |
 | 68 | Minimum Rigid Tapping Spindle Speed (Rigid Tapping Parameter) | Sets the spindle speed the control slows to near the end of a Rigid Tapping cycle. | §15.7.47, p.345 |
 | 69 | Duration For Minimum Spindle Speed (Rigid Tapping Parameter) | Sets how long the control holds the minimum spindle speed during a Rigid Tapping cycle. | §15.7.48, p.345 |
