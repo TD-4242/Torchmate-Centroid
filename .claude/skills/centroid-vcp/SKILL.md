@@ -89,8 +89,8 @@ is the `Skin` value in `options.xml` (VCP Manual p.7).
 
 ### Button XML tags at a glance
 
-Every tag is a child of the root `<vcp_button>` element (VCP Manual p.18, p.19). The ones you will
-meet most:
+Every tag in this table is a child of the root `<vcp_button>` element (VCP Manual p.18, p.19). The
+ones you will meet most:
 
 | Tag | Purpose | Manual | Detailed in |
 |-----|---------|--------|-------------|

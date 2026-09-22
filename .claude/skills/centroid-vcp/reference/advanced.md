@@ -1,4 +1,4 @@
-# Advanced VCP displays: big buttons, PLC words, text and switching
+# Advanced VCP displays: PLC words, text and switching
 
 Source: `docs/official/centroid_vcp_users_manual.pdf` (VCP Manual, `rev 28 5-14-26`). Printed page
 = PDF page; every citation below was checked against a single-page extract

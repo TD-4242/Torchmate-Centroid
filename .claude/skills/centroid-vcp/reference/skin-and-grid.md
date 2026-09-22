@@ -31,9 +31,10 @@ ships several stock skins that are very similar but with a few differences — f
 skins with Diagonal Jog Key functionality (VCP Manual p.4).
 
 On Acorn and AcornSix, which stock skin to use (or start with) is selected from the drop-down menu
-in the Wizard `VCP Preferences` menu (VCP Manual p.5) — that drop-down is described in
+in the Wizard `VCP Preferences` menu (VCP Manual p.5) — the same Wizard menu appears in
 `centroid-cnc12-router-ops`,
-[operator-panel.md](../../centroid-cnc12-router-ops/reference/operator-panel.md).
+[operator-panel.md](../../centroid-cnc12-router-ops/reference/operator-panel.md), under Diagonal
+Jogging.
 
 On Acorn the VCP is the primary operator control interface. On Oak, Allin1DC, AcornSix, Hickory
 and MPU11 it can replace the hard operator's panel, work alongside it, or not be used at all; set
@@ -149,9 +150,9 @@ changed, but not the size of the button box, the position, or whether the button
 
 ## Buttons larger than one cell
 
-Button size is controlled on the grid the same way logo and icon size is: `row span` and
-`column span` tell the VCP to scale the button graphic larger than just one button space
-(VCP Manual p.43). They are attributes on the skin's `<button>` line (VCP Manual p.44):
+Button size is controlled on the grid the same way logo and icon size is: the manual describes
+`row span` and `column span` as telling the VCP to scale the button graphic larger than just one
+button space (VCP Manual p.43). They are attributes on the skin's `<button>` line (VCP Manual p.44):
 
 ```xml
 <button row="3" column="4" row_span="2" column_span="2">m55</button>
