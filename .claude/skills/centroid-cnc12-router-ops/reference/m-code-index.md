@@ -2,9 +2,12 @@
 
 Source: Router Manual Ch 13 (§13.1-§13.69, p.280-306).
 
-§13.1 gives a one-page summary of every M-function, pointing to Ch 12-13 for detail (Router
-Manual §13.1, p.280). §13.2 covers customizing M-functions 0-90 with an `mfuncXX.mac` file in
-`c:\cncr`; no M-function above 90 can be customized with a macro (Router Manual §13.2, p.281).
+§13.1 gives a summary of every M-function, pointing to Ch 12-13 for detail (Router Manual
+§13.1, p.280-281). §13.2 covers customizing **Most** M-functions 0-90 with an `mfuncXX.mac`
+file in `c:\cncr`; M2, M6, and M25 can be customized but always move the Z-axis home before
+the macro's commands run, and M0-M9 filenames must use a single digit (`mfunc3.mac`, not
+`mfunc03.mac`); no M-function above 90 can be customized with a macro (Router Manual §13.2,
+p.281).
 
 | Code | Name | Summary | Ref |
 |---|---|---|---|

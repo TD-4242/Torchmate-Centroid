@@ -273,7 +273,7 @@ Abnormal stops are detected in this order: PLC, servo drive, spindle drive, lube
 | 946 | PC resending | The PC is resending. (Status Message.) | §16.9, p.449 |
 | 947 | PC received data out of order | The PC needed to reorder data received from the MPU. (Status Message.) | §16.9, p.449 |
 | 948 | PC packet error | The PC received bad data from the MPU and will try to recover by requesting a resend. (Status Message.) | §16.9, p.449 |
-| 949 | Drive map does not match hardware | One or more of the drive mapping Parameters 300-307 is misconfigured. Action: contact Dealer. | §16.9, p.449 |
+| 949 | Drive map does not match hardware | One or more of the drive mapping Parameters 300–307 is misconfigured. Action: contact Dealer. | §16.9, p.449 |
 
 > The manual reuses codes 935 and 936 for two different messages each, both within §16.9
 > (p.449, rows above). Neither reuse is resolved here; both are kept as printed.

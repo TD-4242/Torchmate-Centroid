@@ -88,7 +88,7 @@ Coordinate and motion conventions (Router Manual §1.7, p.12):
 
 - Facing the router, X is positive to the right, Y is positive to the rear, and Z is positive
   upward, perpendicular to the XY plane.
-- Direction of motion is defined by the **cutter's** motion, not the table's motion.
+- Direction of motion is defined by the cutter's motion, not the table's motion.
 - CW = clockwise, CCW = counter-clockwise.
 
 ## 1.8 Machine Home
@@ -107,8 +107,8 @@ operator must move each axis to its home position with the jog keys or handwheel
 
 ## 1.9 Router M- and G-codes
 
-Ch 1 gives a one-page summary table of M- and G-codes, pointing to Ch 12-13 for full detail
-(Router Manual §1.9, p.14). The full, cited M-code and G-code catalogs for this manual are in
+Ch 1 gives a summary table of M- and G-codes, pointing to Ch 12-13 for full detail (Router
+Manual §1.9, p.14-15). The full, cited M-code and G-code catalogs for this manual are in
 [m-code-index.md](m-code-index.md) and [g-code-index.md](g-code-index.md).
 
 ## 1.10 How to Unlock Software Features or Unlock Your Control
@@ -130,7 +130,7 @@ moving the machine, setting parameters, and similar tasks (Router Manual §1.11,
 ## 1.12 CNC12 with Multiple Displays
 
 With multiple displays, CNC12 defaults to the display farthest to the right (Router Manual
-§1.12, p.16). To override this, add `--displayX` (X = the target display's ID number) to the
+§1.12, p.16). To override this, add `–displayX` (X = the target display's ID number) to the
 `Target` field of the CNC12 desktop shortcut's Properties. An error message may appear on
 startup, but the desired display is still used.
 
@@ -138,9 +138,7 @@ startup, but the desired display is still used.
 
 ## F1-F10 main-screen menu map
 
-The Options Window shows ten softkey menus from the main screen (Router Manual §3, p.41). This
-build's F5 and F9 assignments (Tool/ATC and Smoothing) are specific to this manual; do not carry
-F-key labels from another CNC12 manual.
+The Options Window shows ten softkey menus from the main screen (Router Manual §1.5, p.11).
 
 | F-key | Menu name | One-line purpose |
 |---|---|---|
@@ -184,9 +182,9 @@ finished. Navigate previous commands with `UP ARROW` / `DOWN ARROW`; edit with `
 `RIGHT` arrow. Press `ENTER` or `CYCLE START` to execute.
 
 ```
-Block? G92X0Y0   ; Set the current XY position to 0,0
-Block? M92 /Z    ; Move the Z to the positive limit.
-Block? M26 /Z    ; Set the current Z position as Z home.
+Block ? G92X0Y0   ; Set the current XY position to 0,0
+Block ? M92 /Z    ; Move the Z to the positive limit.
+Block ? M26 /Z    ; Set the current Z position as Z home.
 ```
 
 ### F4 – Run Job Options
@@ -241,7 +239,7 @@ launch digitizing (if licensed), and open the CNC12 Wizard (Router Manual §3.7,
 | `F6` | User Maint | Perform user maintenance |
 | `F7` | Create Report | Generate a `report.zip` backup of system configuration files |
 | `F8` | Import License | Import a license file into CNC12 |
-| `F9` | Digitizing | Open the digitizing menu: Grid, Radial, Contour, Probe, Wall Following (see Ch 8) |
+| `F9` | Digitizing | Open the digitizing menu: Gird [sic], Radial, Contour, Probe, Wall Following (see Ch 8) |
 | `F10` | Acorn Wizard | Open the CNC12 Wizard |
 
 ### F8 – Graph

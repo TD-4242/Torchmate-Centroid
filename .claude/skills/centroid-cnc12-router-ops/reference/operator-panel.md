@@ -144,7 +144,7 @@ it was paused with Spin Stop (Router Manual §2.18, p.21).
 In manual spindle mode, stops the spindle; in automatic mode, pauses spindle rotation, which
 Spin Start can then resume (Router Manual §2.19, p.21).
 
-> NOTICE: The SPIN STOP key should only be pressed during FEED HOLD or when a program is NOT
+> **NOTICE** The SPIN STOP key should only be pressed during FEED HOLD or when a program is NOT
 > running.
 
 ## 2.20 Coolant Auto/Manual
@@ -242,7 +242,7 @@ The VCP legend below covers this router build's default skin (Router Manual §2.
 The PC keyboard can serve as a jog panel; press `ALT+J` to display and enable it (Router
 Manual §2.26, p.28-30). Coolant on/off, spindle on/off, feed rate, and spindle override work
 without the panel displayed; full functionality, including jogging, needs the panel displayed
-on screen, which requires Parameter 170 set to `1`.
+on screen. Enabling keyboard jogging itself requires Parameter 170 set to `1` (p.29).
 
 - The status window (upper-right) shows jogging mode (continuous/incremental), incremental step
   size, and jog speed (fast/slow).
@@ -251,6 +251,8 @@ on screen, which requires Parameter 170 set to `1`.
 - The jog keys sit in the cursor-key block between the main keyboard and the numeric keypad; a
   key controlling an axis is overlaid with that axis's symbol (X, Y, etc.). They are the Arrow,
   Page Up, and Page Down keys.
+
+Keyboard jog panel keys (Router Manual §2.26, p.30-34):
 
 | Key(s) | Function | Description | Availability |
 |---|---|---|---|
@@ -296,36 +298,45 @@ function, then press `ALT+J` or `Esc` to return to MDI.
 
 A computer-style keyboard, supplied with most systems, doubles as a jog panel and supplies "hot
 keys" usable at almost any time, with few exceptions — some menus may prohibit their use (Router
-Manual §2.28, p.34).
+Manual §2.28, p.34-40).
 
 | Keystroke | Function | Description |
 |---|---|---|
-| `Alt D` | WCS/Machine Coordinates | Swaps the DRO display between current WCS position and current machine position |
-| `Alt E` | Generate Screenshot | If Parameter 389 > 0, saves a screenshot as `screenshot-nnn.png`; `nnn` starts at 000 and increments per screenshot, resetting on CNC12 restart |
-| `Alt I` | Live PLC I/O | Opens the CNC12 PLC Diagnostic Screen, showing real-time status of all inputs/outputs |
-| `Alt J` | Keyboard Jog Panel | Opens the keyboard jog panel; a window overlays keyboard keys with a VCP-like legend, and a print button prints the panel image |
-| `Alt K` | ATC Bin | Displays the current ATC bin |
-| `Alt L` | ATC Putback Location | Displays the current ATC putback location |
-| `Alt M` | Run MDI | Runs MDI |
-| `Alt P` | Live PID Display | Displays the live PID screen with current axis positioning information |
-| `Alt S` | Cycle Start | Alternative to the CYCLE START button |
-| `Alt T` | Temperature Display | Shows current per-axis temperatures in the message window |
-| `Alt V` | Display CNC Software Version Info | Shows CNC12 version info (same as F1 from the main menu) |
-| `Alt 1` ... `Alt 0` | Select WCS | Cycles through the first ten Work Coordinate Systems |
-| `Alt -` | Select Previous WCS | Selects the previous WCS |
-| `Alt =` | Select Next WCS | Selects the next WCS |
-| `Alt F10` | Exit CNC12 | Exits CNC12 (utility menu only) |
-| `Ctrl D` | Swap DRO and Distance-to-Go DRO | Swaps the positions of the DRO and the Distance-to-Go DRO |
-| `Ctrl E` | Launch PLC Detective | Launches the PLC Detective application |
-| `Ctrl H` | Enable G-code Display | Shows the G-code display if a job is running and it is hidden |
-| `Ctrl I` | Save PLC state to file | While on the Live PLC I/O screen, prints the current PLC I/O state to `plcstate.txt` |
-| `Ctrl Q` | Probing Cycles History | Shows recorded probing-cycle positions (from F9 – Digitize > F4 – Probe); enter a description, delete history, or copy positions to the clipboard; close with `CTRL+Q` again or a click outside the window |
-| `Shift F1` | Switch to Old-style Graphics Backplot | While in the accelerated backplot, switches to the old-style backplot that does not use OpenGL |
-| `Shift F2` | Erase Log File | From Utility > Logs > Errors (or Stats), erases the log file after a confirmation dialog |
-| `Ctrl Alt X` | Go to Shutdown Screen | From the main menu, opens the CNC12 shutdown screen |
-| `Ctrl C` | Copy | From a numeric field or WCS Table column, copies the selected value to the clipboard |
-| `Ctrl X` | Cut | From a numeric field or WCS Table column, cuts the selected value to the clipboard; the previous value is set to 0 |
-| `Ctrl V` | Paste | From a numeric field or WCS Table column, pastes the value from the clipboard |
+| `ALT+D` | WCS/Machine Coordinates | Swaps the DRO display between current WCS position and current machine position |
+| `ALT+E` | Generate Screenshot | If Parameter 389 > 0, saves a screenshot as `screenshot-nnn.png`; `nnn` starts at 000 and increments per screenshot, resetting on CNC12 restart |
+| `ALT+I` | Live PLC I/O | Opens the CNC12 PLC Diagnostic Screen, showing real-time status of all inputs/outputs |
+| `ALT+J` | Keyboard Jog Panel | Opens the keyboard jog panel; a window overlays keyboard keys with a VCP-like legend, and a print button prints the panel image |
+| `ALT+K` | ATC Bin | Displays the current ATC bin |
+| `ALT+L` | ATC Putback Location | Displays the current ATC putback location |
+| `ALT+M` | Run MDI | Runs MDI |
+| `ALT+P` | Live PID Display | Displays the live PID screen with current axis positioning information |
+| `ALT+S` | Cycle Start | Alternative to the CYCLE START button |
+| `ALT+T` | Temperature Display | Shows current per-axis temperatures in the message window |
+| `ALT+V` | Display CNC Software Version Info | Shows CNC12 version info (same as F1 from the main menu) |
+| `ALT+1` ... `ALT+0` | Select WCS | Cycles through the first ten Work Coordinate Systems |
+| `ALT+-` | Select Previous WCS | Selects the previous WCS |
+| `ALT+=` | Select Next WCS | Selects the next WCS |
+| `ALT+F10` | Exit CNC12 | Exits CNC12 (utility menu only) |
+| `CTRL+D` | Swap DRO and Distance-to-Go DRO | Swaps the positions of the DRO and the Distance-to-Go DRO |
+| `CTRL+E` | Launch PLC Detective | Launches the PLC Detective application |
+| `CTRL+H` | Enable G-code Display | Shows the G-code display if a job is running and it is hidden |
+| `CTRL+I` | Save PLC state to file | While on the Live PLC I/O screen, prints the current PLC I/O state to `plcstate.txt` |
+| `CTRL+Q` | Probing Cycles History | Shows recorded probing-cycle positions (from F9 – Digitize > F4 – Probe); enter a description, delete history, or copy positions to the clipboard; close with `CTRL+Q` again or a click outside the window |
+| `SHIFT+F1` | Switch to Old-style Graphics Backplot | While in the accelerated backplot, switches to the old-style backplot that does not use OpenGL |
+| `SHIFT+F2` | Erase Log File | From Utility > Logs > Errors (or Stats), erases the log file after a confirmation dialog |
+| `CTRL+ALT+X` | Go to Shutdown Screen | From the main menu, opens the CNC12 shutdown screen |
+| `CTRL+C` | Copy | From a numeric field or WCS Table column, copies the selected value to the clipboard |
+| `CTRL+X` | Cut | From a numeric field or WCS Table column, cuts the selected value to the clipboard; the previous value is set to 0 |
+| `CTRL+V` | Paste | From a numeric field or WCS Table column, pastes the value from the clipboard |
+
+> Note: `Parameter 389 > 0` gates `ALT+E`'s screenshot action here (Router Manual §2.28.2,
+> p.34), while the Machine Parameter index lists Parameters 387-389 as reserved debugging
+> parameters that should be left at 0 (Router Manual §15.7.193, p.379; see
+> [parameter-index.md](parameter-index.md)). Both are quoted as printed; not reconciled here.
+
+> Note: `CTRL+Q` is assigned to both Spindle Cancel (Router Manual §2.26, p.32; see the keyboard
+> jog panel table above) and Probing Cycles History (Router Manual §2.28.20, p.38). Quoted as
+> printed; not reconciled here.
 
 > Note: the manual's §2.28.26 heading reads "CTRL+V – Paste," but its body text instructs
 > pressing `CTRL+P` to paste (Router Manual §2.28, p.40, both in the same paragraph); this file

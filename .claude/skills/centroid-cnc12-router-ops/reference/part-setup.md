@@ -27,10 +27,10 @@ The Set Part Zeros screen has its own softkey bar, distinct from the top-level `
 | `F7` | WCS Table | Opens the Work Coordinate System (WCS) Configuration screen. See §4.8. |
 | `F8` | Set | Accepts the position for the current axis, correcting for edge finder diameter based on the approach direction. Does not automatically advance to the next axis. |
 
-(Router Manual §4.1, p.50.)
+(Router Manual Ch 4 intro, p.50 — printed before the §4.1 heading.)
 
 > Note: this table's `F8 – Set` conflicts with the per-axis Set Part Position procedure below, whose on-screen
-> diagram reads `F10 – Set` / `SHIFT+F10` (Router Manual §4.1, p.50 vs §4.1.1, p.51). Quoted as printed; no
+> diagram reads `F10 – Set` / `SHIFT+F10` (Router Manual Ch 4 intro, p.50 vs §4.1.1, p.51). Quoted as printed; no
 > reconciliation attempted.
 
 ### 4.1.1 Setting Up X- or Y-axis (p.51)

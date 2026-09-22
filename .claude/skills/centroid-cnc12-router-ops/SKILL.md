@@ -25,9 +25,11 @@ of the official **CNC12 Router Operators Manual** (v5.42+) -- not specific to an
 CNC12 Router installs to `c:\cncr` (Router Manual §1.8, p.13). On startup, before any job can
 run, machine home must be set: if the machine has home/limit switches, reference marks, or safe
 hard stops, `CYCLE START` runs the homing G-codes in `cncm.hom` from `c:\cncr`; by default that
-file homes Z plus, then X minus, then Y plus (Router Manual §1.8, p.13).
+file homes Z plus, then X minus, then Y plus (Router Manual §1.8, p.13). The Acorn Wizard
+generates `cncm.hom` from its homing settings; see
+[axis-pairing.md](../centroid-acorn-install/reference/axis-pairing.md).
 
-The Options Window offers ten F1-F10 menus from the main screen (Router Manual §3, p.41):
+The Options Window offers ten F1-F10 menus from the main screen (Router Manual §1.5, p.11):
 
 | F-key | Menu |
 | --- | --- |

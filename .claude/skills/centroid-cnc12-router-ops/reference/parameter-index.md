@@ -299,3 +299,8 @@ subtract its value. For example, enabling Parameter 10's bits 0, 3, and 5 (value
 | 983 | Spindle Speed Variation Amount (+/- rpm) | Sets the RPM variation amount applied above and below the commanded spindle speed by the PLC-driven Spindle Speed Variation feature. | §15.7.285, p.396 |
 | 984 | Feed Rate Variation Cycle Time (in milliseconds) | Sets the cycle time for the PLC-driven Feed Rate Variation feature to ramp from 100% to 0% and back. | §15.7.286, p.396 |
 | 997 | Spindle Cooling Fan Delay Timer | Sets the spindle cooling fan delay timer. | §15.7.287, p.396 |
+
+> Note: Parameters 387-389 are printed here as reserved debugging parameters that should be
+> left at 0 (Router Manual §15.7.193, p.379), while `Alt E`'s screenshot action fires only when
+> Parameter 389 is greater than 0 (Router Manual §2.28.2, p.34; see
+> [operator-panel.md](operator-panel.md) §2.28). Both are quoted as printed; not reconciled here.

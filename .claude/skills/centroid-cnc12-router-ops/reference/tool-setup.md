@@ -72,8 +72,9 @@ Establishing the Z-reference position (p.66):
 3. Jog the tip of the tool to the top of the work surface.
 4. "Press `4` to Set the Z Ref to the current Z position" (Router Manual §5.1, p.66).
 
-> Note: this page prints `4` for the key that sets the Z-ref, where the same screen's softkey bar labels the
-> action `F10 – Save` (Router Manual §5.1, p.65). Quoted as printed; no reconciliation attempted.
+> Note: p.66 prints "Press 4 to Set the Z Ref to the current Z position," with no `F` prefix on
+> the `4` (Router Manual §5.1, p.66). Quoted as printed; no claim is made about which key it
+> should be.
 
 Measuring each tool height (p.66-67):
 
@@ -183,6 +184,15 @@ also associated with bin numbers (see `Parameter 160`, Ch 15) (p.70).
 To edit, navigate to the desired tool number with `Arrow`, `Page Up`, `Page Down`, `HOME`, `END`; type new
 Height Offset, Diameter, or description values and press `ENTER`; press `F10 – Save` to save and exit (p.70).
 
+Tool Library softkeys (screenshot, p.70):
+
+| Softkey | Label | Description |
+|---|---|---|
+| `F3` | Tool Life | Opens Tool Life Management (§5.3). |
+| `F4` | Export Lib... | Exports the tool library; the body text on p.71 calls this key `F5 – Export Lib`, see the note under that heading. |
+| `F6` | Set Tool # | Not described in the surrounding text; shown on the Tool Library softkey bar (Router Manual §5.2, p.70). |
+| `F10` | Save | Saves the Tool Library and exits. |
+
 ### Bin (p.70)
 
 Specifies the bin location, or ATC position, the tool occupies. Valid values are `-1` (shown as `—`) through the
@@ -221,7 +231,7 @@ tool change. Type a new number and press `ENTER` to change it.
 
 Text description of the tool, shown in a prompt message when the CNC software reaches a tool change (`M6`).
 
-### F5 – Export Lib (p.71)
+### F5 – Export Lib (p.70-71)
 
 The tool library can be exported in `txt` (space-separated, aligned columns) or `csv` (comma-separated columns)
 format by pressing `F5`; choose `txt` or `csv` for the desired format.

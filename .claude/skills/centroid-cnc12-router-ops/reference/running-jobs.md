@@ -115,14 +115,19 @@ count to zero, decrementing on each completed run (Router Manual §6.5, p.85).
 buffered, toggling it during a run may take effect with a delay. `F5 – Block Mode` toggles
 Single Block mode (equivalent to the `AUTO/BLOCK` key); Auto mode is the default and is
 re-instated when a job run ends. `F6 – Optional Stops` makes M1 codes wait for `CYCLE START`
-like M0 when on, and be ignored when off (see Router Manual Ch 13 for M-code definitions);
-Optional Stops defaults to off and is reset to off when a job run ends. `F8 – Graph` graphs the
+like M0 when on, and be ignored when off (see Router Manual Ch 13 for M-code definitions).
+Optional Stops defaults to off; the manual prints, under this same key, "If you use this key to
+turn on Single Block mode and then run a job, Optional Stops will be set to off" (Router Manual
+§6.5, p.86). `F8 – Graph` graphs the
 part; from the Search or Resume Job screens it shows dotted lines for the portion that will be
 skipped and solid lines for the portion that will be machined. `F9 – Rapid On/Off` toggles
 Rapid Override; when on, the Feed Rate Override knob adjusts rapid-move (`G0`) speed (see
 Router Manual Ch 12 for G-code definitions), and when off rapids run at full speed. `F10 – RTG
 On/Off` must be on for Run-time Graphics (§6.2) to start with `CYCLE START`, and off prevents
 starting it mid-run (Router Manual §6.5, p.85-86).
+
+> Note: that sentence, printed under the `F6 – Optional Stops` key, names Single Block mode, not
+> Optional Stops, as the thing "this key" turns on (Router Manual §6.5, p.86).
 
 Machine Parameter 400 controls whether `CYCLE START` is enabled on the Run menu: zero disables
 it there, any other value enables it. This does not apply to the Resume and Search sub-menus,
@@ -155,9 +160,9 @@ To run the test (Router Manual §6.7, p.86-87):
 2. If not already in the `ncfiles` directory of the `cncm` folder, navigate to `cncm\ncfiles`.
 3. Select the `com_stress_test.cnc` file.
 4. Press `CYCLE START`.
-5. The test runs; a `Communications Stress Test PASSED` message reports the results: Packets
-   Resent, Generic Communication Errors, Packets Out of Order, NAcks Packets Sent, and NAcks
-   Packets Received.
+5. The test runs; a `Communications Stress Test PASSED` message reports "max. errors acceptable
+   = 5" and the results: Packets Resent, Generic Communication Errors, Packets Out of Order,
+   NAcks Packets Sent, and NAcks Packets Received (p.87).
 
 > **Note:** step 2 names the folder `cncm`, as printed (Router Manual §6.7, p.87), while Ch 7's
 > `F6 – User Maint` describes `F3 – Machine Notes` as opening a file "stored in the cncr
