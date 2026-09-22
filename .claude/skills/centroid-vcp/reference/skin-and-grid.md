@@ -60,9 +60,9 @@ with a different name, edit `options.xml` with the name of the skin to be used (
 ```
 
 > The manual names the same mill skin file differently across its examples:
-> `acorn_mill_vcp_skin.VCP` (p.7, p.8), `acorn_mill_skin.vcp` (p.10), `acorn_mill_skin.VCP`
-> (p.22), `mill_vcp_skin.VCP` (p.27) and `acorn_skin.vcp` (p.43). Read the folder for the name
-> your install actually ships.
+> `acorn_mill_vcp_skin.VCP` (VCP Manual p.7, p.8), `acorn_mill_skin.vcp` (p.10),
+> `acorn_mill_skin.VCP` (p.22), `mill_vcp_skin.VCP` (p.27) and `acorn_skin.vcp` (p.43). Read the
+> folder for the name your install actually ships.
 
 ## The button grid
 
@@ -114,8 +114,9 @@ program controls those functions unless the user selects MAN. The Auto/Man butto
 those functions to work as designed, so don't delete it unless you really don't need them — same
 with the Spindle Auto/Man button (VCP Manual p.26).
 
-If a deleted button sat inside a `<border>` group box or under a static `<image>`, adjust or
-remove that element too ([visual-states.md](visual-states.md)).
+`<border>` boxes and static `<image>` overlays carry their own `<row_start>`/`<row_span>` and
+`<column_start>`/`<column_span>` nodes (VCP Manual p.28, p.31); see
+[visual-states.md](visual-states.md).
 
 ## Grid size: number of rows and columns
 
@@ -145,8 +146,7 @@ Button size is controlled on the grid the same way logo and icon size is: `row s
 ```
 
 Make room first by deleting the buttons the enlarged one will cover (VCP Manual p.43). Sizing the
-button's SVG to match the span is covered in [button-anatomy.md](button-anatomy.md); the full
-worked example is in [advanced.md](advanced.md).
+button's SVG to match the span is covered in [button-anatomy.md](button-anatomy.md).
 
 ## What else lives at skin level
 

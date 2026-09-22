@@ -37,9 +37,9 @@ HEX (VCP Manual p.18):
 </vcp_button>
 ```
 
-`<number>` is the PLC output the LED reflects. To remove the LED indicator light from a button
-entirely, delete the whole `<plc_output>` block, leaving just the `<skin_event_num>`
-(VCP Manual p.18).
+`<number>` is the LED number associated with the output (VCP Manual p.25). To remove the LED
+indicator light from a button entirely, delete the whole `<plc_output>` block, leaving just the
+`<skin_event_num>` (VCP Manual p.18).
 
 ## Swap the image while the button is pressed
 
@@ -80,9 +80,10 @@ label suggests (jog-mode bit ON = incremental; the slow/fast override bit ON = s
 image is the tortoise). Design both SVGs for the two bit states, verify on the machine, and record
 the verified polarity, otherwise the next editor "fixes" it backwards.
 
-A rotary switch, toggle or any other two-position widget is the same mechanism: two SVGs swapped
-on one bit. With a `<skin_event_num>` it is clickable; without one it is a pure indicator (see the
-input and memory indicators below).
+A two-image toggle is the same mechanism as the output swap above: two SVGs on one bit
+(VCP Manual p.20). The manual's indicator example carries no `<skin_event_num>` at all and acts
+purely as an indicator light (VCP Manual p.21); `<skin_event_num>` is how PLC logic is assigned to
+a VCP button (VCP Manual p.36).
 
 ## Indicator from a PLC input or memory bit
 
@@ -176,8 +177,7 @@ adding a `<background>` line to the skin XML file just after the first line (VCP
 The manual prints the value with spaces inside the tag, as `# E9E0B7` (VCP Manual p.15) and
 `# A6A5A0` (VCP Manual p.16). Colors in both the skin and the button XML files are expressed in
 HEX color code. If the `<background>#HEXCODE</background>` line is missing from the skin, the VCP
-defaults to the gray background color `#A6A5A0`, which the manual also gives as the HEX code for
-the default VCP background grey (VCP Manual p.15).
+defaults to the gray background color `#A6A5A0` (VCP Manual p.15).
 
 For those who don't want to edit any XML files, the Centroid CNC12 color picker can also be used
 to change the VCP background color (VCP Manual p.16); it opens from the CNC12 Utility menu as

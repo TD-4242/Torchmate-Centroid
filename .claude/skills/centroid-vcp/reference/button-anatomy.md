@@ -41,8 +41,8 @@ VCP (VCP Manual p.12).
 
 ## Button XML tag reference
 
-Every tag below is a child of the root `<vcp_button>` element. A minimal button is just a
-`<skin_event_num>`; the rest are optional.
+Every tag below is a child of the root `<vcp_button>` element. A button can be as small as a bare
+`<skin_event_num>` (VCP Manual p.19); an indicator button may omit even that (VCP Manual p.21).
 
 | Tag | Purpose | Manual | Detailed in |
 |-----|---------|--------|-------------|
@@ -57,7 +57,7 @@ Every tag below is a child of the root `<vcp_button>` element. A minimal button 
 | `<plc_word>` | Display a live PLC word value on top of the button. | p.45 | [advanced.md](advanced.md) |
 | `<switch>` with `<switch_on>`/`<switch_off>`, `<remove>`, `<add>`, `<image_on>`/`<image_off>` | Switch groups of buttons, borders and images in and out on press. | p.53 | [advanced.md](advanced.md) |
 
-The stock Work Light button is the minimal shape plus an LED (VCP Manual p.18):
+The stock Work Light button is a `<skin_event_num>` plus an LED (VCP Manual p.18):
 
 ```xml
 <vcp_button>
@@ -71,9 +71,10 @@ The stock Work Light button is the minimal shape plus an LED (VCP Manual p.18):
 ```
 
 > The manual gives the Work Light button two different pairs of numbers: `skin_event_num` `20`
-> with `plc_output` `1076` in the LED and image-swap examples (p.18, p.20), and `skin_event_num`
-> `73` with `plc_output` `1112` in the explanation of what a skin event number is (p.36). Take the
-> numbers for your machine from its own PLC source file, not from the examples.
+> with `plc_output` `1076` in the LED and image-swap examples (VCP Manual p.18, p.20), and
+> `skin_event_num` `73` with `plc_output` `1112` in the explanation of what a skin event number is
+> (VCP Manual p.36). Take the numbers for your machine from its own PLC source file, not from the
+> examples.
 
 ## Change an existing button's graphic
 
@@ -84,7 +85,7 @@ to save the edited file in the proper folder — for `x_positive`, that is
 `c:\cncm\resources\vcp\Buttons\x_positive`. Restart CNC12 to see the changes, then repeat the
 process for the other buttons (VCP Manual p.13, p.14).
 
-## SVG rules the VCP renderer enforces
+## SVG practices the VCP expects (VCP Manual p.60)
 
 The SVG library the VCP employs supports a wide variety of SVG features but there are limits. The
 VCP wants a clean SVG that contains ONLY Vectors (lines and arcs), Colors and Gradients; avoid
@@ -149,8 +150,9 @@ Because the XML was copied from the `M56` button, pressing it still runs the sto
 manual's fix is to edit that macro — `mfunc56.mac`, located in the `c:\cncm` folder — with the
 commands the new button should run (VCP Manual p.23).
 
-> On p.22 the prose says to "keep the location (Row 4 , Column 4) the same", but the skin excerpt
-> on the same page shows the `m56` line at `row="3" column="5"` both before and after the edit.
+> The prose says to "keep the location (Row 4 , Column 4) the same", but the skin excerpt on the
+> same page shows the `m56` line at `row="3" column="5"` both before and after the edit
+> (VCP Manual p.22).
 
 ### Point a copied button at a different function
 
