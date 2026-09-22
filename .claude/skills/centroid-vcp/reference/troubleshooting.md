@@ -22,7 +22,7 @@ Common reasons the VCP will fail to start (VCP Manual p.56):
 
 - typo in SVG filename (a filename is being called that doesn't exist)
 - missing SVG file, the SVG file being called isn't in the correct location
-- Incompatible SVG file
+- Incompatible SVG file see below for more info.
 - missing XML file for a button
 - typos in the button XML file
 
@@ -132,8 +132,8 @@ ungroup, and give every element a color — is in
   easy (VCP Manual p.56).
 - Restart CNC12 after a skin or button edit; the changes appear on the restart
   (VCP Manual p.8, p.13).
-- Keep a backup of the skin before opening CNC12's VCP options screen — that screen has been
-  observed rewriting the skin file, see [visual-states.md](visual-states.md).
+- Keep a backup of the skin before touching CNC12's VCP options screen: saving from it rewrites the
+  skin file, a field-verified behavior recorded in [visual-states.md](visual-states.md).
 
 ## What to check before restarting
 
@@ -157,6 +157,6 @@ CNC controller system, `....\resources\VCP`. The Mill offline version can be use
 Router or Plasma VCP graphics set (VCP Manual p.63).
 
 The manual notes it is always ideal to work on the actual control system when building a new VCP
-button or feature, since only there can a macro actually run and interact with the PLC program — but
-that is not always practical, certainly for the graphics design part of a new skin
+button or feature, since that is where a macro can actually run and interact with the PLC program —
+but that is not always practical, certainly for the graphics design part of a new skin
 (VCP Manual p.63).

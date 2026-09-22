@@ -16,18 +16,13 @@ children of `<vcp_button>` ([button-anatomy.md](button-anatomy.md)).
 
 ## Buttons larger than one cell
 
-Similar to how the logo and icon position and size is controlled on the VCP grid, so can the
-individual buttons: row span and column span can be used to let the VCP know to scale the button
-graphic larger than just one button space. The manual's example makes the `m55` button two times as
-wide and two times as high, first deleting the `m56`, `m57` and `m58` buttons to make room
-(VCP Manual p.43), then adding the spans to the `m55` line (VCP Manual p.44):
+Button spans are a skin-file edit: `row_span` and `column_span` on the skin's `<button>` line, with
+the manual's worked `m55` example, are in [skin-and-grid.md](skin-and-grid.md).
 
-```xml
-<button row="3" column="4" row_span="2" column_span="2">m55</button>
-```
-
-`row_span` and `column_span` size the *cell*. Sizing the button's own SVG to match the span is a
-separate job with its own field-verified notes — see [button-anatomy.md](button-anatomy.md).
+The manual describes the spans as scaling the button graphic larger than just one button space
+(VCP Manual p.43). Sizing the button's own SVG to match the span is a separate job — the
+field-verified note in [button-anatomy.md](button-anatomy.md) records that the spans enlarge the
+*cell* while the SVG must declare the spanned size itself.
 
 ## Live PLC data: `<plc_word>`
 

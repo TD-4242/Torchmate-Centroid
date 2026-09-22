@@ -174,7 +174,8 @@ like any other by editing the skin (VCP Manual p.62). Pairing itself is `centroi
 
 A way to run a macro directly from any VCP button was introduced in CNC12 v5.08. `<run>` allows a
 VCP button to run either a single line of G-code or a macro immediately, with or without the need
-for a cycle start button press. Insert the commands directly into the button `.xml` file
+for a cycle start button press. Insert the commands directly into the button `.xml` file — the
+manual's macro block below ends with a repeated opening `<vcp_button>` tag, closed here
 (VCP Manual p.33):
 
 ```xml
@@ -191,7 +192,7 @@ for a cycle start button press. Insert the commands directly into the button `.x
 </vcp_button>
 ```
 
-The manual's notes (VCP Manual p.33):
+The manual notes two restrictions (VCP Manual p.33):
 
 - These types of VCP buttons will only work when being pressed from the main menu of CNC12.
 - Both a macro and a G-code line cannot be run at the same time.
