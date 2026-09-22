@@ -196,7 +196,7 @@ Row below is drawn from PLC Manual, PDF p.112.
 |---|---|---|---|---|
 | `SV_MACHINE_PARAMETER_0-999` | F32 | CNC→PLC | Machine parameter value as entered in CNC software; converted from the 64-bit float CNC software actually maintains, so there may be some precision loss. | p.112 |
 
-Machine parameter meanings are in the Router Manual parameter index (Router Manual §15.7, p.320).
+Machine parameter meanings: `centroid-cnc12-router-ops` [parameter-index.md](../../centroid-cnc12-router-ops/reference/parameter-index.md) (Router Manual §15.7, p.320).
 
 ### Control configuration
 
