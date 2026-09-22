@@ -235,7 +235,7 @@ Abnormal stops are detected in this order: PLC, servo drive, spindle drive, lube
 | Code | Message | Meaning | Ref |
 |---|---|---|---|
 | 901 | Ref. point invalid on line NNNNN | A G30 with an invalid P-value (must be 1 or 2) was issued; job cancelled. Action: change the P-value to 1 or 2. | §16.9, p.447 |
-| 902 | No prior G28 or G30 on line NNNNN | A G29 with no preceding G28 or G30 was issued. Action: add a G29 or G30. | §16.9, p.447 |
+| 902 | No prior G28 or G30 on line NNNNN | A G29 with no preceding G28 or G30 was issued. Action: "Add a G29 or G30." [sic] (the Cause names G28 or G30) | §16.9, p.447 |
 | 903 | Warning: No coordinates for G92 on line NNNNN | G92 with no axis coordinates to set; the remainder of the line is processed and the job continues. Action: add coordinates. | §16.9, p.447 |
 | 905 | Warning: 0 radius arc on line NNNNN | An arc move was specified with a zero radius; the move is done as a linear move and the job continues. Action: specify a radius. | §16.9, p.447 |
 | 906 | Warning: unknown arc on line NNNNN | Position of an arc move could not be determined from the parameters (e.g. G91 G2 X0 Y0 R1); the move is done as a linear move and the job continues. Action: correct program. | §16.9, p.447 |

@@ -26,7 +26,7 @@ CNC12 Router installs to `c:\cncr` (Router Manual §1.8, p.13). On startup, befo
 run, machine home must be set: if the machine has home/limit switches, reference marks, or safe
 hard stops, `CYCLE START` runs the homing G-codes in `cncm.hom` from `c:\cncr`; by default that
 file homes Z plus, then X minus, then Y plus (Router Manual §1.8, p.13). The Acorn Wizard
-generates `cncm.hom` from its homing settings; see
+generates `cncm.hom` from its homing settings (Pairing Guide p.39); see
 [axis-pairing.md](../centroid-acorn-install/reference/axis-pairing.md).
 
 The Options Window offers ten F1-F10 menus from the main screen (Router Manual §1.5, p.11):
@@ -80,7 +80,9 @@ and CNC12 messages (Ch 16) -- not for the whole manual.
 
 ## Useful resources
 
-- Centroid manuals index (includes the CNC12 PLC Programming Manual):
+- Router Manual (this skill's source): download command in
+  [docs/official/centroid-cnc12-router-operator-manual.md](../../../docs/official/centroid-cnc12-router-operator-manual.md).
+- Centroid manuals index, which the Router Manual gives for the CNC12 PLC Programming Manual:
   https://www.centroidcnc.com/centroid_diy/centroid_manuals.html (Router Manual §11.3.7, p.214)
 - Centroid support forum, API discussion section: https://centroidcncforum.com/viewforum.php?f=72
   (Router Manual §1.11, p.16)

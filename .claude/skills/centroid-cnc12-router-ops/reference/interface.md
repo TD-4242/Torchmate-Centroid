@@ -18,6 +18,9 @@ Located below the main DRO, this display shows the distance to go to complete th
 movement (Router Manual §1.2, p.10). It is controlled by Parameter 143 and can be turned on
 with `Ctrl+D` — see [operator-panel.md](operator-panel.md) §2.28 for the full hot-key list.
 
+> The manual disagrees with itself here: p.10 says `Ctrl+D` turns this display on, while
+> §2.28.16 (p.38) says `CTRL+D` swaps the positions of the DRO and the Distance-to-Go DRO.
+
 ## 1.3 Status Window
 
 The first line of the status window shows the name of the currently-loaded job file (Router
@@ -134,6 +137,9 @@ With multiple displays, CNC12 defaults to the display farthest to the right (Rou
 `Target` field of the CNC12 desktop shortcut's Properties. An error message may appear on
 startup, but the desired display is still used.
 
+> The manual prints the switch with an en dash (`–`, U+2013), quoted here as printed, so copying
+> it from this page copies the en dash.
+
 ---
 
 ## F1-F10 main-screen menu map
@@ -203,6 +209,9 @@ Search, run, resume, and control job execution (Router Manual §3.4, p.44):
 | `F10` | RTG On/Off | Toggles Run Time Graphics |
 
 See Ch 6 for more on these options.
+
+> §3.4 (p.44) lists no `F1` key. §6.4 (p.84) documents `F1 – Resume Job` in this menu; see
+> [running-jobs.md](running-jobs.md) §6.4.
 
 ### F5 – Tool/ATC
 

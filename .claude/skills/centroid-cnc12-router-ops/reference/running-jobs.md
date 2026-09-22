@@ -117,7 +117,8 @@ Single Block mode (equivalent to the `AUTO/BLOCK` key); Auto mode is the default
 re-instated when a job run ends. `F6 – Optional Stops` makes M1 codes wait for `CYCLE START`
 like M0 when on, and be ignored when off (see Router Manual Ch 13 for M-code definitions).
 Optional Stops defaults to off; the manual prints, under this same key, "If you use this key to
-turn on Single Block mode and then run a job, Optional Stops will be set to off" (Router Manual
+turn on Single Block mode and then run a job, Optional Stops will be set to off when the job
+ends" (Router Manual
 §6.5, p.86). `F8 – Graph` graphs the
 part; from the Search or Resume Job screens it shows dotted lines for the portion that will be
 skipped and solid lines for the portion that will be machined. `F9 – Rapid On/Off` toggles
@@ -208,10 +209,13 @@ Sub-keys of `F6 – User Maint` (Router Manual Ch 7, p.90):
 | `F1` | File Ops | Access files in a DOS format |
 | `F2` | Restore Report | Pick a `report.zip` file to restore settings to the machine from |
 | `F3` | Machine Notes | Opens a text file, stored in the `cncr` directory, for notes about the machine and control customizations |
-| `F4` | Backup Files | Creates a backup zip file of the `ncfiles` and `intercom` folders to a specified location |
-| `F5` | Restore Files | Restores a zip file to the `ncfiles` and `intercom` folders |
+| `F4` | Backup Files | Creates a backup zip file of the `ncfiles` and `intercom` [sic] folders to a specified location |
+| `F5` | Restore Files | Restores a zip file to the `ncfiles` and `intercom` [sic] folders |
 | `F6` | Log | Opens the Log menu — view logs and debug information about the control and installation |
 | `F7` | System Prompt | Opens the Windows command line terminal |
+
+> p.90 prints `intercom` for both keys; the manual gives the Intercon path as `c:\intercon`
+> elsewhere (p.116, p.312).
 
 ### F9 – Digitizing (p.90-91)
 

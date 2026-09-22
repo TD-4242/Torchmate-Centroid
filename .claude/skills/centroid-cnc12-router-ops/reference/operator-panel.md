@@ -98,6 +98,9 @@ the Main Screen (Router Manual §2.11, p.19). Press `FEED HOLD` first if possibl
 `CYCLE CANCEL`, resuming requires rerunning the entire program or using the search function
 (see Ch 3 or Ch 6).
 
+> §6.3-6.4 (p.83-84) also list `CYCLE CANCEL` as a cancel method whose job can be resumed with
+> `F4 – Run` → `F1 – Resume Job`; see [running-jobs.md](running-jobs.md) §6.3-6.4.
+
 ## 2.12 Emergency Stop
 
 Releases power to all axes and cancels the current job immediately; also resets certain faults
@@ -209,7 +212,7 @@ The VCP legend below covers this router build's default skin (Router Manual §2.
 | Selects CW Spin | Selects CW spin direction in manual mode |
 | Selects CCW Spin | Selects CCW spin direction in manual mode |
 | Toggle MPG | Toggles between the MPG and jog panel |
-| Park | Parks the machine in its current position |
+| Park | Parks the machine in its current position (see the note below the table) |
 | Reset Home | Resets the home values that are currently set |
 | Slow/Fast | Toggles between slow and fast jogging modes |
 | Spin Start | Starts the spindle in the selected direction if in manual mode |
@@ -234,6 +237,10 @@ The VCP legend below covers this router build's default skin (Router Manual §2.
 | Set Tool Number | Sets the currently-selected tool to the entered tool number |
 | Utilities | Opens the Router Utilities menu (by default: calibrate commanded vs. actual axis movement, run a communications stress test, teach in the laser offset distance from the spindle centerline) |
 | Diagonal Jogging | Lets the operator jog diagonally, if enabled (CNC12 Wizard > Preferences > VCP Preferences > VCP Skin, set to `acorn_router_vcp_diagonal_rapid_skin.vcp` or `acorn_router_vcp_diagonal_skin.vcp`) |
+
+> The VCP legend (p.25) prints "Parks the machine in its current position". The `F10` Shutdown
+> menu's `F1 – Park` (§3.10, p.49) instead homes each axis at maximum rate to 1/4 motor revolution
+> from home; see [interface.md](interface.md) F10 – Shutdown.
 
 ---
 

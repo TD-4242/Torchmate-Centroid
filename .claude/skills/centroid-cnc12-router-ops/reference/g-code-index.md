@@ -1,7 +1,8 @@
 # G-code index
 
-Source: Router Manual Ch 12 (§12.1-§12.48, p.243-279). One row per code; the Ref column gives
-the section with full syntax.
+Source: Router Manual Ch 12 (§12.1-§12.48, p.243-279). One row per code per section: the
+canned cycles appear once for the §12.28 summary table and again for their own sections, and
+G81 also for §12.33. The Ref column gives the section with full syntax.
 
 | Code | Name | Summary | Ref |
 |---|---|---|---|
