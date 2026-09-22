@@ -30,7 +30,7 @@ page).
 | `SV_PC_COMMANDED_SPINDLE_SPEED` | F32 | CNC→PLC | Commanded "S" value with Spindle Override factored in; Parameters 65-67 for spindle range must still be controlled in the PLC program. | p.112 |
 | `SV_PC_RIGID_TAP_SPINDLE_OFF` | M | CNC→PLC | CNC software SETs this to signal the spindle should turn off at rigid-tap depth, needed only if Parameter 36 bit 4 is SET and turning off the spindle takes more than clearing M3/M4 (CNC clears only one of M3 or M4 during a rigid tap, not both). | p.104-105 |
 | `SV_PLC_SPINDLE_SPEED` | I32 | PLC→CNC | If Parameter 78 is not set to display actual spindle speed, this is the value CNC shows on-screen. | p.117 |
-| `SV_PLC_SPINDLE_KNOB` | I32 | PLC→CNC | Spindle-speed override percentage sent to the PLC (spindle knob). | p.117 |
+| `SV_PLC_SPINDLE_KNOB` | I32 | PLC→CNC | "Spindle Speed override percentage sent to the PLC" [sic]: the manual lists it in the PLC → CNC table. | p.117 |
 | `SV_PLC_FUNCTION_37` | M | PLC→CNC | Spindle Start. | p.114 |
 | `SV_PLC_FUNCTION_38` | M | PLC→CNC | Spindle Stop. | p.114 |
 | `SV_PLC_FUNCTION_98` | M | PLC→CNC | Select Spindle CCW. | p.114 |

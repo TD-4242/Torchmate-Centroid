@@ -26,9 +26,10 @@ EStopOk_I IS INP11   ; PLC Manual, PDF p.17
 Lube_O    IS OUT2    ; PLC Manual, PDF p.17
 ```
 
-The rest of the program is a flat, sequential list of `IF`/`THEN` statements that runs top to
-bottom every pass; logic inside a Stage (`STG`/`FSTG`) is skipped entirely while that Stage is
-RST (PLC Manual, PDF p.30, p.16). Regular Stages run 50 times per second; Fast Stages or code
+The rest of the program is `IF`/`THEN` statements, grouped under Stage lines, that runs top to
+bottom every pass. A line holding only a Stage name designates the start of that Stage
+(PLC Manual, PDF p.31, p.16). Logic inside a Stage (`STG`/`FSTG`) is skipped entirely while
+that Stage is RST (PLC Manual, PDF p.30, p.16). Regular Stages run 50 times per second; Fast Stages or code
 outside any Stage run up to 1000 times per second, provided the rest of the program finishes in
 under 1ms (PLC Manual, PDF p.13, p.16). `STG1` is SET automatically at startup (PLC Manual, PDF
 p.13).

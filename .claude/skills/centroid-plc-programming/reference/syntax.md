@@ -8,9 +8,12 @@ manual prints no page numbers; citations below are PDF page numbers, verified wi
 
 ## Execution Model
 
-The PLC program is a flat, sequential list of `IS` definitions followed by `IF`/`THEN`
-statements. It runs from top to bottom and executes every line except logic inside a Stage,
-which the executor skips whenever that Stage is RST (PLC Manual, PDF p.30, p.16).
+The PLC program is a sequential list of `IS` definitions followed by `IF`/`THEN` statements.
+A line holding only a Stage name (e.g. `STG1`, or a defined name such as `InitialStage`)
+designates the start of that Stage; the manual's examples put a full-width `;===` line above
+and below it (PLC Manual, PDF p.31, p.16). The program runs from top to bottom and executes
+every line except logic inside a Stage, which the executor skips whenever that Stage is RST
+(PLC Manual, PDF p.30, p.16).
 
 - Code inside a regular Stage (`STG`) executes 50 times per second. Code inside a Fast Stage
   (`FSTG`) or outside any Stage executes up to 1000 times per second (PLC Manual, PDF p.13).
@@ -80,8 +83,9 @@ IF 1==1 THEN FW1 = 2.5  ; PLC Manual, PDF p.21
 ### 4. Output coil — `(<bit-var>)`
 
 Parentheses on the action side of `THEN` form a coil: the variable is SET if the condition is
-true and RST if it is false. Coils cannot be used on Words or on Timers, since a Timer coiled
-this way is generally guaranteed to be turned off again on the next pass (PLC Manual, PDF p.22).
+true and RST if it is false. "Output Coils cannot be used on Words." Nor can they be used "on
+Timer Data types to start them counting because they are generally guaranteed to be turned off
+again on the very next pass of the PLC program" (PLC Manual, PDF p.22).
 
 ```
 IF 1==1 THEN (OUT1)   ; always SET OUT1        — PLC Manual, PDF p.22
