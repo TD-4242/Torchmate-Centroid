@@ -1,0 +1,25 @@
+;------------------------------------------------------------------------------
+; Filename: mfunc75.mac - Pair Axes (Used in Paired Axes Auto Squaring)
+; M75 macro
+; Description: Automatically pair axes together
+; Notes:
+;------------------------------------------------------------------------------
+
+#110 = 3 ; Seconds to display message.
+;#151    ; Master axis.
+;#152    ; Slave axis.
+
+DEFINE <SLAVE_AXIS_PAIRING_VALUE> #9507
+DEFINE <MASTER_AXIS_PAIRING_VALUE> #9508
+DEFINE <MASTER_AXIS> #151
+DEFINE <SLAVE_AXIS> #152
+
+; Get pairing configuration -------------------------------------------------------------------
+<MASTER_AXIS> = ABS[<SLAVE_AXIS_PAIRING_VALUE>]
+<SLAVE_AXIS> = ABS[<MASTER_AXIS_PAIRING_VALUE>]
+
+
+; Assign pairing ------------------------------------------------------------------------------
+G10 P[963+<SLAVE_AXIS>] R<SLAVE_AXIS_PAIRING_VALUE>     ;Assign master axis to slave axis.
+G10 P[963+<MASTER_AXIS>] R0                             ;Make sure master axis is not paired.
+M225 #110 "Axes paired successfully."

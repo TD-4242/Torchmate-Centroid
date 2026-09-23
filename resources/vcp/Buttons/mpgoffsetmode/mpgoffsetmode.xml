@@ -1,0 +1,15 @@
+<vcp_button>
+    <skin_event_num>212</skin_event_num>
+    <plc_output>
+        <number>1146</number>
+        <color_on>#EC1C24</color_on>
+        <color_off>#81151C</color_off>
+    </plc_output>
+  <text>
+    <content>MPG Z&#13;ENABLE</content>
+    <fontstyle>bold</fontstyle>
+    <horizontalalignment>center</horizontalalignment>
+    <verticalalignment>center</verticalalignment>
+    <fontsize>16</fontsize>
+  </text>
+</vcp_button>

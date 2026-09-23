@@ -1,0 +1,87 @@
+;-------------------------------------------------------------------------------
+; Filename: mfunc71.mac - Axes Home Tripped Check (Used in Paired Axes Auto Squaring)
+; M71 macro
+; Description: Checks axes for tripped home. 
+; Notes:
+;-------------------------------------------------------------------------------
+
+;#21301-#21308 - Home axes 1-8 
+;#21401-#21408 + Home axes 1-8 
+
+#103 = 0 ;1 = Paired axis configuration error.
+#115 = 0 ;DEFINE <AXIS_LIMIT_TRIPPED>
+#111 = 0 ;DEFINE AXIS_1_LIMIT_ASSIGNED> 
+#112 = 0 ;DEFINE AXIS_2_LIMIT_ASSIGNED> 
+#113 = 0 ;DEFINE AXIS_3_LIMIT_ASSIGNED> 
+#114 = 0 ;DEFINE AXIS_4_LIMIT_ASSIGNED> 
+#100 = 0; Time to display M225 message in seconds. 0 = Wait for Cycle Start
+#101 = 3; Time to display temporary messages
+
+DEFINE <AXIS_1_HOME_PLUS> #21401
+DEFINE <AXIS_2_HOME_PLUS> #21402
+DEFINE <AXIS_3_HOME_PLUS> #21403
+DEFINE <AXIS_4_HOME_PLUS> #21404
+DEFINE <AXIS_1_HOME_MINUS> #21301
+DEFINE <AXIS_2_HOME_MINUS> #21302
+DEFINE <AXIS_3_HOME_MINUS> #21303
+DEFINE <AXIS_4_HOME_MINUS> #21304
+DEFINE <CONFIGURATION_ERROR> #103
+DEFINE <AXIS_1_LABEL>            #20101
+DEFINE <AXIS_2_LABEL>            #20102
+DEFINE <AXIS_3_LABEL>            #20103
+DEFINE <AXIS_4_LABEL>            #20104
+DEFINE <AXIS_1_LIMIT_ASSIGNED> #111
+DEFINE <AXIS_2_LIMIT_ASSIGNED> #112
+DEFINE <AXIS_3_LIMIT_ASSIGNED> #113
+DEFINE <AXIS_4_LIMIT_ASSIGNED> #114
+DEFINE <HOME_SWITCH_TRIPPED> #115
+
+; Confirm axes have only 1 home input set ------------------------------------------------
+N50
+IF #50001                                     	;Stop parsing
+IF <AXIS_1_HOME_PLUS> && <AXIS_1_HOME_MINUS> THEN M224 #100 "Home switches set in both directions on %c axis\n#)Please select only 1 direction for homing\n#)Enter 1 and press Cycle Start to continue configuration check.\n#)Press Cycle Cancel to exit" <AXIS_1_LABEL>
+IF [<AXIS_1_HOME_PLUS> && <AXIS_1_HOME_MINUS>] THEN <CONFIGURATION_ERROR> = 1
+
+IF #50001                                     	;Stop parsing
+IF <AXIS_2_HOME_PLUS> && <AXIS_2_HOME_MINUS> THEN M224 #100 "Home switches set in both directions on %c axis\n#)Please select only 1 direction for homing\n#)Enter 1 and press Cycle Start to continue configuration check.\n#)Press Cycle Cancel to exit" <AXIS_2_LABEL>
+IF [<AXIS_2_HOME_PLUS> && <AXIS_2_HOME_MINUS>] THEN <CONFIGURATION_ERROR> = 1
+
+IF #50001                                     	;Stop parsing
+IF <AXIS_3_HOME_PLUS> && <AXIS_3_HOME_MINUS> THEN M224 #100 "Home switches set in both directions on %c axis\n#)Please select only 1 direction for homing\n#)Enter 1 and press Cycle Start to continue configuration check.\n#)Press Cycle Cancel to exit" <AXIS_3_LABEL>
+IF [<AXIS_3_HOME_PLUS> && <AXIS_3_HOME_MINUS>] THEN <CONFIGURATION_ERROR> = 1
+
+IF #50001                                     	;Stop parsing
+IF <AXIS_4_HOME_PLUS> && <AXIS_4_HOME_MINUS> THEN M224 #100 "Home switches set in both directions on %c axis\n#)Please select only 1 direction for homing\n#)Enter 1 and press Cycle Start to continue configuration check.\n#)Press Cycle Cancel to exit" <AXIS_4_LABEL>
+IF [<AXIS_4_HOME_PLUS> && <AXIS_4_HOME_MINUS>] THEN <CONFIGURATION_ERROR> = 1
+IF #50001                                     	;Stop parsing
+
+
+; Check for tripped switch before starting homing ------------------------------------------
+IF <AXIS_1_HOME_PLUS> != 0 THEN <AXIS_1_LIMIT_ASSIGNED> = 50000 + <AXIS_1_HOME_PLUS>
+IF <AXIS_1_HOME_MINUS> != 0 THEN <AXIS_1_LIMIT_ASSIGNED> = 50000 + <AXIS_1_HOME_MINUS>
+
+IF <AXIS_2_HOME_PLUS> != 0 THEN <AXIS_2_LIMIT_ASSIGNED> = 50000 + <AXIS_2_HOME_PLUS>
+IF <AXIS_2_HOME_MINUS> != 0 THEN <AXIS_2_LIMIT_ASSIGNED> = 50000 + <AXIS_2_HOME_MINUS>
+
+IF <AXIS_3_HOME_PLUS> != 0 THEN <AXIS_3_LIMIT_ASSIGNED> = 50000 + <AXIS_3_HOME_PLUS>
+IF <AXIS_3_HOME_MINUS> != 0 THEN <AXIS_3_LIMIT_ASSIGNED> = 50000 + <AXIS_3_HOME_MINUS>
+
+IF <AXIS_4_HOME_PLUS> != 0 THEN <AXIS_4_LIMIT_ASSIGNED> = 50000 + <AXIS_4_HOME_PLUS>
+IF <AXIS_4_HOME_MINUS> != 0 THEN <AXIS_4_LIMIT_ASSIGNED> = 50000 + <AXIS_4_HOME_MINUS>
+
+
+; Check for tripped switch -----------------------------------------------------------------
+IF <AXIS_1_LIMIT_ASSIGNED> && !#[<AXIS_1_LIMIT_ASSIGNED>] THEN M225 #100 "HOME TRIPPED" 
+IF <AXIS_1_LIMIT_ASSIGNED> && !#[<AXIS_1_LIMIT_ASSIGNED>] THEN <HOME_SWITCH_TRIPPED> = 1
+ 
+IF <AXIS_2_LIMIT_ASSIGNED> && !#[<AXIS_2_LIMIT_ASSIGNED>] THEN M225 #100 "HOME TRIPPED"
+IF <AXIS_2_LIMIT_ASSIGNED> && !#[<AXIS_2_LIMIT_ASSIGNED>] THEN <HOME_SWITCH_TRIPPED> = 1 
+
+IF <AXIS_3_LIMIT_ASSIGNED> && !#[<AXIS_3_LIMIT_ASSIGNED>] THEN M225 #100 "HOME TRIPPED"
+IF <AXIS_3_LIMIT_ASSIGNED> && !#[<AXIS_3_LIMIT_ASSIGNED>] THEN <HOME_SWITCH_TRIPPED> = 1
+
+IF <AXIS_4_LIMIT_ASSIGNED> && !#[<AXIS_4_LIMIT_ASSIGNED>] THEN M225 #100 "HOME TRIPPED"
+IF <AXIS_4_LIMIT_ASSIGNED> && !#[<AXIS_4_LIMIT_ASSIGNED>] THEN <HOME_SWITCH_TRIPPED> = 1
+
+
+IF <CONFIGURATION_ERROR> || <HOME_SWITCH_TRIPPED> THEN GOTO 50

@@ -1,0 +1,16 @@
+<vcp_button>
+	<skin_event_num>39</skin_event_num>
+	<switch>
+		<trigger>
+			<parameter number="1">
+				<bit>1</bit>
+			</parameter>
+		</trigger>
+		<switch_on>
+			<add>left_mount</add>
+		</switch_on>
+		<switch_off>
+			<remove>left_mount</remove>
+		</switch_off>
+	</switch>
+</vcp_button>
