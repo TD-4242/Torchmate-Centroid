@@ -242,6 +242,8 @@ The VCP legend below covers this router build's default skin (Router Manual §2.
 > menu's `F1 – Park` (§3.10, p.49) instead homes each axis at maximum rate to 1/4 motor revolution
 > from home; see [interface.md](interface.md) F10 – Shutdown.
 
+To customize the VCP, use `centroid-vcp` ([SKILL.md](../../centroid-vcp/SKILL.md)).
+
 ---
 
 ## 2.26 Keyboard Jog Panel

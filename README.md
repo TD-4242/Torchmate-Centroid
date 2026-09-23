@@ -8,7 +8,7 @@ fully working. Modeled on [Acroloc-Centroid](https://github.com/TD-4242/Acroloc-
 
 | Sub-project | State |
 | --- | --- |
-| 1. Repo foundation + Acorn skill set | In progress: [spec](docs/superpowers/specs/2026-09-14-acorn-skill-set-design.md), [plan](docs/superpowers/plans/2026-09-14-acorn-skill-set.md) |
+| 1. Repo foundation + Acorn skill set | Done: [spec](docs/superpowers/specs/2026-09-14-acorn-skill-set-design.md), [plan](docs/superpowers/plans/2026-09-14-acorn-skill-set.md) |
 | 2. Router baseline (Wizard PLC, macros, config from the control PC) | Waiting on control-PC files |
 | 3. Router customizations | Not started |
 | 4. Plasma | Not started |
@@ -23,6 +23,7 @@ manual section and page. Skills land one per PR, and each adds its row here.
 | [`centroid-acorn-install`](.claude/skills/centroid-acorn-install/SKILL.md) | Acorn hardware, wiring, Wizard, axis pairing, motion tuning, troubleshooting |
 | [`centroid-plc-programming`](.claude/skills/centroid-plc-programming/SKILL.md) | PLC stage language, Acorn I/O, SV_* catalog, messages, Wizard-generated PLC |
 | [`centroid-cnc12-router-ops`](.claude/skills/centroid-cnc12-router-ops/SKILL.md) | CNC12 Router operation plus G-code, M-code, parameter and message indexes |
+| [`centroid-vcp`](.claude/skills/centroid-vcp/SKILL.md) | VCP skins, buttons, visual states, actions, PLC-word displays, troubleshooting |
 
 ## Official documentation
 
