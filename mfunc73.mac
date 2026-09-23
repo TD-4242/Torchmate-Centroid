@@ -1,0 +1,48 @@
+;------------------------------------------------------------------------------
+; Filename: mfunc73.mac - Independent Axis Homing (Used in Paired Axes Auto Squaring)
+; M73 macro
+; Description: Homes the independent axis. Either Axis 1 or 2. 
+; Notes:
+;------------------------------------------------------------------------------
+
+;#151 = Master to 4th axis 
+;#21301-#21308 - Home axes 1-8 
+;#21401-#21408 + Home axes 1-8 
+
+#100 = 0; Time to display M225 message in seconds. 0 = Wait for Cycle Start
+#101 = 3; Time to display temporary messages
+;#102   ; Axis label
+
+DEFINE <AXIS_1_HOME_PLUS> #21401
+DEFINE <AXIS_2_HOME_PLUS> #21402
+DEFINE <AXIS_1_HOME_MINUS> #21301
+DEFINE <AXIS_2_HOME_MINUS> #21302
+DEFINE <MASTER_AXIS> #151 
+
+DEFINE <AXIS_1_LABEL> #20101
+DEFINE <AXIS_2_LABEL> #20102
+DEFINE <AXIS_3_LABEL> #20103
+DEFINE <AXIS_LABEL>   #102
+DEFINE <SLAVE_AXIS> 4
+
+
+N20															 ;Get pairing configuration
+IF ABS[#[9963+<SLAVE_AXIS>]] == 1 THEN <MASTER_AXIS> = 1     ;First axis is "master" axis 
+IF ABS[#[9963+<SLAVE_AXIS>]] == 2 THEN <MASTER_AXIS> = 2     ;Second axis is "master" axis
+IF ABS[#[9963+<SLAVE_AXIS>]] == 3 THEN <MASTER_AXIS> = 3     ;Third axis is "master" axis
+
+; Assign axis label
+IF [<MASTER_AXIS> != 1] THEN <AXIS_LABEL> = <AXIS_1_LABEL>
+IF [<MASTER_AXIS> != 2] THEN <AXIS_LABEL> = <AXIS_2_LABEL>
+
+; Home independent axis (not part of a pair) ------------------------------------------------
+N200  
+M225 #101 "Homing %c axis..." <AXIS_LABEL>
+IF <AXIS_1_HOME_PLUS> && [<MASTER_AXIS> != 1] THEN M92 /$<AXIS_1_LABEL> L1   ;Move to 1st axis + to home switch, back off until it clears.
+IF <AXIS_1_HOME_MINUS> && [<MASTER_AXIS> != 1] THEN M91 /$<AXIS_1_LABEL> L1  ;Move to 1st axis - to home switch, back off until it clears.
+IF <AXIS_2_HOME_PLUS> && [<MASTER_AXIS> != 2] THEN M92 /$<AXIS_2_LABEL> L1   ;Move to 2nd axis + to home switch, back off until it clears.
+IF <AXIS_2_HOME_MINUS> && [<MASTER_AXIS> != 2] THEN M91 /$<AXIS_2_LABEL> L1  ;Move to 2nd axis - to home switch, back off until it clears.
+IF [<MASTER_AXIS> != 1] THEN M26 /$<AXIS_1_LABEL>
+IF [<MASTER_AXIS> != 2] THEN M26 /$<AXIS_2_LABEL>
+
+M225 #101 "%c axis successfully homed." <AXIS_LABEL>

@@ -1,0 +1,252 @@
+;------------------------------------------------------------------------------
+; Filename: mfunc74.mac - Paired Axes Auto Home/Squaring (Used in Paired Axes Auto Squaring)
+; M74 macro
+; Description: Automatically Home and Square the paired axes
+; Notes:
+;------------------------------------------------------------------------------
+
+#100 = 0     ; Time to display M225 message in seconds. 0 = Wait for Cycle Start
+#101 = 3     ; Time to display temporary messages
+#102 = 0     ; Debug mode. Set to 1 to enable debugging messages and features.
+#104 = 0     ; = 1 = Master tripped
+#105 = 0     ; = 1 = Slave tripped
+;#106        ; Master Input
+;#107        ; Slave Input
+;#120        ; Previous Axis 1 plus limit
+;#121        ; Previous Axis 1 minus limit
+;#122        ; Previous Axis 2 plus limit
+;#123        ; Previous Axis 2 minus limit
+;#124        ; Previous Axis 3 plus limit
+;#125        ; Previous Axis 3 minus limit
+;#126        ; Previous Axis 4 plus limit
+;#127        ; Previous Axis 4 minus limit
+;#151        ; Master Axis
+;#152        ; Slave Axis
+
+;######################### DO NOT MODIFY! USED BY WIZARD ################################
+; Automatic or manual squaring	   #9501        
+DEFINE <AXIS_SQUARING_DISTANCE>    #9502
+DEFINE <FEEDRATE>                  #9503
+DEFINE <SLAVE_INPUT_STATE>         #9505
+DEFINE <MASTER_INPUT_STATE>        #9506
+DEFINE <SLAVE_AXIS_PAIRING_VALUE>  #9507
+DEFINE <MASTER_AXIS_PAIRING_VALUE> #9508
+;########################################################################################
+
+DEFINE <DEBUG_MODE>              #102
+DEFINE <MASTER_TRIPPED>          #104
+DEFINE <SLAVE_TRIPPED>           #105
+DEFINE <MASTER_INPUT>            #106
+DEFINE <SLAVE_INPUT>             #107
+DEFINE <MASTER_OR_SLAVE_TRIP>    70263
+DEFINE <MASTER_AXIS>             #151 
+DEFINE <SLAVE_AXIS>              #152
+DEFINE <AXIS_1_LABEL>            #20101
+DEFINE <AXIS_2_LABEL>            #20102
+DEFINE <AXIS_3_LABEL>            #20103
+DEFINE <OLD_AXIS_1_PLUS_LIMIT>   #120
+DEFINE <OLD_AXIS_1_MINUS_LIMIT>  #121
+DEFINE <OLD_AXIS_2_PLUS_LIMIT>   #122
+DEFINE <OLD_AXIS_2_MINUS_LIMIT>  #123
+DEFINE <OLD_AXIS_3_PLUS_LIMIT>   #124
+DEFINE <OLD_AXIS_3_MINUS_LIMIT>  #125
+DEFINE <OLD_AXIS_4_PLUS_LIMIT>   #126
+DEFINE <OLD_AXIS_4_MINUS_LIMIT>  #127
+DEFINE <AXIS_1_HOME_PLUS>        #21401
+DEFINE <AXIS_2_HOME_PLUS>        #21402
+DEFINE <AXIS_3_HOME_PLUS>        #21403
+DEFINE <AXIS_4_HOME_PLUS>        #21404
+DEFINE <AXIS_1_HOME_MINUS>       #21301
+DEFINE <AXIS_2_HOME_MINUS>       #21302
+DEFINE <AXIS_3_HOME_MINUS>       #21303
+DEFINE <AXIS_4_HOME_MINUS>       #21304
+
+
+; --------------------------------------------------------------------------------------------------------------------------------------------------------
+; ------------ GET PAIRING CONFIGURATION -----------------------------------------------------------------------------------------------------------------
+; --------------------------------------------------------------------------------------------------------------------------------------------------------
+N20															 
+<MASTER_AXIS> = ABS[<SLAVE_AXIS_PAIRING_VALUE>]
+<SLAVE_AXIS> = ABS[<MASTER_AXIS_PAIRING_VALUE>]
+
+<MASTER_INPUT> = ABS[<MASTER_INPUT_STATE>]
+<SLAVE_INPUT> = ABS[<SLAVE_INPUT_STATE>]
+
+; Save old travel limits
+;<OLD_AXIS_1_MINUS_LIMIT> = #23501
+;<OLD_AXIS_1_PLUS_LIMIT>  = #23601
+;<OLD_AXIS_2_MINUS_LIMIT> = #23502
+;<OLD_AXIS_2_PLUS_LIMIT>  = #23602
+;<OLD_AXIS_3_MINUS_LIMIT> = #23503
+;<OLD_AXIS_3_PLUS_LIMIT>  = #23603
+;<OLD_AXIS_4_MINUS_LIMIT> = #23504
+;<OLD_AXIS_4_PLUS_LIMIT>  = #23604
+
+; Clear travel limits temporarily
+;#23501 = 0
+;#23601 = 0
+;#23502 = 0
+;#23602 = 0
+;#23503 = 0
+;#23603 = 0
+;#23504 = 0
+;#23604 = 0
+
+M225 #101 "Ensuring axes are paired..."
+M75
+
+; --------------------------------------------------------------------------------------------------------------------------------------------------------
+; ------------ HOME PAIRED AXES --------------------------------------------------------------------------------------------------------------------------
+; --------------------------------------------------------------------------------------------------------------------------------------------------------
+N300
+M225 #101 "Moving Paired Axes until slave switch is tripped..."
+
+; Move both axes in a pair until either inp1 or inp2 opens (<MASTER_OR_SLAVE_TRIP> - MEM263 set)
+IF <AXIS_1_HOME_PLUS> && [<MASTER_AXIS> == 1] THEN M106 /$<AXIS_1_LABEL> P-<MASTER_OR_SLAVE_TRIP> F<FEEDRATE> ;Move axes plus until INP1 or INP2 opens
+IF <AXIS_1_HOME_MINUS> && [<MASTER_AXIS> == 1] THEN M105 /$<AXIS_1_LABEL> P-<MASTER_OR_SLAVE_TRIP> F<FEEDRATE> ;Move axes minus until INP1 or INP2 opens
+IF <AXIS_2_HOME_PLUS> && [<MASTER_AXIS> == 2] THEN M106 /$<AXIS_2_LABEL> P-<MASTER_OR_SLAVE_TRIP> F<FEEDRATE> ;Move axes plus until INP1 or INP2 opens
+IF <AXIS_2_HOME_MINUS> && [<MASTER_AXIS> == 2] THEN M105 /$<AXIS_2_LABEL> P-<MASTER_OR_SLAVE_TRIP> F<FEEDRATE> ;Move axes minus until INP1 or INP2 opens
+
+
+; --------------------------------------------------------------------------------------------------------------------------------------------------------
+; ------------ DETERMINE WHETHER MASTER OR SLAVE TRIPPED FIRST -------------------------------------------------------------------------------------------
+; --------------------------------------------------------------------------------------------------------------------------------------------------------
+IF !#(50000 + ABS[<SLAVE_INPUT>]) THEN <SLAVE_TRIPPED> = 1      ;Slave tripped first
+IF !#(50000 + ABS[<MASTER_INPUT>]) THEN <MASTER_TRIPPED> = 1    ;Master tripped first
+
+IF [<SLAVE_INPUT_STATE> < 0] && [<MASTER_INPUT_STATE> < 0] THEN GOTO 305    ; Both NO switches
+IF [<SLAVE_INPUT_STATE> > 0] && [<MASTER_INPUT_STATE> > 0] THEN GOTO 306    ; Both NC switches
+IF [<SLAVE_INPUT_STATE> < 0] && [<MASTER_INPUT_STATE> > 0] THEN GOTO 307    ; Slave = NO and Master = NC
+IF [<SLAVE_INPUT_STATE> > 0] && [<MASTER_INPUT_STATE> < 0] THEN GOTO 308    ; Slave = NC and Master = NC
+
+N305  ; Both NO switches
+IF <DEBUG_MODE> THEN M225 #100 "Both NO. Press Cycle Start to continue."
+GOTO 309
+
+N306  ; Both NC switches
+IF <DEBUG_MODE> THEN M225 #100 "Both NC. Press Cycle Start to continue."
+GOTO 309
+
+N307  ; Slave = NC and Master = NO
+IF <DEBUG_MODE> THEN M225 #100 "Slave = NC and Master = NO. Press Cycle Start to continue."
+GOTO 309
+
+N308  ; Slave = NO and Master = NC
+IF <DEBUG_MODE> THEN M225 #100 "Slave = NO and Master = NC. Press Cycle Start to continue."
+GOTO 309
+
+N309
+;Display message to user about which axis tripped first
+IF <MASTER_TRIPPED> && <SLAVE_TRIPPED> THEN M225 #101 "Master and Slave tripped at the same time."
+IF <MASTER_TRIPPED> && <SLAVE_TRIPPED> THEN GOTO 320
+IF <DEBUG_MODE> && <MASTER_TRIPPED> THEN M225 #101 "Master tripped first." 
+IF <DEBUG_MODE> && <SLAVE_TRIPPED> THEN M225 #101 "Slave tripped first." 
+
+IF !<DEBUG_MODE> THEN GOTO 320
+;WRITING WHICH AXIS TRIPPED FIRST TO FILE
+#145 = 59           ; - 145 - ASCII value for ; (59)
+M121 "#400\Axis_Tripped_First.txt"
+M223 "%c Date and time of homing " #145
+M127
+IF <MASTER_TRIPPED> THEN M223 "%c MASTER TRIPPED FIRST\n\n" #145
+IF <SLAVE_TRIPPED> THEN M223 "%c SLAVED TRIPPED FIRST\n\n" #145
+
+
+; --------------------------------------------------------------------------------------------------------------------------------------------------------
+; ------------ MOVE OFF SWITCH ---------------------------------------------------------------------------------------------------------------------------
+; --------------------------------------------------------------------------------------------------------------------------------------------------------
+N320
+IF <MASTER_TRIPPED> && !<SLAVE_TRIPPED> THEN M225 #100 "Master has tripped first!\nPlease re-configure machine to trip the slave first and try again.\n\n Press ESC or Cycle Cancel to exit."
+IF <MASTER_TRIPPED> && !<SLAVE_TRIPPED> THEN GOTO 600    ; Go to End Program
+
+M225 #101 "Moving Paired Axes until slave switch is un-tripped..."
+
+; Move both axes in a pair until either inp1 or inp2 opens (<MASTER_OR_SLAVE_TRIP> - MEM263 set)
+IF <AXIS_1_HOME_MINUS> && [<MASTER_AXIS> == 1] THEN M106 /$<AXIS_1_LABEL> P<MASTER_OR_SLAVE_TRIP> F<FEEDRATE> ;Move axes plus until INP1 or INP2 opens
+IF <AXIS_1_HOME_PLUS> && [<MASTER_AXIS> == 1] THEN M105 /$<AXIS_1_LABEL> P<MASTER_OR_SLAVE_TRIP> F<FEEDRATE>  ;Move axes minus until INP1 or INP2 opens
+IF <AXIS_2_HOME_MINUS> && [<MASTER_AXIS> == 2] THEN M106 /$<AXIS_2_LABEL> P<MASTER_OR_SLAVE_TRIP> F<FEEDRATE> ;Move axes plus until INP1 or INP2 opens
+IF <AXIS_2_HOME_PLUS> && [<MASTER_AXIS> == 2] THEN M105 /$<AXIS_2_LABEL> P<MASTER_OR_SLAVE_TRIP> F<FEEDRATE>  ;Move axes minus until INP1 or INP2 opens
+
+
+; --------------------------------------------------------------------------------------------------------------------------------------------------------
+; ------------ CLEAR PAIRING -----------------------------------------------------------------------------------------------------------------------------
+; --------------------------------------------------------------------------------------------------------------------------------------------------------
+N400
+IF #50001
+M225 #101 "Un-pairing axes..."
+G10 P[963+<MASTER_AXIS>] R0
+G10 P967 R0
+
+
+; --------------------------------------------------------------------------------------------------------------------------------------------------------
+; ------------ MOVE MASTER AXIS UNTIL SWITCH IS TRIPPED --------------------------------------------------------------------------------------------------
+; --------------------------------------------------------------------------------------------------------------------------------------------------------
+IF #50001
+M225 #101 "Moving Master Axis until switch is tripped..."
+
+;If slave tripped first - move slave back until switch closes to minimize skew
+IF <MASTER_AXIS> == 1 && <AXIS_1_HOME_PLUS>  THEN M106 /$<AXIS_1_LABEL> P<MASTER_INPUT> F<FEEDRATE>   ;Move master negative until switch closes
+IF <MASTER_AXIS> == 1 && <AXIS_1_HOME_MINUS> THEN M105 /$<AXIS_1_LABEL> P<MASTER_INPUT> F<FEEDRATE>   ;Move master positive until switch closes
+IF <MASTER_AXIS> == 2 && <AXIS_2_HOME_PLUS>  THEN M106 /$<AXIS_2_LABEL> P<MASTER_INPUT> F<FEEDRATE>   ;Move master negative until switch closes
+IF <MASTER_AXIS> == 2 && <AXIS_2_HOME_MINUS> THEN M105 /$<AXIS_2_LABEL> P<MASTER_INPUT> F<FEEDRATE>   ;Move master positive until switch closes
+
+
+; --------------------------------------------------------------------------------------------------------------------------------------------------------
+; ------------ MOVE OFF SWITCH ---------------------------------------------------------------------------------------------------------------------------
+; --------------------------------------------------------------------------------------------------------------------------------------------------------
+M225 #101 "Moving Master Axis until switch is un-tripped..."
+;----------------Move both axes in a pair until either inp1 or inp2 opens or closes------------------
+IF <AXIS_1_HOME_MINUS> && [<MASTER_AXIS> == 1] THEN M106 /$<AXIS_1_LABEL> P-<MASTER_INPUT> F<FEEDRATE>  ;Move axes plus until INP1 or INP2 opens
+IF <AXIS_1_HOME_PLUS>  && [<MASTER_AXIS> == 1] THEN M105 /$<AXIS_1_LABEL> P-<MASTER_INPUT> F<FEEDRATE>  ;Move axes minus until INP1 or INP2 opens
+IF <AXIS_2_HOME_MINUS> && [<MASTER_AXIS> == 2] THEN M106 /$<AXIS_2_LABEL> P-<MASTER_INPUT> F<FEEDRATE>  ;Move axes plus until INP1 or INP2 opens
+IF <AXIS_2_HOME_PLUS>  && [<MASTER_AXIS> == 2] THEN M105 /$<AXIS_2_LABEL> P-<MASTER_INPUT> F<FEEDRATE>  ;Move axes minus until INP1 or INP2 opens
+
+;Home Master
+;This allows the following G1 move to occure if it is "behind" the travel limits
+IF <MASTER_AXIS> == 1 THEN M26 /$<AXIS_1_LABEL>
+IF <MASTER_AXIS> == 2 THEN M26 /$<AXIS_2_LABEL>
+IF <MASTER_AXIS> == 3 THEN M26 /$<AXIS_3_LABEL>
+
+; --------------------------------------------------------------------------------------------------------------------------------------------------------
+; ------------ MOVE MASTER AXIS BACK TO SQUARE POSITION ------------------------------------------------------------------------------------------------
+; --------------------------------------------------------------------------------------------------------------------------------------------------------
+N500
+IF #50001
+M225 #101 "Moving Master Axis back to square position..."
+IF <MASTER_AXIS> == 1 && <AXIS_1_HOME_PLUS>  THEN G91 $<AXIS_1_LABEL> [-<AXIS_SQUARING_DISTANCE>] G1 F<FEEDRATE>    
+IF <MASTER_AXIS> == 1 && <AXIS_1_HOME_PLUS>  THEN G90                                                			;Set back to absolute
+IF <MASTER_AXIS> == 1 && <AXIS_1_HOME_MINUS>  THEN G91 $<AXIS_1_LABEL> [<AXIS_SQUARING_DISTANCE>] G1 F<FEEDRATE>  
+IF <MASTER_AXIS> == 1 && <AXIS_1_HOME_MINUS>  THEN G90                                               			;Set back to absolute
+IF <MASTER_AXIS> == 2 && <AXIS_2_HOME_PLUS>  THEN G91 $<AXIS_2_LABEL> [-<AXIS_SQUARING_DISTANCE>] G1 F<FEEDRATE>    
+IF <MASTER_AXIS> == 2 && <AXIS_2_HOME_PLUS>  THEN G90                                                			;Set back to absolute
+IF <MASTER_AXIS> == 2 && <AXIS_2_HOME_MINUS>  THEN G91 $<AXIS_2_LABEL> [<AXIS_SQUARING_DISTANCE>] G1 F<FEEDRATE>    
+IF <MASTER_AXIS> == 2 && <AXIS_2_HOME_MINUS>  THEN G90                                               			;Set back to absolute
+
+
+; --------------------------------------------------------------------------------------------------------------------------------------------------------
+; ------------ RE-SLAVE AXES -----------------------------------------------------------------------------------------------------------------------------
+; --------------------------------------------------------------------------------------------------------------------------------------------------------
+IF #50001
+M225 #101 "Re-pairing axes."
+M75
+
+
+; --------------------------------------------------------------------------------------------------------------------------------------------------------
+; ------------ HOME AND SYNQ -----------------------------------------------------------------------------------------------------------------------------
+; --------------------------------------------------------------------------------------------------------------------------------------------------------
+; Restore old travel limits.
+;#23501 = <OLD_AXIS_1_MINUS_LIMIT>
+;#23601 = <OLD_AXIS_1_PLUS_LIMIT> 
+;#23502 = <OLD_AXIS_2_MINUS_LIMIT>
+;#23602 = <OLD_AXIS_2_PLUS_LIMIT> 
+;#23503 = <OLD_AXIS_3_MINUS_LIMIT>
+;#23603 = <OLD_AXIS_3_PLUS_LIMIT> 
+;#23504 = <OLD_AXIS_4_MINUS_LIMIT>
+;#23604 = <OLD_AXIS_4_PLUS_LIMIT>
+
+M225 #101 "Setting home positions..."
+M26 /$<AXIS_1_LABEL> 
+M26 /$<AXIS_2_LABEL> 
+M26 /$<AXIS_3_LABEL>
+
+N600 ; End Program

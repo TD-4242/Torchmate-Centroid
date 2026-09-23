@@ -1,0 +1,21 @@
+;------------------------------------------------------------------------------
+; Filename: mfunc72.mac - 3rd Axis Homing (Used in Paired Axes Auto Squaring)
+; M72 macro
+; Description: Homes the 3rd axis.
+; Notes:
+;------------------------------------------------------------------------------
+
+#100 = 0; Time to display M225 message in seconds. 0 = Wait for Cycle Start
+#101 = 3; Time to display temporary messages
+
+DEFINE <AXIS_3_HOME_PLUS> #21403
+DEFINE <AXIS_3_HOME_MINUS> #21303
+DEFINE <AXIS_3_LABEL> #20103
+
+; Home 3rd Axis ----------------------------------------------------------------------
+N100
+M225 #101 "Homing %c axis..." <AXIS_3_LABEL>
+IF <AXIS_3_HOME_PLUS> THEN M92 /$<AXIS_3_LABEL> L1       ;Move to 3rd axis + to limit switch, back off until it clears.
+IF <AXIS_3_HOME_MINUS> THEN M91 /$<AXIS_3_LABEL> L1      ;Move to 3rd axis - to limit switch, back off until it clears.
+M26 /$<AXIS_3_LABEL>
+M225 #101 "%c axis successfully homed." <AXIS_3_LABEL>

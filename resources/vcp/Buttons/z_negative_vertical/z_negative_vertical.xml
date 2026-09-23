@@ -1,0 +1,18 @@
+<vcp_button>
+	<skin_event_num>43</skin_event_num>
+	<switch>
+		<trigger>
+			<parameter number="1">
+				<bit>2</bit>
+			</parameter>
+		</trigger>
+		<switch_on>
+			<add>vertical_mount</add>
+			<remove>horizontal_mount</remove>
+		</switch_on>
+		<switch_off>
+			<remove>vertical_mount</remove>
+			<add>horizontal_mount</add>
+		</switch_off>
+	</switch>
+</vcp_button>
