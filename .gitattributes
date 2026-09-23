@@ -1,2 +1,13 @@
 *.pdf binary
 *.exe binary
+
+# CNC12 edits and compiles these on Windows; keep CRLF in every checkout.
+/*.src text eol=crlf
+/*.mac text eol=crlf
+/*.hom text eol=crlf
+/plcmsg.txt text eol=crlf
+/language.msg text eol=crlf
+/resources/**/*.xml text eol=crlf
+/resources/**/*.vcp text eol=crlf
+/resources/**/*.svg text eol=crlf
+/resources/**/*.xaml text eol=crlf
