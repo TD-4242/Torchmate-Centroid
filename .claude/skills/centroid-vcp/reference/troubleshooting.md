@@ -9,8 +9,9 @@ Symptoms after a skin or button edit, the messages CNC12 puts up, and how to che
 the machine. The files being edited are the skin ([skin-and-grid.md](skin-and-grid.md)) and the
 button folders ([button-anatomy.md](button-anatomy.md)).
 
-> Paths the manual prints are mill paths under `c:\cncm`. On CNC12 Router the same tree lives
-> under `c:\cncr` (Router Manual §1.8, p.13); the manual's own strings are quoted unchanged below.
+> Prose paths below use CNC12 Router's `c:\cncr` (Router Manual §1.8, p.13). The manual prints
+> mill paths under `c:\cncm`; code blocks, error messages and `[sic]` quotes keep them
+> unchanged, so substitute `c:\cncr` when copying one.
 
 ---
 
@@ -85,6 +86,10 @@ is to bisect: make throwaway copies of the skin, each carrying one suspect featu
 `options.xml` at each in turn, restart CNC12 and see which one kills the panel. Delete the test
 skins afterwards.
 
+**Field-verified (CNC12, 2026-07):** CNC12 runs on Windows, so every file it consumes under
+`resources\vcp\` (the skin `.vcp`, button `.xml` and `.svg`, `options.xml`) should be ASCII-only
+with CRLF line endings. Check this first when a hand-edited file will not load.
+
 ## The VCP looks skewed or chopped off
 
 Set the Windows display resolution to `1920x1080` (VCP Manual p.59).
@@ -120,7 +125,7 @@ limits, and one of the more common mistakes is embedding a font or opening a bit
 `.PNG`, `.BMP`) and saving it as a `.SVG` — which embeds the bitmap or font rather than converting
 it, and does not scale or display well. The VCP wants a clean SVG that contains ONLY Vectors (lines
 and arcs), Colors and Gradients (VCP Manual p.60). Convert a bitmap to vector format first;
-InkScape has free tools for both manual and automatic conversion (VCP Manual p.60). The full
+Inkscape has free tools for both manual and automatic conversion (VCP Manual p.60). The full
 practice list — convert fonts to lines and arcs, rename an existing button `.svg` so the
 size/artboard is correct, delete unnecessary art and hidden layers, keep art within the art board,
 ungroup, and give every element a color — is in

@@ -81,11 +81,13 @@ findstr /n "<button" "c:\cncr\resources\vcp\skins\<skin>.vcp"
 ```
 
 > The manual prints this whole tree as mill paths under `c:\cncm` (VCP Manual p.7, p.27); on CNC12
-> Router it lives under `c:\cncr`.
+> Router it lives under `c:\cncr`, which every prose path in this skill uses.
 
 Which stock skin to use (or start with) is selected on Acorn and AcornSix from the drop-down menu
 in the Wizard `VCP Preferences` menu (VCP Manual p.5); the file the VCP actually loads at startup
-is the `Skin` value in `options.xml` (VCP Manual p.7).
+is the `Skin` value in `options.xml` (VCP Manual p.7). Once you edit a skin, set the Wizard's
+`Custom VCP Skin` preference so a later Wizard save does not overwrite it (Acorn Install §6.18,
+p.97); see [wizard.md](../centroid-acorn-install/reference/wizard.md).
 
 ### Button XML tags at a glance
 
@@ -134,6 +136,7 @@ Board-agnostic behaviors of CNC12 and the VCP that no manual page states. Each i
 | A font named in `<font>` must be installed on the Windows control PC *for all users*, or the VCP process does not see it and silently substitutes another font, shifting the text. | [advanced.md](reference/advanced.md) |
 | `<percentage>true</percentage>` can overlap the digits at some font and size combinations. | [advanced.md](reference/advanced.md) |
 | An unsupported SVG feature produces no dialog at all -- CNC12 runs normally while the VCP simply never appears. | [troubleshooting.md](reference/troubleshooting.md) |
+| Files CNC12 consumes under `resources\vcp\` should be ASCII-only with CRLF line endings. | [troubleshooting.md](reference/troubleshooting.md) |
 
 ## Useful resources
 
@@ -141,7 +144,7 @@ The manual's own Resources page (VCP Manual p.64):
 
 - Notepad ++: https://notepad-plus-plus.org/ -- "A free powerful text editor used for editing VCP
   XML files. Also useful for editing G and M code programs and macros."
-- InkScape: https://inkscape.org/ -- "A free Vector Drawing program. Great for editing and
+- Inkscape: https://inkscape.org/ -- "A free Vector Drawing program. Great for editing and
   creating VCP buttons and graphics. Also useful for CNC Art work."
 - YouTube: YouTube.com -- search on "Inkscape for Beginners", "InkScape bitmap to vector" or
   "Inkscape convert image to vector".

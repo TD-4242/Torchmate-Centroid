@@ -10,8 +10,9 @@ a skin-file edit, in [skin-and-grid.md](skin-and-grid.md) — which also holds t
 children of `<vcp_skin>`. Button tags are children of `<vcp_button>`
 ([button-anatomy.md](button-anatomy.md)).
 
-> Paths the manual prints are mill paths under `c:\cncm`. On CNC12 Router the same tree lives
-> under `c:\cncr` (Router Manual §1.8, p.13); the manual's own strings are quoted unchanged below.
+> Prose paths below use CNC12 Router's `c:\cncr` (Router Manual §1.8, p.13). The manual prints
+> mill paths under `c:\cncm`; code blocks, error messages and `[sic]` quotes keep them
+> unchanged, so substitute `c:\cncr` when copying one.
 
 ---
 
@@ -66,7 +67,7 @@ The stock Acorn Mill skin displays the current feedrate override percentage like
 
 `<number>` identifies which PLC word to display — `<number>31</number>` above. These PLC word
 numbers are found in the PLC program itself (VCP Manual p.45), under the Word Definitions section
-of the PLC program source file, `cncm\XXXX.src`, which is a text file (VCP Manual p.46). For
+of the PLC program source file, `c:\cncr\XXXX.src`, which is a text file (VCP Manual p.46). For
 example `W31` is Word #31, which equals the current Feedrate Override Percentage value
 (VCP Manual p.46). Commonly used stock PLC word values (VCP Manual p.46):
 
@@ -111,6 +112,12 @@ All defaults and value lists below are from VCP Manual p.49.
 | `<horizontalalignment>` | horizontal alignment | `left`, `right` or `center`; default left. |
 | `<marginbottom>`, `<margintop>`, `<marginleft>`, `<marginright>` | margins on the text, for fine tuning where it is displayed | Integer; default `0`. |
 | `<percentage>` | adds a percentage sign to the end of the word value | `true` = display the `%` sign. |
+
+> The `<type>` bounds are as p.49 prints them, but they are the signed 32-bit and 64-bit
+> *integer* limits. The PLC Manual defines `FW` and `DFW` as 32-bit and 64-bit floating-point
+> words (PLC Manual, PDF p.13; see
+> [resources.md](../../centroid-plc-programming/reference/resources.md)), so do not treat these as
+> float ranges.
 
 > The `<type>` example on p.49 is introduced as "PLC word set to Integer value and 5 decimal
 > places" but the block itself prints `<type>float</type>` with `<significant>5</significant>`

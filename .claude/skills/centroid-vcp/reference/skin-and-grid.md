@@ -12,9 +12,9 @@ named buttons on a grid. The button layer, each button's own folder, is
 > Change *where* a button is -> edit the skin file (this file).
 > Change *what* a button is -> edit the button folder ([button-anatomy.md](button-anatomy.md)).
 
-> Every path the manual prints is a mill path under `c:\cncm`. On CNC12 Router the same tree
-> lives under `c:\cncr` (Router Manual §1.8, p.13); the manual's own strings are quoted unchanged
-> below.
+> Prose paths below use CNC12 Router's `c:\cncr` (Router Manual §1.8, p.13). The manual prints
+> mill paths under `c:\cncm`; code blocks, error messages and `[sic]` quotes keep them
+> unchanged, so substitute `c:\cncr` when copying one.
 
 ---
 
@@ -44,12 +44,12 @@ and MPU11 it can replace the hard operator's panel, work alongside it, or not be
 ## Where skins live and which one is active
 
 Two XML files primarily define a skin's appearance: the skin XML file, located in the
-`c:\cncm\resources\vcp\skins` folder (the manual's example is `acorn_mill_vcp_skin.VCP`), and the
-individual button XML files in `c:\cncm\resources\vcp\Buttons\name of button folder`
+`c:\cncr\resources\vcp\skins` folder (the manual's example is `acorn_mill_vcp_skin.VCP`), and the
+individual button XML files in `c:\cncr\resources\vcp\Buttons\name of button folder`
 (VCP Manual p.7).
 
 You can have any number of VCP skins. On startup the VCP is commanded to use a particular skin
-with the `options.xml` file located in the `c:\cncm\resources\vcp\` folder; to change to a skin
+with the `options.xml` file located in the `c:\cncr\resources\vcp\` folder; to change to a skin
 with a different name, edit `options.xml` with the name of the skin to be used (VCP Manual p.7).
 `options.xml` holds an `<ArrayOfVcpOption>` of `<VcpOption>` entries; the active skin is the
 `Skin` option's `<Value>`, given without the file extension (VCP Manual p.7):

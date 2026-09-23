@@ -8,21 +8,22 @@ This is the button layer: each button is a self-contained folder. The skin that 
 the grid is the layout layer, [skin-and-grid.md](skin-and-grid.md); what the button *shows* is
 [visual-states.md](visual-states.md).
 
-> Paths the manual prints are mill paths under `c:\cncm`. On CNC12 Router the same tree lives
-> under `c:\cncr` (Router Manual §1.8, p.13); the manual's own strings are quoted unchanged below.
+> Prose paths below use CNC12 Router's `c:\cncr` (Router Manual §1.8, p.13). The manual prints
+> mill paths under `c:\cncm`; code blocks, error messages and `[sic]` quotes keep them
+> unchanged, so substitute `c:\cncr` when copying one.
 
 ---
 
 ## The button folder
 
-Button graphics are located in the `c:\cncm\resources\vcp\Buttons\` directory and each button has
+Button graphics are located in the `c:\cncr\resources\vcp\Buttons\` directory and each button has
 its own folder. The X axis positive jog button's files are in
-`c:\cncm\resources\vcp\Buttons\x_positive`; opening that folder you find two files,
+`c:\cncr\resources\vcp\Buttons\x_positive`; opening that folder you find two files,
 `x_positive.SVG` and `x_positive.XML`, the `.SVG` being the graphics file drawn on screen
 (VCP Manual p.12).
 
 The button XML files are typically named the same as the button itself: the Cycle Start button is
-in the folder `c:\cncm\resources\vcp\Buttons\cycle_start` and is called `cycle_start.XML`
+in the folder `c:\cncr\resources\vcp\Buttons\cycle_start` and is called `cycle_start.XML`
 (VCP Manual p.7). That folder name is what the skin's `<button>` line names
 ([skin-and-grid.md](skin-and-grid.md)).
 
@@ -35,8 +36,8 @@ pick a browser (VCP Manual p.12).
 Centroid chose it because it scales with no resolution loss, is lightweight, which keeps the VCP
 running smooth and reliable, is easy to create and modify, and has a large online support
 community. SVG documents are plain text files that describe lines, curves, shapes, colors and
-text, and can be manipulated with Adobe Illustrator, Corel Draw or InkScape. Centroid recommends
-InkScape (free, open source, SVG is its native format) to create trouble-free SVG files for the
+text, and can be manipulated with Adobe Illustrator, Corel Draw or Inkscape. Centroid recommends
+Inkscape (free, open source, SVG is its native format) to create trouble-free SVG files for the
 VCP (VCP Manual p.12).
 
 ## Button XML tag reference
@@ -83,7 +84,7 @@ Navigate to the button's folder and make a backup copy of its `.svg`. Open the o
 vector graphics editing software such as Inkscape, change it (the manual's example swaps the jog
 key's safety-yellow background and black text for a black background and white text), and be sure
 to save the edited file in the proper folder — for `x_positive`, that is
-`c:\cncm\resources\vcp\Buttons\x_positive`. Restart CNC12 to see the changes, then repeat the
+`c:\cncr\resources\vcp\Buttons\x_positive`. Restart CNC12 to see the changes, then repeat the
 process for the other buttons (VCP Manual p.13, p.14).
 
 ## SVG practices the VCP expects (VCP Manual p.60)
@@ -135,11 +136,11 @@ No manual page states the following; they are board-agnostic behaviors of the VC
 
 The manual's worked example creates a `laser_set_xy` button (VCP Manual p.22-23):
 
-1. Navigate to `c:\cncm\resources\vcp\Buttons` and right click "New", "Folder"; call it
+1. Navigate to `c:\cncr\resources\vcp\Buttons` and right click "New", "Folder"; call it
    `laser_set_xy`.
 2. Copy an existing button's XML into the new folder and rename it `laser_set_xy.XML` — the
    manual copies the `M56` button XML.
-3. Create the graphic with InkScape, place the `.SVG` in the `laser_set_xy` folder and name it
+3. Create the graphic with Inkscape, place the `.SVG` in the `laser_set_xy` folder and name it
    `laser_set_xy`.
 4. Edit the skin XML file and insert (or modify an existing) `<button>` line to assign the
    location where the new button should appear. The manual replaces the `m56` line:
@@ -147,7 +148,7 @@ The manual's worked example creates a `laser_set_xy` button (VCP Manual p.22-23)
 5. Save and restart CNC12; the new graphic appears on the VCP.
 
 Because the XML was copied from the `M56` button, pressing it still runs the stock M56 macro. The
-manual's fix is to edit that macro — `mfunc56.mac`, located in the `c:\cncm` folder — with the
+manual's fix is to edit that macro — `mfunc56.mac`, located in the `c:\cncr` folder — with the
 commands the new button should run (VCP Manual p.23).
 
 > The prose says to "keep the location (Row 4 , Column 4) the same", but the skin excerpt on the

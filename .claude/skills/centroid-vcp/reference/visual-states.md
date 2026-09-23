@@ -9,8 +9,9 @@ logos, hover and click feedback). Button tags here are children of `<vcp_button>
 ([button-anatomy.md](button-anatomy.md)); skin tags are children of `<vcp_skin>`
 ([skin-and-grid.md](skin-and-grid.md)).
 
-> Paths the manual prints are mill paths under `c:\cncm`. On CNC12 Router the same tree lives
-> under `c:\cncr` (Router Manual §1.8, p.13); the manual's own strings are quoted unchanged below.
+> Prose paths below use CNC12 Router's `c:\cncr` (Router Manual §1.8, p.13). The manual prints
+> mill paths under `c:\cncm`; code blocks, error messages and `[sic]` quotes keep them
+> unchanged, so substitute `c:\cncr` when copying one.
 
 ---
 
@@ -206,14 +207,14 @@ The manual's notes (VCP Manual p.17):
 - The image should be larger in size (pixels) than the VCP for best results.
 - The image upper right corner will be placed in the upper right corner of the VCP background.
 - Any parts of the image that are larger than the VCP are simply cropped.
-- The sample `.jpg` is included in the `c:\cncm\resources\vcp\images` folder, and an example skin
+- The sample `.jpg` is included in the `c:\cncr\resources\vcp\images` folder, and an example skin
   using it is included in the `skins\custom\` folder.
 
 ## Logos and icons: static images
 
 Static graphics can be used as icons or logos, and the VCP overlays them on top of the VCP itself.
 They are in the same `.SVG` format as the button images and live in
-`c:\cncm\resources\vcp\images\` — the stock examples are `coolant.SVG` and `acornlogo.SVG`. They
+`c:\cncr\resources\vcp\images\` — the stock examples are `coolant.SVG` and `acornlogo.SVG`. They
 are controlled in the skin with `<image>` nodes (VCP Manual p.27).
 
 ```xml
@@ -234,7 +235,7 @@ space, so its row and column spans are both 1 (VCP Manual p.28); the Acorn logo 
 button lengths and is one row high (VCP Manual p.29).
 
 To replace an image, edit the filename in `<path>` to point the VCP to a different image — for a
-new logo, create the image, save it into `C:\cncm\resources\vcp\images` and edit `<path>`
+new logo, create the image, save it into `c:\cncr\resources\vcp\images` and edit `<path>`
 (VCP Manual p.28, p.29). To delete an image, delete those lines from the skin; the space is now
 available for a button if desired (VCP Manual p.28, p.30).
 

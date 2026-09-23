@@ -9,8 +9,9 @@ single line of G-code, or launch an external program. The tags here are children
 ([button-anatomy.md](button-anatomy.md)); where the button sits on the grid is
 [skin-and-grid.md](skin-and-grid.md) and what it shows is [visual-states.md](visual-states.md).
 
-> Paths the manual prints are mill paths under `c:\cncm`. On CNC12 Router the same tree lives
-> under `c:\cncr` (Router Manual §1.8, p.13); the manual's own strings are quoted unchanged below.
+> Prose paths below use CNC12 Router's `c:\cncr` (Router Manual §1.8, p.13). The manual prints
+> mill paths under `c:\cncm`; code blocks, error messages and `[sic]` quotes keep them
+> unchanged, so substitute `c:\cncr` when copying one.
 
 ---
 
@@ -73,7 +74,7 @@ Two lookups, both in the manual (VCP Manual p.35, p.36):
 
 2. From the PLC source — all `skin_events` numbers can be viewed in the PLC source file that the
    Acorn Wizard creates from the Wizard choices — for the manual's examples that file is
-   `acorn_mill_plc.src`, located in the `cncm` directory. It is a text file; open it with
+   `acorn_mill_plc.src`, located in the install directory (`c:\cncr` on Router). It is a text file; open it with
    Notepad ++, select "Search" then "Find" and search for `skin_event`, which brings you to the
    `System variables: Virtual Control Panel Events` section (VCP Manual p.35). With the number in
    hand, search the PLC source for it and read the related PLC logic (VCP Manual p.36).
