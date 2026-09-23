@@ -12,6 +12,20 @@
 !/LICENSE.md
 !/README.md
 
+# CNC12 machine files. Compiler output (mpu.plc, plc.map, mpu.sym ...) stays ignored.
+!/*.src
+!/mfunc*.mac
+!/park.mac
+!/cncm.hom
+!/mpucomp.exe
+!/plcmsg.txt
+!/language.msg
+# Only the VCP and color themes under resources/; resources/wizard/ is stock Wizard content.
+!/resources/
+/resources/*
+!/resources/vcp/
+!/resources/colors/
+
 # 63 MB vendor manual kept local-only; its .md stub is tracked.
 /docs/official/centroid-cnc12-router-operator-manual.pdf
 .superpowers/
