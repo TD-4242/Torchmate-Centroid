@@ -5,13 +5,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## What this is
 
 Centroid CNC12 source and reference skills for a Torchmate CNC router on a Centroid **Acorn**
-(step/direction, CNC12 Router, install directory `c:\cncr`). Today the repo holds generic Acorn
-knowledge skills, the vendor manuals they cite, and a link checker. The machine's
-Wizard-generated PLC, macros and config arrive in a later sub-project, and plasma comes after
-the router works. See [README.md](README.md) for status.
+(step/direction, CNC12 Router, install directory `c:\cncr`). The repo holds the machine's CNC12
+files as checked out on the control PC, generic Acorn knowledge skills, the vendor manuals they
+cite, and a link checker. Plasma comes after the router works. See [README.md](README.md) for
+status.
 
 ## Layout
 
+- `acorn_router_plc.src` -- the Acorn Wizard-generated PLC source. The Wizard overwrites it unless
+  its Custom PLC preference is set; see `centroid-plc-programming` before hand-editing.
+- `cncm.hom`, `mfunc*.mac`, `plcmsg.txt`, `language.msg`, `mpucomp.exe` -- home program, M-code
+  macros, PLC messages and the PLC compiler, from `c:\cncr`.
+- `resources/vcp/`, `resources/colors/` -- the VCP (skins, buttons, images, `options.xml`) and
+  color themes.
 - `.claude/skills/` -- generic Centroid skills: `SKILL.md` plus `reference/*.md`.
 - `docs/official/` -- vendor manuals the skills cite. The router manual PDF is gitignored; its
   `.md` stub holds the download command.
