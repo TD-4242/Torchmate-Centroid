@@ -1,6 +1,9 @@
 *.pdf binary
 *.exe binary
 
+# Bash script; CRLF would break it under Git Bash and Wine.
+/compile.sh text eol=lf
+
 # CNC12 edits and compiles these on Windows; keep CRLF in every checkout.
 /*.src text eol=crlf
 /*.mac text eol=crlf

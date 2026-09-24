@@ -24,6 +24,8 @@ status.
 - `docs/superpowers/specs/`, `docs/superpowers/plans/` -- design specs and implementation
   plans. They are the historical record and may be annotated.
 - `tools/check_skill_links.py` -- link checker (`python3 tools/test_check_skill_links.py`).
+- `compile.sh` -- compile-checks `acorn_router_plc.src` with `mpucomp.exe`, natively or via Wine.
+  Run it after any PLC edit, before loading the program on the machine.
 
 ## Skill conventions
 
