@@ -20,6 +20,7 @@
 !/mpucomp.exe
 !/plcmsg.txt
 !/language.msg
+!/compile.sh
 # Only the VCP and color themes under resources/; resources/wizard/ is stock Wizard content.
 !/resources/
 /resources/*

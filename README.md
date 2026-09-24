@@ -51,3 +51,4 @@ manual section and page. Skills land one per PR, and each adds its row here.
 
     python3 tools/check_skill_links.py        # broken links / unknown skill names in skill docs
     python3 tools/test_check_skill_links.py   # its tests
+    ./compile.sh [-v] [-o out.plc]            # compile-check acorn_router_plc.src (Windows, or Wine)
