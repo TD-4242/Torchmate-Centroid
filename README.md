@@ -9,9 +9,21 @@ fully working. Modeled on [Acroloc-Centroid](https://github.com/TD-4242/Acroloc-
 | Sub-project | State |
 | --- | --- |
 | 1. Repo foundation + Acorn skill set | Done: [spec](docs/superpowers/specs/2026-09-14-acorn-skill-set-design.md), [plan](docs/superpowers/plans/2026-09-14-acorn-skill-set.md) |
-| 2. Router baseline (Wizard PLC, macros, config from the control PC) | Waiting on control-PC files |
+| 2. Router baseline (Wizard PLC, macros, config from the control PC) | In progress: control-PC files committed |
 | 3. Router customizations | Not started |
 | 4. Plasma | Not started |
+
+## Machine files
+
+The repo root is also the control PC's `c:\cncr` checkout. `.gitignore` allowlists the machine
+files; CNC12's binaries, parameters, jobs, logs and compiler output stay untracked.
+
+| Path | Contents |
+| --- | --- |
+| `acorn_router_plc.src` | Acorn Wizard-generated PLC source |
+| `cncm.hom`, `mfunc*.mac` | Home program and M-code macros |
+| `plcmsg.txt`, `language.msg`, `mpucomp.exe` | PLC messages, message strings, PLC compiler |
+| `resources/vcp/`, `resources/colors/` | VCP skins, buttons, images and `options.xml`; color themes |
 
 ## Reference skills
 
