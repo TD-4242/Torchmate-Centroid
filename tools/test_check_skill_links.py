@@ -36,10 +36,48 @@ class CheckTreeTest(unittest.TestCase):
             csl.check_tree(self.root),
             [".claude/skills/centroid-alpha/SKILL.md:2: broken link reference/missing.md"])
 
-    def test_anchor_is_stripped_before_resolving(self):
+    def test_anchor_to_existing_heading_passes(self):
+        self.write(".claude/skills/centroid-alpha/reference/a.md", "# A\n## Section\n")
+        self.write(".claude/skills/centroid-alpha/SKILL.md",
+                   "# Top\n[a](reference/a.md#section) [top](#top)\n")
+        self.assertEqual(csl.check_tree(self.root), [])
+
+    def test_missing_anchor_is_reported(self):
         self.write(".claude/skills/centroid-alpha/reference/a.md", "# A\n")
         self.write(".claude/skills/centroid-alpha/SKILL.md",
-                   "[a](reference/a.md#section) [top](#top)\n")
+                   "# Top\n[a](reference/a.md#nope) [b](#gone)\n")
+        self.assertEqual(
+            csl.check_tree(self.root),
+            [".claude/skills/centroid-alpha/SKILL.md:2: broken anchor reference/a.md#nope",
+             ".claude/skills/centroid-alpha/SKILL.md:2: broken anchor #gone"])
+
+    def test_anchor_slugs_follow_github_rules(self):
+        self.write(".claude/skills/centroid-alpha/reference/a.md",
+                   "## Axis Configuration (§6.5)\n"
+                   "## Appendix H: Cyclone & MCU Status\n"
+                   "## 1. Definition — `Name IS Resource`\n"
+                   "## Symptom -> fix (App B)\n"
+                   "## Dup\n## Dup\n")
+        self.write(".claude/skills/centroid-alpha/SKILL.md",
+                   "[a](reference/a.md#axis-configuration-65) "
+                   "[b](reference/a.md#appendix-h-cyclone--mcu-status) "
+                   "[c](reference/a.md#1-definition--name-is-resource) "
+                   "[d](reference/a.md#symptom---fix-app-b) "
+                   "[e](reference/a.md#dup) [f](reference/a.md#dup-1)\n")
+        self.assertEqual(csl.check_tree(self.root), [])
+
+    def test_headings_in_code_fences_are_not_anchors(self):
+        self.write(".claude/skills/centroid-alpha/reference/a.md",
+                   "# A\n```\n# not a heading\n```\n")
+        self.write(".claude/skills/centroid-alpha/SKILL.md",
+                   "[a](reference/a.md#not-a-heading)\n")
+        self.assertEqual(
+            csl.check_tree(self.root),
+            [".claude/skills/centroid-alpha/SKILL.md:1: broken anchor reference/a.md#not-a-heading"])
+
+    def test_anchors_into_non_markdown_files_are_not_checked(self):
+        self.write(".claude/skills/centroid-alpha/reference/t.py", "x = 1\n")
+        self.write(".claude/skills/centroid-alpha/SKILL.md", "[t](reference/t.py#L1)\n")
         self.assertEqual(csl.check_tree(self.root), [])
 
     def test_external_links_are_skipped(self):

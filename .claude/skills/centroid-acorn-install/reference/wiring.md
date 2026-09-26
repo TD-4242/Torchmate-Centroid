@@ -105,7 +105,8 @@ E-stop contactor (Acorn Install §5.5, p.47):
 Test the E-stop wiring from the Wizard's Input Definitions menu: set the `IN8 EstopOk` input to
 normally-closed (green) and write settings; cycling the switch should toggle CNC12's message
 `406 Estop detected` / `335 released`, and the PLC Diagnostic app (`Alt+I`) shows the input live
-(Acorn Install §5.5, p.49-51).
+(Acorn Install §5.5, p.49-51); see
+[troubleshooting.md](troubleshooting.md#plc-diagnostic-screen-app-b).
 
 ## Axis drive wiring (§5.6)
 
@@ -186,7 +187,7 @@ Wizard combined home/limit input assignments (Acorn Install §5.7, p.63):
 Zri homing uses a closed-loop drive that closes an Acorn input on the axis motor encoder's marker
 pulse (once per revolution); the home switch gets the axis "in the ballpark" and the Zri input then
 sets home precisely at the marker pulse (Acorn Install §5.7, p.64). Test home/limit wiring with the
-PLC Diagnostic menu (`Alt+I`): tripping a switch by hand should flip its input LED from green to red
+PLC Diagnostic menu (`Alt+I`, see [troubleshooting.md](troubleshooting.md#plc-diagnostic-screen-app-b)): tripping a switch by hand should flip its input LED from green to red
 (Acorn Install §5.7, p.57, p.64-65).
 
 ## Spindle motor (§5.8)
