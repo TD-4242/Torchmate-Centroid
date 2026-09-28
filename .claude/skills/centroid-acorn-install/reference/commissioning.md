@@ -1,4 +1,4 @@
-# Motion Tuning Reference
+# Acorn Motion Tuning Reference
 
 Final motion tuning after the Wizard is configured (Ch 6): axis motor testing and direction,
 coarse and fine calibration of the Overall Turns Ratio, backlash compensation, and software
