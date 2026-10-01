@@ -53,9 +53,12 @@ The Acorn CNC Controller Kit (Part# 14455) includes (Acorn Install Ch 1, p.7):
 | 12 | Input 3 | | |
 | 13 | Input 4 | | |
 
-Inputs and outputs on the DB25 are 5V-compatible and not isolated; the same signal is not
-available on both the DB25 and the screw terminals at once (Acorn Install App D, p.124,
-p.126).
+Inputs and outputs on the DB25 are 5V compatible (Acorn Install App D, p.124). DB25 inputs are
+not isolated. Screw-terminal inputs are optically isolated and take 24 VDC sensors or switches;
+powering them from a separate 24 VDC supply improves isolation and noise immunity (Acorn Install
+App D, p.126). Each input may be connected on the DB25 or the screw terminal, not both: screw
+terminal input 1 and DB25 input 1 cannot both be used, but screw terminal input 1 can be used with
+DB25 input 2 (Acorn Install App D, p.124).
 
 ### I/O map
 

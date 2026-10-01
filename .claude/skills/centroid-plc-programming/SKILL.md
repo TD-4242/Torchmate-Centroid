@@ -54,11 +54,11 @@ A macro reads PLC resource state through fixed variable ranges (for example `OUT
 
 | Reference file | Look here when... |
 | --- | --- |
-| `reference/syntax.md` | You need statement syntax: `IF`/`THEN`, `SET`/`RST`/`JMP`, the output-coil `()` form, Logical/Relational/Arithmetic operators, comment style, or the manual's naming and layout conventions |
-| `reference/resources.md` | You need a resource type (`INP`/`OUT`/`MEM`/`STG`/`FSTG`/`T`/`PD`/`W`/`DW`/`FW`/`DFW`), its address range, Acorn's physical I/O, the naming-suffix convention, or macro<->PLC access (`#(60000+n)`, `M94`/`M95`) |
-| `reference/system-variables.md` | You need to look up or verify an `SV_*` system-variable name, its type, direction (CNC->PLC vs. PLC->CNC), or an Appendix H-K bit table |
-| `reference/messages.md` | You need to encode or decode an operator-message constant (`value = type + 256 x msgNumber`), the `plcmsg.txt` format, or the manual's worked message example |
-| `reference/acorn-plc.md` | You need the Acorn Wizard's universal-template path, where the Wizard-generated `.src` lands, how to turn on Custom PLC before hand-editing, or the PLC Diagnostic/PLC Detective tools |
+| [reference/syntax.md](reference/syntax.md) | You need statement syntax: `IF`/`THEN`, `SET`/`RST`/`JMP`, the output-coil `()` form, Logical/Relational/Arithmetic operators, comment style, or the manual's naming and layout conventions |
+| [reference/resources.md](reference/resources.md) | You need a resource type (`INP`/`OUT`/`MEM`/`STG`/`FSTG`/`T`/`PD`/`W`/`DW`/`FW`/`DFW`), its address range, Acorn's physical I/O, the naming-suffix convention, or macro<->PLC access (`#(60000+n)`, `M94`/`M95`) |
+| [reference/system-variables.md](reference/system-variables.md) | You need to look up or verify an `SV_*` system-variable name, its type, direction (CNC->PLC vs. PLC->CNC), or an Appendix H-K bit table |
+| [reference/messages.md](reference/messages.md) | You need to encode or decode an operator-message constant (`value = type + 256 x msgNumber`), the `plcmsg.txt` format, or the manual's worked message example |
+| [reference/acorn-plc.md](reference/acorn-plc.md) | You need the Acorn Wizard's universal-template path, where the Wizard-generated `.src` lands, how to turn on Custom PLC before hand-editing, or the PLC Diagnostic/PLC Detective tools |
 
 Example PLC projects are not indexed here; the Acorn Wizard's own generated template is
 described in [acorn-plc.md](reference/acorn-plc.md).

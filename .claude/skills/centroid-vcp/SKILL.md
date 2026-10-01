@@ -113,12 +113,12 @@ so it is easy to revert to a working setup (VCP Manual p.56).
 
 | Reference file | Look here when... |
 | --- | --- |
-| `reference/skin-and-grid.md` | You're moving, deleting or re-sizing a button, spanning one across several cells with `row_span`/`column_span`, picking or switching the active skin in `options.xml`, changing the grid's row and column count, asking which region of the panel is editable at all, or want the list of what else lives at skin level |
-| `reference/button-anatomy.md` | You're creating a copied button, changing a button's graphic, or need the button folder layout, the `<vcp_button>` tag table, or the SVG practices the VCP expects |
-| `reference/visual-states.md` | You're setting LED colors, swapping images on a PLC output/input/memory bit or on click, or styling the panel with backgrounds, borders, logos, icons and hover/click effects |
-| `reference/actions.md` | You're wiring a button to PLC logic with a skin event number, turning a button into an Aux key that runs a macro, running a line of G-code with `<run>`, or launching an external app with `<app>` |
-| `reference/advanced.md` | You need live PLC-word displays and their styling nodes, static `<text>`, or `<group>`/`<hide_group>` switching |
-| `reference/troubleshooting.md` | The VCP will not start, shows no panel at all, looks skewed, or lost its lower third after an upgrade -- plus running the VCP offline to check an edit |
+| [reference/skin-and-grid.md](reference/skin-and-grid.md) | You're moving, deleting or re-sizing a button, spanning one across several cells with `row_span`/`column_span`, picking or switching the active skin in `options.xml`, changing the grid's row and column count, asking which region of the panel is editable at all, or want the list of what else lives at skin level |
+| [reference/button-anatomy.md](reference/button-anatomy.md) | You're creating a copied button, changing a button's graphic, or need the button folder layout, the `<vcp_button>` tag table, or the SVG practices the VCP expects |
+| [reference/visual-states.md](reference/visual-states.md) | You're setting LED colors, swapping images on a PLC output/input/memory bit or on click, or styling the panel with backgrounds, borders, logos, icons and hover/click effects |
+| [reference/actions.md](reference/actions.md) | You're wiring a button to PLC logic with a skin event number, turning a button into an Aux key that runs a macro, running a line of G-code with `<run>`, or launching an external app with `<app>` |
+| [reference/advanced.md](reference/advanced.md) | You need live PLC-word displays and their styling nodes, static `<text>`, or `<group>`/`<hide_group>` switching |
+| [reference/troubleshooting.md](reference/troubleshooting.md) | The VCP will not start, shows no panel at all, looks skewed, or lost its lower third after an upgrade -- plus running the VCP offline to check an edit |
 
 ## Field-verified facts
 

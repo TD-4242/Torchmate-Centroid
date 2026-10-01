@@ -50,15 +50,15 @@ See [interface.md](reference/interface.md) for each menu's own sub-keys and full
 
 | Reference file | Look here when... |
 | --- | --- |
-| `reference/interface.md` | You need the DRO/message/status window layout, the machine-home procedure, or the F1-F10 main-screen menu map and each menu's sub-keys |
-| `reference/operator-panel.md` | You need the hardware jog panel button functions, the default VCP button legend, or the keyboard jog panel and keyboard shortcut keys |
-| `reference/part-setup.md` | You're setting part zeros (manually, by laser, by probe, or by touch plate), configuring Work Coordinate Systems, Coordinate System Rotation (CSR), or Transformed WCS |
-| `reference/tool-setup.md` | You're working with the Offset Library (H/D values), the Tool Library, Tool Life Management, or PWM laser/spindle output setup |
-| `reference/running-jobs.md` | You're starting, canceling, or resuming a job; using the Run menu, Power Feed, or the communications stress test; or navigating the Utility menu |
-| `reference/g-code-index.md` | You need to look up a router G-code by number |
-| `reference/m-code-index.md` | You need to look up a router M-code by number |
-| `reference/parameter-index.md` | You need to look up a machine parameter by number |
-| `reference/messages-index.md` | You need to look up a CNC12 status or error message by number |
+| [reference/interface.md](reference/interface.md) | You need the DRO/message/status window layout, the machine-home procedure, or the F1-F10 main-screen menu map and each menu's sub-keys |
+| [reference/operator-panel.md](reference/operator-panel.md) | You need the hardware jog panel button functions, the default VCP button legend, or the keyboard jog panel and keyboard shortcut keys |
+| [reference/part-setup.md](reference/part-setup.md) | You're setting part zeros (manually, by laser, by probe, or by touch plate), configuring Work Coordinate Systems, Coordinate System Rotation (CSR), or Transformed WCS |
+| [reference/tool-setup.md](reference/tool-setup.md) | You're working with the Offset Library (H/D values), the Tool Library, Tool Life Management, or PWM laser/spindle output setup |
+| [reference/running-jobs.md](reference/running-jobs.md) | You're starting, canceling, or resuming a job; using the Run menu, Power Feed, or the communications stress test; or navigating the Utility menu |
+| [reference/g-code-index.md](reference/g-code-index.md) | You need to look up a router G-code by number |
+| [reference/m-code-index.md](reference/m-code-index.md) | You need to look up a router M-code by number |
+| [reference/parameter-index.md](reference/parameter-index.md) | You need to look up a machine parameter by number |
+| [reference/messages-index.md](reference/messages-index.md) | You need to look up a CNC12 status or error message by number |
 
 The G-code, M-code, machine parameter, and CNC12 message indexes above are complete for the
 chapters they cover -- G-codes (Router Manual Ch 12), M-codes (Ch 13), machine parameters (§15.7),

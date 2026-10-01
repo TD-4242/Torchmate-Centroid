@@ -1,8 +1,9 @@
 # Centroid CNC12 SV_* System Variable Catalog
 
-This catalog is a re-verified subset of the `SV_*` system variables documented in the PLC
-Manual's Appendix D (PLC Manual, PDF p.102-120) and Appendices H-K (PDF p.128-132), grouped by
-function; Appendix D itself is the full list. Types: `M` memory bit, `I32`/`I64` signed integer,
+This catalog lists every system variable in the PLC Manual's Appendix D tables (PLC Manual,
+PDF p.104-120), grouped by function, plus the status-bit breakdowns of Appendices H-K (PDF
+p.128-132). Appendix D also prints two names without the `SV_` prefix, `ENCODER_DIFF_BITS` and
+`ENCODER_QUAD_BITS` (PDF p.111); they are listed under their printed names. Types: `M` memory bit, `I32`/`I64` signed integer,
 `F32`/`F64` floating-point (PLC Manual, PDF p.102).
 
 Appendix D splits variables into two write-direction tables, **CNC Software Write-Controlled**
@@ -17,7 +18,7 @@ manual's own notation, rather than expanded per instance.
 
 ## Spindle
 
-Rows below are drawn from PLC Manual, PDF p.104-120 (see the Page column for each fact's exact
+Rows below are drawn from PLC Manual, PDF p.102-120 (see the Page column for each fact's exact
 page).
 
 | SV_ name | Type | Dir | Meaning | Page |
@@ -38,6 +39,12 @@ page).
 | `SV_PLC_FUNCTION_106` | M | PLC→CNC | Spindle Override +. | p.114 |
 | `SV_PLC_FUNCTION_107` | M | PLC→CNC | Spindle Override -. | p.115 |
 | `SV_PLC_FUNCTION_108` | M | PLC→CNC | Select Spindle Override / 100%. | p.115 |
+| `SV_PC_SPINDLE_OVERRIDE` | I32 | CNC→PLC | Not currently used. | p.107 |
+| `SV_MEASURED_SPINDLE_SPEED` | F32 | CNC→PLC | Measured spindle speed in RPM, taking into account the `SV_SPINDLE_MID_RANGE` and `SV_SPINDLE_LOW_RANGE` settings. | p.112 |
+| `SV_PC_MAX_SPINDLE_SPEED_FOR_TOOL` | F32 | CNC→PLC | Maximum allowed spindle speed for the tool in the spindle. | p.112 |
+| `SV_PC_MAXIMUM_CSS_SPEED` | F32 | CNC→PLC | Lathe: the maximum constant surface speed set by a G50 command. | p.112 |
+| `SV_SPINDLE_RPM_MODE` | M | PLC→CNC | C axis lathe: when set, the MPU11 sends the current value of `SV_SPINDLE_DAC` as the PID output to the drive for the last axis configured as a "C axis"; while active, full power without motion and position errors are disabled for that axis. Write only once per PLC pass. | p.102, p.116 |
+| `SV_SPINDLE_DAC` | I32 | PLC→CNC | C axis lathe: the value the MPU sends as the PID output while `SV_SPINDLE_RPM_MODE` is set. p.118 prints the bit's own description ("When this bit is set…") under this I32 word. | p.116, p.118 |
 
 ---
 
@@ -54,6 +61,8 @@ page).
 | `SV_PLC_CAROUSEL_POSITION` | I32 | PLC→CNC | Carousel bin position; the carousel must not be allowed to turn unless CNC software is running. When Parameter 160 = 0, CNC uses this to determine Active Tool and expects a BCD value; when Parameter 160 != 0, CNC also uses it for carousel position and tool putback, and expects normal binary. | p.117 |
 | `SV_SYS_MACRO` | I32 | PLC→CNC | Setting a non-zero value while CNC software is at the main menu makes CNC software load and run the G-code program `MPGmacro#.mac` from the system directory (e.g. `\cncm\system\MPGmacro3.mac` for `SV_SYS_MACRO = 3` on a Mill system); can be set negative. | p.119 |
 | `SV_M94_M95_1-128` | M | CNC→PLC | Used for M-codes needing PLC interaction (M3, M4, M6, M7, M8, M10, M11 and custom M-codes); set/reset from M/G-code programs with `M94`/`M95`. Also settable by the PLC program itself, even though the table labels them Read Only for the PLC. CNC11 has built-in default actions for some M-codes that control the first 16 of these variables, e.g. `IF !SV_PROGRAM_RUNNING THEN RST M3, RST M4, RST M7, RST M8`. See [resources.md](resources.md#triggering-plc-actions-with-m94m95) for which requests those default actions cover (Router Manual §13.28, p.290). | p.104 |
+| `SV_DOING_AUTO_TOOL_MEASURE` | M | CNC→PLC | Set by CNC software while performing an automatic tool measure with the TT1. | p.105 |
+| `SV_FORCE_PROBE_DETECTION_ON` | M | CNC→PLC | Set by CNC software when detection of a probe is forced, typically when the probe tool number is called and in the spindle; the PLC should enable any probe protections it has while this is set. | p.106 |
 
 ---
 
@@ -94,7 +103,7 @@ Rows below are drawn from PLC Manual, PDF p.106, p.110-111.
 
 ### Jog panel link and debounce
 
-Rows below are drawn from PLC Manual, PDF p.104-105, p.117.
+Rows below are drawn from PLC Manual, PDF p.104-106, p.111, p.117-118.
 
 | SV_ name | Type | Dir | Meaning | Page |
 |---|---|---|---|---|
@@ -103,14 +112,27 @@ Rows below are drawn from PLC Manual, PDF p.104-105, p.117.
 | `SV_PC_VIRTUAL_JOGPANEL_ACTIVE` | M | CNC→PLC | Indicates the user has activated the keyboard (virtual) jog panel with ALT-J; most functions besides jogging are allowed without the screen up by default. | p.105 |
 | `SV_PLC_DEBOUNCE_x` (1-64) | I32 | PLC→CNC | Debounce configuration word for the first 240 PLC inputs. | p.117 |
 | `SV_JOG_LINK_DEBOUNCE_x` (1-32) | I32 | PLC→CNC | Jog Panel input debounce configuration words. | p.117 |
+| `SV_LOCAL_DEBOUNCE_x` (1-13) | I32 | PLC→CNC | MPU11 onboard/local inputs debounce configuration. | p.118 |
+| `SV_LEGACY_JOG_PANEL_ONLINE` | M | CNC→PLC | 1 = legacy jog panel detected, e.g. Uniconsole-2. | p.104 |
+| `SV_PC_EXT_USB_PANEL_ONLINE_BITS` | I32 | CNC→PLC | SET by CNC software when an external USB panel is connected. | p.111 |
+| `SV_PC_EXT_USB_PANEL_INP_x` (1-64) | M | CNC→PLC | SET by CNC software for an external USB panel, to indicate a press of a button. | p.106 |
+| `SV_PC_EXT_USB_PANEL_OUT_x` (1-64) | M | CNC→PLC | "SET by PLC to activate outputs for an external USB Panel to activate indication LEDs" — see the note below. | p.106 |
+| `SV_PC_EXT_USB_PANEL_W_x` (1-16) | I32 | CNC→PLC | SET by CNC software "to typically indicate a ration [sic] of a knob for Feed/Rapid/Spindle for an external USB Panel". | p.111 |
+
+> `SV_PC_EXT_USB_PANEL_OUT_x` is printed in the CNC → PLC table, but its description says the PLC
+> SETs it (PLC Manual, PDF p.106). The Dir column follows the table, as everywhere in this catalog.
 
 ### Axis absolute position
 
-Rows below are drawn from PLC Manual, PDF p.103, p.111.
+Rows below are drawn from PLC Manual, PDF p.103-104, p.107, p.111-112.
 
 | SV_ name | Type | Dir | Meaning | Page |
 |---|---|---|---|---|
 | `SV_MPU11_ABS_POS_x` (0-7) | I64 | CNC→PLC | Absolute position of the axis in encoder counts, same value CNC reports and shows in the PID screen as AbsPos; index is zero-based (0-7 for 8 axes), unlike most other `_1-8` families. Should be read once per PLC pass — written externally. | p.103, p.111 |
+| `SV_MPU11_EXPECTED_POS_x` (0-7) | I64 | CNC→PLC | Expected position of the axis in encoder counts — the current commanded position. Read only once per PLC pass — written externally. | p.104, p.112 |
+| `SV_MPU11_LASH_OFFSET_0-7` | I32 | CNC→PLC | The current lash offset. Read only once per PLC pass — written externally. | p.103, p.107 |
+| `SV_ENCODER_POSITION_x` (1-32) | I64 | CNC→PLC | Current encoder position. | p.112 |
+| `SV_MACHINE_POSITION_AXIS_x` (1-8) / `SV_?_AXIS_MACHINE_POSITION` | F32 | CNC→PLC | Current machine position of each axis (1-8, or A, B, C, U, V, W, X, Y, Z) in machine units. | p.112 |
 
 ### PLC function commands (jog panel / cycle control)
 
@@ -211,7 +233,7 @@ Rows below are drawn from PLC Manual, PDF p.112.
 
 ## System state, faults, and program control
 
-Rows below are drawn from PLC Manual, PDF p.102-117.
+Rows below are drawn from PLC Manual, PDF p.102-120.
 
 | SV_ name | Type | Dir | Meaning | Page |
 |---|---|---|---|---|
@@ -230,6 +252,23 @@ Rows below are drawn from PLC Manual, PDF p.102-117.
 | `SV_MASTER_ENABLE` | M | PLC→CNC | PLC sets this bit to turn on the Master Enable to hardware devices (drives and PLCs). | p.115 |
 | `SV_ENABLE_IO_OVERRIDE` | M | PLC→CNC | When SET by the PLC program, CNC software indirectly allows inversion and forcing of PLC bits through the live PLC display (ALT-I) by manipulating machine parameters 911-939, which the PLC program uses directly to set the forcing/inversion system variables. | p.116 |
 | `SV_TRIGGER_PLOT_DUMP` | M | PLC→CNC | Internal debugging: when SET, starts a debug dump sent to CNC software, which launches `plot.exe`; without custom-built CNC software the dump has no useful data. | p.116 |
+| `SV_ESTOP_PRESSED` | M | PLC→CNC | SET by the PLC to tell CNC software that E-Stop was pressed. | p.117 |
+| `SV_RESET_PRESSED` | M | PLC→CNC | SET by the PLC to tell CNC software that Reset was pressed. | p.117 |
+| `SV_STOP_REASON` | I32 | PLC→CNC | When motion stops, the reason is stored here. "Do not use at this time." | p.117 |
+| `SV_M_FUNCTION` | I32 | CNC→PLC | Set as part of M-code execution. Read only once per PLC pass — written externally; p.103 notes it is "Not used in any program." | p.103, p.107 |
+| `SV_PC_CURRENT_WCS` | I32 | CNC→PLC | The work coordinate system (1-18) currently in effect in CNC software. | p.110 |
+| `SV_STARTUP_TIME` | I64 | CNC→PLC | 12-digit integer holding the date and time CNC software was started, format `YYMMDDHHmmSS`. | p.112 |
+| `SV_PC_DEFEAT_TRAVEL_LIMITS` | M | CNC→PLC | CNC software SETs this when software travel limits are defeated by M297. | p.107 |
+| `SV_PLC_DISABLE_TRAVEL_LIMITS` | M | PLC→CNC | When SET by the PLC, CNC no longer stops at or errors at software travel limits when jogging and/or with the MPG. It does not prevent software travel limits during normal job processing. | p.117 |
+| `SV_PLC_RESTART_FORWARD` | M | PLC→CNC | SET by the PLC to instruct Traverse.exe to move forward in the job. | p.117 |
+| `SV_PLC_RESTART_REVERSE` | M | PLC→CNC | SET by the PLC to instruct Traverse.exe to move in reverse in the job. | p.117 |
+| `SV_SYS_COMMAND` | I32 | PLC→CNC | A non-zero positive value makes CNC software launch a process that tries to run the Windows batch file `plc_system_command_n.bat`, where n is the value set. | p.118 |
+| `SV_RESET_PLC_STATS_MIN_MAX` | M | PLC→CNC | Resets the current Minimum/Maximum PLC executor statistics shown on the PLC diagnostic screen (ALT-I). | p.116 |
+| `SV_RESET_PLC_STATS_AVG` | M | PLC→CNC | Resets the current Average PLC executor statistics shown on the PLC diagnostic screen (ALT-I). | p.116 |
+| `SV_SMSG_D_ARG_x` (1-9) | I32 | PLC→CNC | Reserved for future use. Do not use. | p.117 |
+| `SV_SMSG_F_ARG_x` (1-9) | F32 | PLC→CNC | Reserved for future use. Do not use. | p.120 |
+| `SV_PLC_FAULT`, `SV_LUBRICANT_LOW`, `SV_DRIVE_FAULT` | M | PLC→CNC | Obsolete. Do not use. | p.113 |
+| `SV_PLC_OP_IN_PROGRESS` | M | PLC→CNC | Obsolete. Do not use. p.103 names it in the Externally Read list only "for completeness". | p.103, p.113 |
 
 > `SV_STALL_ERROR` is printed in the PLC → CNC table (p.115), but p.103's "Externally Written
 > System Variables" list also names it — meaning it is actually written by the MPU outside the
@@ -240,7 +279,7 @@ Rows below are drawn from PLC Manual, PDF p.102-117.
 
 ## Axis validity, drive status, and power
 
-Rows below are drawn from PLC Manual, PDF p.103-107, p.110, p.115.
+Rows below are drawn from PLC Manual, PDF p.103-111, p.115-116.
 
 | SV_ name | Type | Dir | Meaning | Page |
 |---|---|---|---|---|
@@ -256,15 +295,45 @@ Rows below are drawn from PLC Manual, PDF p.103-107, p.110, p.115.
 | `SV_PLC_IO2_ONLINE` | M | CNC→PLC | 1 = IO2 Legacy PLC detected. | p.104 |
 | `SV_?_AXIS_FIBER_OK` | M | CNC→PLC | Nine system variables mapped to the bits in `SV_PC_CYCLONE_STATUS_2` by axis label (X, Y, Z, A, B, C, U, V, W); a convenience for PLC programs that handle axis changes. | p.105-106 |
 | `SV_?_AXIS_POWERED` | M | CNC→PLC | See `SV_PC_POWER_AXIS_x` above. | p.104 |
+| `SV_DRIVE_VERSION_x` (1-8) | I32 | CNC→PLC | The drive firmware version. | p.110 |
+| `SV_AXIS_LABEL_x` (1-8) | I32 | CNC→PLC | Uppercase ASCII character value of the axis label, e.g. A = 65, N = 78, X = 88, Y = 89, Z = 90. | p.110 |
+| `SV_?_AXIS_DRIVE_NUMBER` | I32 | CNC→PLC | Mapped to machine parameters 300 (Axis 1 Drive Number) through 307 (Axis 8 Drive Number), by axis label A, B, C, U, V, W, X, Y, Z; a convenience for PLC programs that handle axis changes. | p.110 |
+| `SV_HOME_SET_AXIS_1-8` | M | CNC→PLC | Set after initial homing; stays set even if CNC software resets the homing state. | p.106 |
+| `SV_ENCODER_INDEX_PULSE_1-21` | M | CNC→PLC | Current state of the encoder index pulses. | p.106 |
+| `SV_LATCHED_ENCODER_INDEX_PULSE_1-21` | M | CNC→PLC | Latched state of the encoder index pulses; they remain set until read. | p.106 |
+| `SV_SCALE_ENABLED_AXIS_1-8` | M | CNC→PLC | Set if the scale is enabled in CNC software's Scale Menu. | p.106 |
+| `SV_SCALE_INITIALIZED_AXIS_1-8` | M | CNC→PLC | Set when a scale is initialized (axis homed); turns off once an axis homing command is issued. | p.106 |
+| `SV_SCALE_INHIBIT_AXIS_x` (1-8) | M | PLC→CNC | When set, scale compensation for the axis is disabled until the bit is reset, undoing previous corrections; the DRO then shows the motor encoder's absolute position. | p.116 |
+| `SV_POSITION_MODE_ERROR_AXIS_x` (1-8) | I32 | CNC→PLC | Same as in CNC software's PID Encoder menu. | p.111 |
+| `SV_DISABLE_STALL_DETECTION` | M | PLC→CNC | When SET, disables detection of some stall errors, such as position errors and full power without motion errors. | p.116 |
+| `ENCODER_DIFF_BITS` | I32 | CNC→PLC | Bitmap of encoder differential errors. Printed without the `SV_` prefix. | p.111 |
+| `ENCODER_QUAD_BITS` | I32 | CNC→PLC | Bitmap of encoder quadrature errors. Printed without the `SV_` prefix. | p.111 |
+| `SV_HSC_DRIVE_x_STATUS_y` | I32 | CNC→PLC | Every bit of the status packets AC1 drives send back: 64 variables, eight for each of eight drives. Only `SV_HSC_DRIVE_x_STATUS_4` is documented. Its bit00 FatalError should be monitored on all AC1 drives and treated as an emergency stop; if it is still on about a second after `SV_MASTER_ENABLE` is turned back on, throw the fault again. Full bit list on p.108-109. | p.108-109 |
+| `SV_SD_DRIVE_x_STATUS` (1-5) | I32 | CNC→PLC | Status of legacy SD drives. bit00 FatalErrorDetected should be monitored for all drives and treated as an emergency stop; the manual recommends echoing the variable to W1-W44 for viewing in PLC diagnostics. Full bit list on p.109. | p.109 |
 
 `SV_PLC_BUS_ONLINE` and `SV_PLC_IO2_ONLINE` are CNC-written despite the `SV_PLC_` prefix — see
 [resources.md](resources.md#system-variables-sv).
 
 ---
 
+### RPM mode (AC1 drives)
+
+Rows below are drawn from PLC Manual, PDF p.105-120.
+
+| SV_ name | Type | Dir | Meaning | Page |
+|---|---|---|---|---|
+| `SV_RPM_MODE_ACTIVE_1-8` | M | CNC→PLC | 1 = the AC1 drive axis is in RPM mode. | p.105 |
+| `SV_RPM_MODE_ZERO_SPEED_x` (1-8) | M | CNC→PLC | 1 = the AC1 drive axis is at zero speed in RPM mode. | p.105 |
+| `SV_RPM_MODE_ENABLE_x` (1-8) | M | PLC→CNC | Enables RPM mode on an AC1 drive. | p.116 |
+| `SV_RPM_MODE_AXIS_ENABLE_x` (1-8) | M | PLC→CNC | Enables the axis in RPM mode on an AC1 drive. | p.116 |
+| `SV_RPM_MODE_DIRECTION_x` (1-8) | M | PLC→CNC | Sets the RPM-mode direction on an AC1 drive. | p.116 |
+| `SV_RPM_MODE_SPEED_REQUEST_1-8` | F32 | PLC→CNC | The requested RPM speed, for AC1 drives. | p.120 |
+
+---
+
 ## Override and feedrate
 
-Rows below are drawn from PLC Manual, PDF p.102-105, p.107, p.120.
+Rows below are drawn from PLC Manual, PDF p.102-107, p.115, p.117, p.120.
 
 | SV_ name | Type | Dir | Meaning | Page |
 |---|---|---|---|---|
@@ -275,6 +344,11 @@ Rows below are drawn from PLC Manual, PDF p.102-105, p.107, p.120.
 | `SV_PC_FEEDRATE_PERCENTAGE` | I32 | CNC→PLC | 0-200% adjustment for axis motion control, sent for machine parameter 78 bit 1 checking and on-screen display; not needed if `SV_PC_OVERRIDE_CONTROL_FEEDRATE_OVERRIDE` is not SET. Read only once per PLC pass — written externally. | p.103, p.107 |
 | `SV_PC_OVERRIDE_CONTROL_FEEDRATE_OVERRIDE` | M | CNC→PLC | 1 = the Feedrate Override Knob is allowed to change the feedrate on axis motion. | p.104 |
 | `SV_PC_OVERRIDE_CONTROL_FEEDHOLD` | M | CNC→PLC | 1 = Feedhold pauses the G-code program. | p.104 |
+| `SV_PC_OVERRIDE_CONTROL_SPINDLE_OVERRIDE` | M | CNC→PLC | 1 = the Spindle Override keys or knob change the commanded spindle speed. | p.104 |
+| `SV_PLC_OVERRIDE_CONTROL_FEEDRATE_OVERRIDE` | M | PLC→CNC | 1 = the feedrate can be changed from the commanded value by Feedrate Override. | p.115 |
+| `SV_PLC_OVERRIDE_CONTROL_SPINDLE_OVERRIDE` | M | PLC→CNC | 1 = the spindle speed can be changed from the commanded value by Spindle Override. | p.115 |
+| `SV_PLC_OVERRIDE_CONTROL_FEEDHOLD` | M | PLC→CNC | 1 = Feedhold is allowed. | p.115 |
+| `SV_PC_TOGGLE_RAPID_FEED_LINK` | M | CNC→PLC | CNC software SETs this bit when the state of Feed/Rapid Link needs to change; the PLC should RST it after toggling Feed/Rapid Link. | p.106 |
 
 ---
 
@@ -314,11 +388,37 @@ named below.
 
 ## Meters and misc
 
-Row below is drawn from PLC Manual, PDF p.120.
+Rows below are drawn from PLC Manual, PDF p.103, p.106-107, p.111, p.116, p.118-120.
 
 | SV_ name | Type | Dir | Meaning | Page |
 |---|---|---|---|---|
 | `SV_METER_x` (1-16) / `SV_?_AXIS_METER` | F32 | PLC→CNC | Set by the PLC program to -100.0 to 100.0, for CNC software to display as a meter in the DRO. Only the first eight are used; meters 9-16 are reserved for future use. | p.120 |
+| `SV_NV_Wx` (1-10) | I32 | PLC→CNC | Nonvolatile memory: used like any other I32 variable, but the value is retained when power is off; changes are written to non-volatile memory within 2ms. | p.118 |
+| `SV_NV_Fwx` (1-10) | F32 | PLC→CNC | Nonvolatile memory: used like any other F32 variable, but the value is retained when power is off; changes are written to non-volatile memory within 2ms. | p.120 |
+| `SV_PC_LASER_ON` | M | CNC→PLC | Crosshair laser status. CNC software SETs it when the laser is requested on; the PLC should SET it when the laser is on and RST it when off. | p.106-107 |
+| `SV_DAC_OUTPUT_ENABLE_x` (1-8) | M | PLC→CNC | When set, enables control of the analog voltage on the OpticDirect through `SV_DAC_OUTPUT_VALUE_1-8`. | p.116 |
+| `SV_DAC_OUTPUT_VALUE_1-8` | I32 | PLC→CNC | Controls the analog output on an OpticDirect, provided the corresponding `SV_DAC_OUTPUT_ENABLE_1-8` is set. | p.119 |
+| `SV_ETHER1616_ONLINE_BITS` | I32 | CNC→PLC | Online status of the Ether1616 devices; used with `SV_MACHINE_PARAMETER_415` (Ether1616 Configured Bits) to detect changes. | p.111 |
+| `SV_FSIO_1-32` | I32 | CNC→PLC | Fast Synchronous IO (see the M300 commands in the Operator Manual). Read only once per PLC pass — written externally. | p.103, p.107 |
+
+---
+
+## Plasma torch height control (THC)
+
+Rows below are drawn from PLC Manual, PDF p.106-119. The torch-height board is the Centroid
+THC_TXRX; P516 and P517 set the dive detection (PLC Manual, PDF p.106).
+
+| SV_ name | Type | Dir | Meaning | Page |
+|---|---|---|---|---|
+| `SV_THC_CONTROL_ENABLE` | M | PLC→CNC | SET by the PLC to instruct CNC12 to turn on height control movement for the Z axis. | p.117 |
+| `SV_THC_RESET_REQUEST` | M | PLC→CNC | SET by the PLC to instruct CNC12 to reset position after height control movement for the Z axis. | p.117 |
+| `SV_THC_TARGET_VOLTAGE` | I32 | PLC→CNC | Sets the target voltage, in the range 0-4095, when `SV_THC_CONTROL_ENABLE` is SET. | p.119 |
+| `SV_THC_VOLTAGE` | I32 | CNC→PLC | Current voltage reading from the THC_TXRX board. | p.111 |
+| `SV_THC_TORCH_TOUCH` | M | CNC→PLC | The MPU SETs this when torch touch is detected, i.e. when the "Tin" input on a connected Centroid THC_TXRX board is triggered; the information reaches the MPU through the Encoder Index Pulse channel. | p.106 |
+| `SV_THC_DIVE_DETECTED` | M | CNC→PLC | The MPU sets this when a voltage spike is detected, based on P516 and P517; the PLC should react and turn off `SV_THC_CONTROL_ENABLE` where that is valid. | p.106 |
+| `SV_THC_ENCODER_STATUS` | I32 | CNC→PLC | Height-control encoder status from the THC_TXRX board. Bit 0 General Error is typically the only one used, as it reports all error types; bit 1 Negative Delta Error, bit 2 No B6/B7 Detected Error, bit 3 B6/B7 Both Detected Error, bit 4 Zero Delta Error. | p.111 |
+| `SV_VELOCITY_RATIO` | F32 | CNC→PLC | Current ratio, 0 to 1, between actual velocity and requested feedrate velocity. Reliable for both smoothed and non-smoothed motion since V5.22.00; from V5.00.00 to V5.20.00, only for non-smoothing moves. | p.112 |
+| `SV_THC_VELOCITY_XY` | F32 | CNC→PLC | Current XY velocity in encoder counts. The manual marks it Deprecated: it was used for the smoothing-ratio calculation and is no longer needed since V5.22.00. | p.112 |
 
 ---
 
@@ -334,11 +434,14 @@ Row below is drawn from PLC Manual, PDF p.100, p.105.
 
 ## Skin events (CNC skinning API)
 
-Row below is drawn from PLC Manual, PDF p.106.
+Rows below are drawn from PLC Manual, PDF p.106, p.110, p.112.
 
 | SV_ name | Type | Dir | Meaning | Page |
 |---|---|---|---|---|
 | `SV_SKIN_EVENT_1-255` | M | CNC→PLC | Generic events SET/RST by skinning applications via the CNC Skinning API — e.g. the Centroid Virtual Control Panel (VCP), which uses them for virtual jog-panel button states. Convention: `SV_SKIN_EVENT_1` through `SV_SKIN_EVENT_50` map to the fifty keys on a real hardware jog panel, left to right and top to bottom, with `SV_SKIN_EVENT_1` = Spindle+ and `SV_SKIN_EVENT_50` = CYCLE_START. | p.106 |
+| `SV_SKINNING_DATA_W_x` (1-12) | I32 | CNC→PLC | Generic 32-bit integer data set by CNC Skinning API functions and read by the PLC. | p.110 |
+| `SV_SKINNING_DATA_FW_1-11` | F32 | CNC→PLC | Generic 32-bit floating-point data set by CNC Skinning API functions and read by the PLC. | p.112 |
+| `SV_SKINNING_DATA_DFW_1-11` | F64 | CNC→PLC | Generic 64-bit floating-point data set by CNC Skinning API functions and read by the PLC. | p.112 |
 
 ---
 

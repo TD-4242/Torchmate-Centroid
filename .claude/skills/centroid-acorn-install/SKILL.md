@@ -51,13 +51,13 @@ Cautions that recur throughout:
 
 | Reference file | Look here when... |
 | --- | --- |
-| `reference/hardware.md` | You need kit part numbers, board specs (axes/I-O/pulse rate/analog), the DB25 pinout, the I/O map, relay board/power specs, LED meanings, or the bench-test hardware setup |
-| `reference/software-setup.md` | You're configuring Windows, installing CNC12, importing the license file, running the communications stress test, generating a configuration report, or running the spindle bench test |
-| `reference/wiring.md` | You're wiring the cabinet: layout, inputs, outputs, the +24VDC jumper, E-stop, axis drives, home/limit switches, the spindle motor, or the spindle encoder |
-| `reference/wizard.md` | You need a Wizard page's fields, from drive type and I/O definitions through axis config, homing, spindle setup, touch devices, DB25 mapping, control/Wizard preferences (including Custom PLC), and the lube pump |
-| `reference/axis-pairing.md` | You're pairing two axis motors, in software or hardware, or homing/squaring a paired gantry |
-| `reference/commissioning.md` | You're doing final motion tuning: motor testing and direction, coarse/fine Overall Turns Ratio calibration, backlash compensation, or software travel limits |
-| `reference/troubleshooting.md` | You have a symptom to diagnose, need the PLC diagnostic screen, or want a support/knowledge-base link |
+| [reference/hardware.md](reference/hardware.md) | You need kit part numbers, board specs (axes/I-O/pulse rate/analog), the DB25 pinout, the I/O map, relay board/power specs, LED meanings, or the bench-test hardware setup |
+| [reference/software-setup.md](reference/software-setup.md) | You're configuring Windows, installing CNC12, importing the license file, running the communications stress test, generating a configuration report, or running the spindle bench test |
+| [reference/wiring.md](reference/wiring.md) | You're wiring the cabinet: layout, inputs, outputs, the +24VDC jumper, E-stop, axis drives, home/limit switches, the spindle motor, or the spindle encoder |
+| [reference/wizard.md](reference/wizard.md) | You need a Wizard page's fields, from drive type and I/O definitions through axis config, homing, spindle setup, touch devices, DB25 mapping, control/Wizard preferences (including Custom PLC), and the lube pump |
+| [reference/axis-pairing.md](reference/axis-pairing.md) | You're pairing two axis motors, in software or hardware, or homing/squaring a paired gantry |
+| [reference/commissioning.md](reference/commissioning.md) | You're doing final motion tuning: motor testing and direction, coarse/fine Overall Turns Ratio calibration, backlash compensation, or software travel limits |
+| [reference/troubleshooting.md](reference/troubleshooting.md) | You have a symptom to diagnose, need the PLC diagnostic screen, or want a support/knowledge-base link |
 
 ## Useful resources
 
