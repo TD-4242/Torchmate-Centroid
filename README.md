@@ -49,6 +49,9 @@ manual section and page. Skills land one per PR, and each adds its row here.
 | `docs/official/rattm_tst57_integrated_closed_loop_stepper.pdf` | Rattm TST57 integrated closed-loop stepper (NEMA23; Y and Z use the TST57-76P, 2.2 N·m), from the CNCTOPBAOS Amazon listing B0DZBBFF4D |
 | `docs/official/rattm_tst60_integrated_closed_loop_stepper.pdf` | Rattm TST60 integrated closed-loop stepper (NEMA24; paired X uses two TST60-100P, 3.5 N·m), from the CNCTOPBAOS Amazon listing B0DZBLM765 |
 
+> Both motor manuals document DIP switches SW1-SW5 only. The label on the motors defines SW6 as
+> current: OFF = large, ON = low.
+
 ## Tools
 
     python3 tools/check_skill_links.py        # broken links / unknown skill names in skill docs
