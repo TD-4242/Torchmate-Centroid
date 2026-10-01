@@ -1,3 +1,5 @@
+M225 #100 "Manually align/square paired axes and press Cycle Start to continue."
+
 M26/Z
 M26/Y
 M26/X
