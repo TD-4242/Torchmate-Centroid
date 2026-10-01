@@ -46,6 +46,8 @@ manual section and page. Skills land one per PR, and each adds its row here.
 | `docs/official/centroid_plc_programming_manual.pdf` | CNC12 PLC Programming Manual, rev8 07/24/26 |
 | `docs/official/centroid_vcp_users_manual.pdf` | VCP 2.0 Users Manual, rev28 5-14-26 |
 | [`docs/official/centroid-cnc12-router-operator-manual.md`](docs/official/centroid-cnc12-router-operator-manual.md) | CNC12 Router Operators Manual v5.42+ (PDF is local-only; stub has the download) |
+| `docs/official/rattm_tst57_integrated_closed_loop_stepper.pdf` | Rattm TST57 integrated closed-loop stepper (NEMA23; Y and Z use the TST57-76P, 2.2 N·m), from the CNCTOPBAOS Amazon listing B0DZBBFF4D |
+| `docs/official/rattm_tst60_integrated_closed_loop_stepper.pdf` | Rattm TST60 integrated closed-loop stepper (NEMA24; paired X uses two TST60-100P, 3.5 N·m), from the CNCTOPBAOS Amazon listing B0DZBLM765 |
 
 ## Tools
 
