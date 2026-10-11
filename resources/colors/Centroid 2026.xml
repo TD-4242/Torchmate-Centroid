@@ -36,6 +36,8 @@
     <textInactiveGcodeColor>647b9c</textInactiveGcodeColor>
     <textTableOddRowColor>dceffe</textTableOddRowColor>
     <textTableEvenRowColor>6eeffe</textTableEvenRowColor>
+    <textInterconHeaderColor>f0f4ff</textInterconHeaderColor>
+    <textInterconEmphasisColor>ff0000</textInterconEmphasisColor>
     <menuUneditableColor>7f7f7f</menuUneditableColor>
     <eventHighlightBackColor>0f0f0f</eventHighlightBackColor>
     <eventHighlightTextColor>f0f4ff</eventHighlightTextColor>

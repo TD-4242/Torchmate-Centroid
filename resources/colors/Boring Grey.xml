@@ -14,6 +14,7 @@
     <infoTextColor>d1d1d1</infoTextColor>
     <secondInfoTextColor>f0f4ff</secondInfoTextColor>
     <infoWarningTextColor>f0f4ff</infoWarningTextColor>
+    <textHighlightedInfoWarningColor>ffffff</textHighlightedInfoWarningColor>
     <infoWarningHighlightColor>ff0000</infoWarningHighlightColor>
     <infoFavorableHighlightColor>00ff00</infoFavorableHighlightColor>
     <textGcodeDispPastColor>494949</textGcodeDispPastColor>
@@ -35,6 +36,8 @@
     <textInactiveGcodeColor>6c6c6c</textInactiveGcodeColor>
     <textTableOddRowColor>d1d1d1</textTableOddRowColor>
     <textTableEvenRowColor>f0f4ff</textTableEvenRowColor>
+    <textInterconHeaderColor>d1d1d1</textInterconHeaderColor>
+    <textInterconEmphasisColor>ff0000</textInterconEmphasisColor>
     <menuUneditableColor>7f7f7f</menuUneditableColor>
     <eventHighlightBackColor>f0f4ff</eventHighlightBackColor>
     <eventHighlightTextColor>000000</eventHighlightTextColor>
@@ -144,6 +147,32 @@
     <font8000sColor>000000</font8000sColor>
     <background9000sColor>d00000</background9000sColor>
     <font9000sColor>f0f4ff</font9000sColor>
+    <lattooDefaultLineColor>ffffff</lattooDefaultLineColor>
+    <lattooDefaultTextColor>000000</lattooDefaultTextColor>
+    <lattooDefaultTextOutlineColor>ffffff</lattooDefaultTextOutlineColor>
+    <lattooBackgroundColor>ffffff</lattooBackgroundColor>
+    <lattooForegroundColor>000000</lattooForegroundColor>
+    <lattooXOffsetLineColor>ffffff</lattooXOffsetLineColor>
+    <lattooXColOffsetLineColor>000000</lattooXColOffsetLineColor>
+    <lattooXOffsetTextColor>000000</lattooXOffsetTextColor>
+    <lattooXOffsetTextOutlineColor>ffffff</lattooXOffsetTextOutlineColor>
+    <lattooZOffsetLineColor>ffffff</lattooZOffsetLineColor>
+    <lattooZColOffsetLineColor>000000</lattooZColOffsetLineColor>
+    <lattooZOffsetTextColor>000000</lattooZOffsetTextColor>
+    <lattooZOffsetTextOutlineColor>ffffff</lattooZOffsetTextOutlineColor>
+    <lattooToolNumTextColor>000000</lattooToolNumTextColor>
+    <lattooToolNumTextOutlineColor>ffffff</lattooToolNumTextOutlineColor>
+    <lattooToolLineColor>000000</lattooToolLineColor>
+    <lattooToolHeadColor>fff700</lattooToolHeadColor>
+    <lattooToolBodyColor>ffffff</lattooToolBodyColor>
+    <lattooVectorOnValueCircleColor>7f7f7f</lattooVectorOnValueCircleColor>
+    <lattooVectorOffValueOutputLabelColor>007600</lattooVectorOffValueOutputLabelColor>
+    <lattooVectorOnValueOutputLabelColor>000000</lattooVectorOnValueOutputLabelColor>
+    <lattooVectorInvalidOutputLabelColor>d00000</lattooVectorInvalidOutputLabelColor>
+    <lattooVectorOffValueArrowColor>00ff00</lattooVectorOffValueArrowColor>
+    <lattooVectorOnValueArrowColor>000000</lattooVectorOnValueArrowColor>
+    <lattooVectorInvalidColor>ff0000</lattooVectorInvalidColor>
+    <lattooMiddleDotColor>000000</lattooMiddleDotColor>
     <catchAllColor>d1d1d1</catchAllColor>
   </Colors>
 </Table>

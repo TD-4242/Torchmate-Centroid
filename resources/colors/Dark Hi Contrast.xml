@@ -14,6 +14,7 @@
     <infoTextColor>ffffff</infoTextColor>
     <secondInfoTextColor>ffffff</secondInfoTextColor>
     <infoWarningTextColor>3700b3</infoWarningTextColor>
+    <textHighlightedInfoWarningColor>ffffff</textHighlightedInfoWarningColor>
     <infoWarningHighlightColor>cf6679</infoWarningHighlightColor>
     <infoFavorableHighlightColor>03dac6</infoFavorableHighlightColor>
     <textGcodeDispPastColor>ffffff</textGcodeDispPastColor>
@@ -35,6 +36,8 @@
     <textInactiveGcodeColor>7f7f7f</textInactiveGcodeColor>
     <textTableOddRowColor>ffffff</textTableOddRowColor>
     <textTableEvenRowColor>ffffff</textTableEvenRowColor>
+    <textInterconHeaderColor>48b1e7</textInterconHeaderColor>
+    <textInterconEmphasisColor>3700b3</textInterconEmphasisColor>
     <menuUneditableColor>7f7f7f</menuUneditableColor>
     <eventHighlightBackColor>0f0f0f</eventHighlightBackColor>
     <eventHighlightTextColor>48b1e7</eventHighlightTextColor>
