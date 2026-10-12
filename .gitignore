@@ -21,6 +21,10 @@
 !/plcmsg.txt
 !/language.msg
 !/compile.sh
+# Wizard settings: axis config, machine parameters (incl. pairing), Wizard preferences.
+!/cncmcfg.xml
+!/cncm.prm.xml
+!/wizardsettings.xml
 # Only the VCP and color themes under resources/; resources/wizard/ is stock Wizard content.
 !/resources/
 /resources/*

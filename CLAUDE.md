@@ -16,6 +16,8 @@ status.
   its Custom PLC preference is set; see `centroid-plc-programming` before hand-editing.
 - `cncm.hom`, `mfunc*.mac`, `plcmsg.txt`, `language.msg`, `mpucomp.exe` -- home program, M-code
   macros, PLC messages and the PLC compiler, from `c:\cncr`.
+- `cncmcfg.xml`, `cncm.prm.xml`, `wizardsettings.xml` -- axis configuration, machine parameters
+  (including axis pairing) and Wizard preferences.
 - `resources/vcp/`, `resources/colors/` -- the VCP (skins, buttons, images, `options.xml`) and
   color themes.
 - `.claude/skills/` -- generic Centroid skills: `SKILL.md` plus `reference/*.md`.
