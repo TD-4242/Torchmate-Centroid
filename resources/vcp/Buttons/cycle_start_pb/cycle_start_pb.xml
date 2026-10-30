@@ -1,0 +1,8 @@
+<vcp_button>
+	<skin_event_num>50</skin_event_num>
+	<plc_output>
+		<number>1100</number>
+		<image_on>cycle_start_pb_lit.svg</image_on>
+		<image_off>cycle_start_pb.svg</image_off>
+	</plc_output>
+</vcp_button>
