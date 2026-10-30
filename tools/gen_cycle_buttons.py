@@ -61,9 +61,11 @@ def housing(lit):
 '''
 
 def cap_svg(id_, y, colors, stroke, paths, icon_size):
-    # One square cap on a transparent cell, so the housing and lamp show around it.
+    # One square cap on a transparent cell, so the housing and lamp show around it. The near-invisible
+    # full-cell rect keeps the VCP from scaling the drawing to the cap's bounds.
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{BH}" viewBox="0 0 {W} {BH}">
   <defs>{cap(id_, y, y + CAP, *colors)}</defs>
+  <rect width="{W}" height="{BH}" fill="#000000" fill-opacity="0.01"/>
   <rect x="{CX}" y="{y:.1f}" width="{CAP}" height="{CAP}" rx="7" fill="url(#{id_})" stroke="{stroke}" stroke-width="1.5"/>
   <rect x="{CX+6}" y="{y+5:.1f}" width="{CAP-12}" height="10" rx="5" fill="#ffffff" fill-opacity="0.25"/>
   {icon(paths, icon_size, W / 2, y + CAP / 2 + 4)}
