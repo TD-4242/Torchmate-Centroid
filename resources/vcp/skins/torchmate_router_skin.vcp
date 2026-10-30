@@ -126,7 +126,6 @@
   <button row="2" column="2">spindle_cancel</button>
   <button row="2" column="3">set_xy0</button>
   <button row="2" column="4">set_z0</button>
-  <button row="2" column="5">auto_z_plate</button>
   <button row="2" column="6">park</button>
   <button row="3" column="5">goto_xy0</button>
   <button row="3" column="6">limit_switch_defeat</button>
