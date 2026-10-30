@@ -112,10 +112,20 @@
     <row_span>4</row_span>
     <row_start>7</row_start>
     <path>resources\vcp\images\cycle_pushbutton_housing.svg</path>
+    <group>run_lamp_off_group</group>
+  </image>
+  <image>
+    <column_span>2</column_span>
+    <column_start>1</column_start>
+    <row_span>4</row_span>
+    <row_start>7</row_start>
+    <path>resources\vcp\images\cycle_pushbutton_housing_lit.svg</path>
+    <group>run_lamp_on_group</group>
   </image>
   <!-- Group Initialization -->
   <hide_group>
     <group>rapid_group</group>
+    <group>run_lamp_on_group</group>
   </hide_group>
   <!-- Button Interaction -->
   <on_click>

@@ -5,7 +5,13 @@ ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'resources
 # Stock cell pitch is 126 x 116.6 with 100 x 100 cells; each button is 2x2 cells, the housing 2x4.
 W, BH = 226, 216.6
 H = 449.8
-LAMP_OUT = 1100        # UnusedR9C4LED; lit while a job runs once the PLC drives it
+CAP = 182                    # both caps are square
+CX = (W - CAP) / 2
+RED_Y = 14
+LAMP_Y0, LAMP_Y1 = H / 2 - 22, H / 2 + 22      # centered on the housing, straddling the row gap
+GREEN_Y = H - 14 - CAP
+START_Y = H - BH                               # top of the Cycle Start cell in housing coordinates
+LAMP_MEM = 1020        # free MEM bit; lit while a job runs once the PLC drives it
 
 # Stock icon artwork (cycle_start.svg / cycle_cancel.svg, 100x100), reused on the caps.
 FRAME = ('M89.15,45.05v-34.2H54.21L45.05,4.9v5.95h-34.2v34.84l-6.02,9.26h6.02v34.2h34.76l9.34,6.07v-6.07h34.2V54.33'
@@ -25,7 +31,21 @@ def cap(id_, y0, y1, light, mid, dark):
             f'<stop offset="0" stop-color="{light}"/><stop offset="0.5" stop-color="{mid}"/><stop offset="1" stop-color="{dark}"/>'
             '</linearGradient>')
 
-def housing():
+def lamp(lit):
+    lens = ('#fff2b0', '#ffb300', '#d97a00') if lit else ('#8a6a2a', '#5e4210', '#3a2806')
+    ribs = '#ffe28a' if lit else '#4a340c'
+    y0, y1 = LAMP_Y0, LAMP_Y1
+    out = (f'<defs>{cap("lens", y0, y1, *lens)}</defs>'
+           f'<rect x="{CX}" y="{y0:.1f}" width="{CAP}" height="{y1-y0:.1f}" rx="5" fill="url(#lens)" stroke="#2a1a00" stroke-width="1.5"/>')
+    out += ''.join(f'<line x1="{x}" y1="{y0+2:.1f}" x2="{x}" y2="{y1-2:.1f}" stroke="{ribs}" stroke-width="1" stroke-opacity="0.6"/>'
+                   for x in range(int(CX) + 4, int(CX + CAP) - 2, 4))
+    out += ''.join(f'<line x1="{CX+2}" y1="{y0+k:.1f}" x2="{CX+CAP-2}" y2="{y0+k:.1f}" stroke="{ribs}" stroke-width="1" stroke-opacity="0.6"/>'
+                   for k in range(4, int(y1 - y0) - 1, 4))
+    if lit:
+        out += f'<rect x="{CX+5}" y="{y0+4:.1f}" width="{CAP-10}" height="12" rx="5" fill="#ffffff" fill-opacity="0.35"/>'
+    return out
+
+def housing(lit):
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}">
   <defs>
     <linearGradient id="body" x1="0" y1="0" x2="{W}" y2="0" gradientUnits="userSpaceOnUse">
@@ -34,35 +54,17 @@ def housing():
   </defs>
   <rect x="1.5" y="1.5" width="{W-3}" height="{H-3:.1f}" rx="12" fill="url(#body)" stroke="#000000" stroke-width="2"/>
   <rect x="6" y="6" width="{W-12}" height="{H-12:.1f}" rx="9" fill="none" stroke="#4a4a4a" stroke-width="1.2"/>
+  {lamp(lit)}
 </svg>
 '''
 
-def stop_button():
+def cap_svg(id_, y, colors, stroke, paths, icon_size):
+    # One square cap on a transparent cell, so the housing and lamp show around it.
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{BH}" viewBox="0 0 {W} {BH}">
-  <defs>{cap('red', 14, BH, '#ff6b6b', '#e8262c', '#a3161b')}</defs>
-  <rect x="15" y="14" width="{W-30}" height="{BH-14:.1f}" rx="7" fill="url(#red)" stroke="#5c0d10" stroke-width="1.5"/>
-  <rect x="21" y="19" width="{W-42}" height="10" rx="5" fill="#ffffff" fill-opacity="0.25"/>
-  {icon([RING, FRAME], 150, W / 2, 118)}
-</svg>
-'''
-
-def start_button(lit):
-    lens = ('#fff2b0', '#ffb300', '#d97a00') if lit else ('#8a6a2a', '#5e4210', '#3a2806')
-    ribs = '#ffe28a' if lit else '#4a340c'
-    ly0, ly1 = 0, 52
-    rib_lines = ''.join(f'<line x1="{x}" y1="{ly0+2}" x2="{x}" y2="{ly1-2}" stroke="{ribs}" stroke-width="1" stroke-opacity="0.6"/>'
-                        for x in range(20, W - 16, 4))
-    rib_lines += ''.join(f'<line x1="17" y1="{y}" x2="{W-17}" y2="{y}" stroke="{ribs}" stroke-width="1" stroke-opacity="0.6"/>'
-                         for y in range(ly0 + 4, ly1 - 1, 4))
-    glow = (f'<rect x="20" y="4" width="{W-40}" height="13" rx="5" fill="#ffffff" fill-opacity="0.35"/>' if lit else '')
-    gy = ly1 + 8
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{BH}" viewBox="0 0 {W} {BH}">
-  <defs>{cap('lens', ly0, ly1, *lens)}{cap('green', gy, BH - 14, '#4fd17f', '#0f8a45', '#045228')}</defs>
-  <rect x="15" y="{ly0}" width="{W-30}" height="{ly1-ly0}" rx="5" fill="url(#lens)" stroke="#2a1a00" stroke-width="1.5"/>
-  {rib_lines}{glow}
-  <rect x="15" y="{gy}" width="{W-30}" height="{BH-14-gy:.1f}" rx="7" fill="url(#green)" stroke="#02331a" stroke-width="1.5"/>
-  <rect x="21" y="{gy+5}" width="{W-42}" height="9" rx="4.5" fill="#ffffff" fill-opacity="0.25"/>
-  {icon([BAR, FRAME], 120, W / 2, (gy + BH - 14) / 2)}
+  <defs>{cap(id_, y, y + CAP, *colors)}</defs>
+  <rect x="{CX}" y="{y:.1f}" width="{CAP}" height="{CAP}" rx="7" fill="url(#{id_})" stroke="{stroke}" stroke-width="1.5"/>
+  <rect x="{CX+6}" y="{y+5:.1f}" width="{CAP-12}" height="10" rx="5" fill="#ffffff" fill-opacity="0.25"/>
+  {icon(paths, icon_size, W / 2, y + CAP / 2 + 4)}
 </svg>
 '''
 
@@ -71,12 +73,31 @@ def write(path, text):
     os.makedirs(os.path.dirname(path), exist_ok=True)
     open(path, 'w', newline='').write(text.replace('\n', '\r\n'))
 
-write(os.path.join(ROOT, 'images', 'cycle_pushbutton_housing.svg'), housing())
-write(os.path.join(ROOT, 'Buttons', 'cycle_cancel_pb', 'cycle_cancel_pb.svg'), stop_button())
+write(os.path.join(ROOT, 'images', 'cycle_pushbutton_housing.svg'), housing(False))
+write(os.path.join(ROOT, 'images', 'cycle_pushbutton_housing_lit.svg'), housing(True))
+write(os.path.join(ROOT, 'Buttons', 'cycle_cancel_pb', 'cycle_cancel_pb.svg'),
+      cap_svg('red', RED_Y, ('#ff6b6b', '#e8262c', '#a3161b'), '#5c0d10', [RING, FRAME], 140))
 write(os.path.join(ROOT, 'Buttons', 'cycle_cancel_pb', 'cycle_cancel_pb.xml'),
       '<vcp_button>\n\t<skin_event_num>46</skin_event_num>\n</vcp_button>\n')
-write(os.path.join(ROOT, 'Buttons', 'cycle_start_pb', 'cycle_start_pb_lit.svg'), start_button(True))
-write(os.path.join(ROOT, 'Buttons', 'cycle_start_pb', 'cycle_start_pb.svg'), start_button(False))
-write(os.path.join(ROOT, 'Buttons', 'cycle_start_pb', 'cycle_start_pb.xml'),
-      f'<vcp_button>\n\t<skin_event_num>50</skin_event_num>\n\t<plc_output>\n\t\t<number>{LAMP_OUT}</number>\n'
-      '\t\t<image_on>cycle_start_pb_lit.svg</image_on>\n\t\t<image_off>cycle_start_pb.svg</image_off>\n\t</plc_output>\n</vcp_button>\n')
+write(os.path.join(ROOT, 'Buttons', 'cycle_start_pb', 'cycle_start_pb.svg'),
+      cap_svg('green', GREEN_Y - START_Y, ('#4fd17f', '#0f8a45', '#045228'), '#02331a', [BAR, FRAME], 140))
+# The lamp lives in the housing image; the PLC bit swaps the lit and unlit housing groups.
+write(os.path.join(ROOT, 'Buttons', 'cycle_start_pb', 'cycle_start_pb.xml'), f'''<vcp_button>
+\t<skin_event_num>50</skin_event_num>
+  <switch>
+    <trigger>
+      <plc_memory>
+        <number>{LAMP_MEM}</number>
+      </plc_memory>
+    </trigger>
+    <switch_on>
+      <add>run_lamp_on_group</add>
+      <remove>run_lamp_off_group</remove>
+    </switch_on>
+    <switch_off>
+      <add>run_lamp_off_group</add>
+      <remove>run_lamp_on_group</remove>
+    </switch_off>
+  </switch>
+</vcp_button>
+''')

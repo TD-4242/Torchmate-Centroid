@@ -1,8 +1,18 @@
 <vcp_button>
 	<skin_event_num>50</skin_event_num>
-	<plc_output>
-		<number>1100</number>
-		<image_on>cycle_start_pb_lit.svg</image_on>
-		<image_off>cycle_start_pb.svg</image_off>
-	</plc_output>
+  <switch>
+    <trigger>
+      <plc_memory>
+        <number>1020</number>
+      </plc_memory>
+    </trigger>
+    <switch_on>
+      <add>run_lamp_on_group</add>
+      <remove>run_lamp_off_group</remove>
+    </switch_on>
+    <switch_off>
+      <add>run_lamp_off_group</add>
+      <remove>run_lamp_on_group</remove>
+    </switch_off>
+  </switch>
 </vcp_button>
