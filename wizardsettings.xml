@@ -29,6 +29,6 @@
   <CustomToolChangeMacro value="False" />
   <LimitAllIsHomeAll value="False" />
   <Warned value="False" />
-  <CopyProbeInput value="True" />
+  <CopyProbeInput value="False" />
   <CopyProbeDetect value="False" />
 </WizardSettings>
