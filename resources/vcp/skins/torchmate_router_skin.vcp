@@ -156,7 +156,7 @@
   <button row="4" column="4">y_positive</button>
   <button row="4" column="6">z_positive</button>
   <button row="5" column="3">x_negative</button>
-  <button row="5" column="4">tortoise_hare</button>
+  <button row="5" column="4">jog_speed</button>
   <button row="5" column="5">x_positive</button>
   <button row="6" column="4">y_negative</button>
   <button row="6" column="6">z_negative</button>
