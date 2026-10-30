@@ -119,9 +119,9 @@
     <outline_color>#ffffff</outline_color>
   </on_hover>
   <!-- Buttons -->
-  <button row="1" column="1">spindle_auto_man</button>
+  <button row="1" column="1" row_span="2">spindle_toggle</button>
+  <button row="1" column="2">spindle_start</button>
   <button row="1" column="3">park</button>
-  <button row="2" column="1">spindle_start</button>
   <button row="2" column="2">spindle_cancel</button>
   <button row="2" column="3">set_xy0</button>
   <button row="2" column="4">set_z0</button>
