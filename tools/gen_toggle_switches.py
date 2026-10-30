@@ -24,7 +24,7 @@ def hexagon(r):
     return ' '.join(f'{x:.1f},{y:.1f}' for x, y in pts)
 
 def svg(name, up, top, bottom):
-    a_txt, m_txt = ('#FFFFFF', '#5c5c5c') if up else ('#5c5c5c', '#FFFFFF')
+    a_txt, m_txt = ('#FFFFFF', '#9a9a9a') if up else ('#9a9a9a', '#FFFFFF')
     sgn = -1 if up else 1
     ball_y = CY + sgn * 31
     shaft_y = min(CY, ball_y)
