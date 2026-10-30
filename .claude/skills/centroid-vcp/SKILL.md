@@ -123,11 +123,12 @@ so it is easy to revert to a working setup (VCP Manual p.56).
 ## Field-verified facts
 
 Board-agnostic behaviors of CNC12 and the VCP that no manual page states. Each is labeled
-`Field-verified (CNC12, 2026-07)` in the reference file that holds it; the full note is there.
+`Field-verified (CNC12, YYYY-MM)` in the reference file that holds it; the full note is there.
 
 | Field-verified claim | Where |
 | --- | --- |
 | Rendered size tracks the SVG's declared `width`/`height`/artboard -- the graphic is drawn at its declared size rather than stretched to fill the cell, and `row_span`/`column_span` enlarge the *cell* only, so a spanned button needs a full-span artboard. | [button-anatomy.md](reference/button-anatomy.md) |
+| Transparent padding does not count: a button painting a small shape on a transparent artboard is scaled to fill its cell. Inset see-through art with a full-artboard rect at about 1% opacity. | [button-anatomy.md](reference/button-anatomy.md) |
 | `text-anchor` is effectively ignored. Position button text with an explicit `x`. | [button-anatomy.md](reference/button-anatomy.md) |
 | Only a subset of SVG renders. `<filter>` is not supported, gradients must use absolute `userSpaceOnUse` coordinates, and transforms are limited to a single `matrix()`. | [button-anatomy.md](reference/button-anatomy.md) |
 | `image_on` means the PLC bit is on, nothing more -- it does not mean "the active choice". | [visual-states.md](reference/visual-states.md) |
