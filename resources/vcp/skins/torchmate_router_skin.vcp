@@ -122,6 +122,13 @@
     <path>resources\vcp\images\cycle_pushbutton_housing_lit.svg</path>
     <group>run_lamp_on_group</group>
   </image>
+  <image>
+    <column_span>1</column_span>
+    <column_start>2</column_start>
+    <row_span>3</row_span>
+    <row_start>4</row_start>
+    <path>resources\vcp\images\jog_step_plate.svg</path>
+  </image>
   <!-- Group Initialization -->
   <hide_group>
     <group>rapid_group</group>
@@ -150,9 +157,9 @@
   <button row="3" column="1">change_tool</button>
   <button row="3" column="2">tool_check</button>
   <button row="4" column="1" row_span="2">jog_toggle</button>
-  <button row="4" column="2">x1</button>
-  <button row="5" column="2">x10</button>
-  <button row="6" column="2">x100</button>
+  <button row="4" column="2">jog_step_x1</button>
+  <button row="5" column="2">jog_step_x10</button>
+  <button row="6" column="2">jog_step_x100</button>
   <button row="4" column="4">y_positive</button>
   <button row="4" column="6">z_positive</button>
   <button row="5" column="3">x_negative</button>
