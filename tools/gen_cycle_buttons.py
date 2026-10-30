@@ -13,6 +13,7 @@ LAMP_Y0, LAMP_Y1 = H / 2 - LAMP / 2, H / 2 + LAMP / 2   # centered on the housin
 RED_Y = LAMP_Y0 - SEP - CAP
 GREEN_Y = LAMP_Y1 + SEP
 START_Y = H - BH                               # top of the Cycle Start cell in housing coordinates
+EXT = 14                     # housing art extends this far past its four rows, top and bottom
 LAMP_MEM = 1020        # free MEM bit; lit while a job runs once the PLC drives it
 
 # Stock icon artwork (cycle_start.svg / cycle_cancel.svg, 100x100), reused on the caps.
@@ -33,10 +34,10 @@ def cap(id_, y0, y1, light, mid, dark):
             f'<stop offset="0" stop-color="{light}"/><stop offset="0.5" stop-color="{mid}"/><stop offset="1" stop-color="{dark}"/>'
             '</linearGradient>')
 
-def lamp(lit):
+def lamp(lit, dy):
     lens = ('#fff2b0', '#ffb300', '#d97a00') if lit else ('#8a6a2a', '#5e4210', '#3a2806')
     ribs = '#ffe28a' if lit else '#4a340c'
-    y0, y1 = LAMP_Y0, LAMP_Y1
+    y0, y1 = LAMP_Y0 + dy, LAMP_Y1 + dy
     out = (f'<defs>{cap("lens", y0, y1, *lens)}</defs>'
            f'<rect x="{CX}" y="{y0:.1f}" width="{CAP}" height="{y1-y0:.1f}" rx="5" fill="url(#lens)" stroke="#2a1a00" stroke-width="1.5"/>')
     out += ''.join(f'<line x1="{x}" y1="{y0+2:.1f}" x2="{x}" y2="{y1-2:.1f}" stroke="{ribs}" stroke-width="1" stroke-opacity="0.6"/>'
@@ -48,15 +49,16 @@ def lamp(lit):
     return out
 
 def housing(lit):
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}">
+    hh = H + 2 * EXT
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{hh:.1f}" viewBox="0 0 {W} {hh:.1f}">
   <defs>
     <linearGradient id="body" x1="0" y1="0" x2="{W}" y2="0" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#3a3a3a"/><stop offset="0.5" stop-color="#1c1c1c"/><stop offset="1" stop-color="#0a0a0a"/>
     </linearGradient>
   </defs>
-  <rect x="1.5" y="1.5" width="{W-3}" height="{H-3:.1f}" rx="12" fill="url(#body)" stroke="#000000" stroke-width="2"/>
-  <rect x="6" y="6" width="{W-12}" height="{H-12:.1f}" rx="9" fill="none" stroke="#4a4a4a" stroke-width="1.2"/>
-  {lamp(lit)}
+  <rect x="1.5" y="1.5" width="{W-3}" height="{hh-3:.1f}" rx="12" fill="url(#body)" stroke="#000000" stroke-width="2"/>
+  <rect x="6" y="6" width="{W-12}" height="{hh-12:.1f}" rx="9" fill="none" stroke="#4a4a4a" stroke-width="1.2"/>
+  {lamp(lit, EXT)}
 </svg>
 '''
 
