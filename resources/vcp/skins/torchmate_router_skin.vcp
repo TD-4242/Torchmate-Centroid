@@ -163,7 +163,7 @@
   <button row="7" column="1" column_span="2" row_span="2">cycle_cancel_pb</button>
   <button row="9" column="1" column_span="2" row_span="2">cycle_start_pb</button>
   <button row="8" column="3">single_block</button>
-  <button row="8" column="5">feed_hold</button>
+  <button row="9" column="3">feed_hold</button>
   <button row="10" column="4">rapid_feed</button>
   <button row="11" column="1" column_span="3" row_span="3">reset</button>
   <button row="11" column="4" group="feed_group">feedrate_negative</button>
