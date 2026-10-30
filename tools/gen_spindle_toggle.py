@@ -13,57 +13,60 @@ def text(s, y, size, fill):
             f'font-size="{size}" fill="{fill}">{s}</text>')
 
 def hexagon(r):
-    pts = [(CX + r * math.cos(math.radians(30 + 60 * i)), CY + r * math.sin(math.radians(30 + 60 * i))) for i in range(6)]
+    # Flat top and bottom, points left and right.
+    pts = [(CX + r * math.cos(math.radians(60 * i)), CY + r * math.sin(math.radians(60 * i))) for i in range(6)]
     return ' '.join(f'{x:.1f},{y:.1f}' for x, y in pts)
 
 def svg(up):
-    lit_on, lit_off = '#EC1C24', '#81151C'
-    txt_on, txt_off = '#FFFFFF', '#C9A0A3'
-    a_lamp, m_lamp = (lit_on, lit_off) if up else (lit_off, lit_on)
-    a_txt, m_txt = (txt_on, txt_off) if up else (txt_off, txt_on)
-    tip_y = 52 if up else H - 52
+    a_txt, m_txt = ('#FFFFFF', '#5c5c5c') if up else ('#5c5c5c', '#FFFFFF')
     sgn = -1 if up else 1
-    # Bat handle: tapers from the bushing to the ball, with a shadow edge on the right.
-    base_y = CY + sgn * 6
-    lever = f'{CX-6.5:.1f},{base_y:.1f} {CX+6.5:.1f},{base_y:.1f} {CX+4:.1f},{tip_y:.1f} {CX-4:.1f},{tip_y:.1f}'
-    shadow = f'{CX+2:.1f},{base_y:.1f} {CX+6.5:.1f},{base_y:.1f} {CX+4:.1f},{tip_y:.1f} {CX+1.2:.1f},{tip_y:.1f}'
+    ball_y = CY + sgn * 31
+    shaft_y = min(CY, ball_y)
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}">
   <title>spindle_toggle {'auto' if up else 'manual'}</title>
   <defs>
-    <linearGradient id="plate" x1="0" y1="0" x2="100" y2="{H}" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#5a5d61"/>
-      <stop offset="0.5" stop-color="#3a3c3f"/>
-      <stop offset="1" stop-color="#2a2b2d"/>
+    <linearGradient id="rim" x1="0" y1="0" x2="100" y2="{H}" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f2f2f2"/>
+      <stop offset="0.5" stop-color="#b9b9b9"/>
+      <stop offset="1" stop-color="#7d7d7d"/>
     </linearGradient>
-    <radialGradient id="nut" cx="{CX-7}" cy="{CY-7}" r="30" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#f4f4f4"/>
-      <stop offset="0.6" stop-color="#a7aaae"/>
-      <stop offset="1" stop-color="#5d6064"/>
+    <linearGradient id="plate" x1="0" y1="0" x2="0" y2="{H}" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2e2e2e"/>
+      <stop offset="1" stop-color="#050505"/>
+    </linearGradient>
+    <linearGradient id="nut" x1="0" y1="{CY-34}" x2="0" y2="{CY+34}" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#a8a8a8"/>
+      <stop offset="1" stop-color="#4a4a4a"/>
+    </linearGradient>
+    <linearGradient id="nutface" x1="0" y1="{CY-28}" x2="0" y2="{CY+28}" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7c7c7c"/>
+      <stop offset="1" stop-color="#5a5a5a"/>
+    </linearGradient>
+    <radialGradient id="bush" cx="{CX}" cy="{CY-6}" r="22" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#6e6e6e"/>
+      <stop offset="1" stop-color="#262626"/>
     </radialGradient>
-    <linearGradient id="chrome" x1="{CX-7}" y1="0" x2="{CX+7}" y2="0" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#8d9094"/>
-      <stop offset="0.35" stop-color="#ffffff"/>
-      <stop offset="1" stop-color="#6b6e72"/>
+    <linearGradient id="shaft" x1="{CX-9}" y1="0" x2="{CX+9}" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2a2a2a"/>
+      <stop offset="0.4" stop-color="#8a8a8a"/>
+      <stop offset="1" stop-color="#1e1e1e"/>
     </linearGradient>
-    <radialGradient id="ball" cx="{CX-3}" cy="{tip_y-3}" r="10" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#ffffff"/>
-      <stop offset="0.5" stop-color="#c3c6ca"/>
-      <stop offset="1" stop-color="#5d6064"/>
+    <radialGradient id="ball" cx="{CX-4}" cy="{ball_y-8}" r="20" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e6e6e6"/>
+      <stop offset="0.45" stop-color="#8c8c8c"/>
+      <stop offset="1" stop-color="#262626"/>
     </radialGradient>
   </defs>
-  <rect x="3" y="3" width="94" height="{H-6:.1f}" rx="8" fill="url(#plate)" stroke="#111111" stroke-width="2"/>
-  <circle cx="9" cy="9" r="2.2" fill="#8d9094"/><circle cx="91" cy="9" r="2.2" fill="#8d9094"/>
-  <circle cx="9" cy="{H-9:.1f}" r="2.2" fill="#8d9094"/><circle cx="91" cy="{H-9:.1f}" r="2.2" fill="#8d9094"/>
-  <rect x="17" y="14" width="66" height="26" rx="4" fill="{a_lamp}" stroke="#111111" stroke-width="1.5"/>
-  {text('AUTO', 33.5, 17, a_txt)}
-  <rect x="17" y="{H-40:.1f}" width="66" height="26" rx="4" fill="{m_lamp}" stroke="#111111" stroke-width="1.5"/>
-  {text('MAN', H-20.5, 17, m_txt)}
-  <polygon points="{hexagon(22)}" fill="url(#nut)" stroke="#333333" stroke-width="1.5"/>
-  <circle cx="{CX}" cy="{CY}" r="13" fill="#4a4d51" stroke="#222222" stroke-width="1"/>
-  <circle cx="{CX}" cy="{CY}" r="9" fill="url(#chrome)"/>
-  <polygon points="{lever}" fill="url(#chrome)" stroke="#444444" stroke-width="0.8"/>
-  <polygon points="{shadow}" fill="#000000" fill-opacity="0.18"/>
-  <circle cx="{CX}" cy="{tip_y}" r="9" fill="url(#ball)" stroke="#444444" stroke-width="0.8"/>
+  <rect x="1.5" y="1.5" width="97" height="{H-3:.1f}" rx="7" fill="url(#rim)" stroke="#3a3a3a" stroke-width="1"/>
+  <rect x="5" y="5" width="90" height="{H-10:.1f}" rx="5" fill="url(#plate)" stroke="#000000" stroke-width="1"/>
+  {text('AUTO', 52, 20, a_txt)}
+  {text('MAN', H-34, 20, m_txt)}
+  <polygon points="{hexagon(39)}" fill="url(#nut)" stroke="#1a1a1a" stroke-width="1.5"/>
+  <polygon points="{hexagon(33)}" fill="url(#nutface)" stroke="#9c9c9c" stroke-width="1"/>
+  <circle cx="{CX}" cy="{CY}" r="23" fill="#4c4c4c" stroke="#8a8a8a" stroke-width="1.2"/>
+  <circle cx="{CX}" cy="{CY}" r="18" fill="url(#bush)" stroke="#1a1a1a" stroke-width="1"/>
+  <rect x="{CX-9}" y="{shaft_y:.1f}" width="18" height="31" fill="url(#shaft)"/>
+  <circle cx="{CX}" cy="{ball_y:.1f}" r="17" fill="url(#ball)" stroke="#1a1a1a" stroke-width="1"/>
 </svg>
 '''
 os.makedirs(out, exist_ok=True)
