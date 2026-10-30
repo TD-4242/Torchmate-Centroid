@@ -124,6 +124,10 @@ No manual page states the following; they are board-agnostic behaviors of the VC
   numbers right, and to show normal-size art centered in a larger span pad the full-span artboard
   rather than stretching the art. This is why the manual's "rename an existing button `.svg` so
   the size/artboard is correct" advice works.
+- **Field-verified (CNC12, 2026-10):** padding counts only if something is painted there. A button
+  that paints a small shape on an otherwise transparent artboard is scaled up to fill its cell, so
+  shrinking the shape changes nothing. To inset art in a button that must stay see-through (for
+  example over a skin `<image>`), start the SVG with a full-artboard `<rect>` at about 1% opacity.
 - **Field-verified (CNC12, 2026-07):** `text-anchor` is effectively ignored. Position button text
   with an explicit `x` — either convert the text to paths, or compute the left-edge `x` from the
   character advance widths of a font actually installed on the control PC.
