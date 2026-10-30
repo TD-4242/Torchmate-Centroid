@@ -16,13 +16,14 @@ fully working. Modeled on [Acroloc-Centroid](https://github.com/TD-4242/Acroloc-
 ## Machine files
 
 The repo root is also the control PC's `c:\cncr` checkout. `.gitignore` allowlists the machine
-files; CNC12's binaries, parameters, jobs, logs and compiler output stay untracked.
+files; CNC12's binaries, jobs, logs and compiler output stay untracked.
 
 | Path | Contents |
 | --- | --- |
 | `acorn_router_plc.src` | Acorn Wizard-generated PLC source |
 | `cncm.hom`, `mfunc*.mac` | Home program and M-code macros |
 | `plcmsg.txt`, `language.msg`, `mpucomp.exe` | PLC messages, message strings, PLC compiler |
+| `cncmcfg.xml`, `cncm.prm.xml`, `wizardsettings.xml` | Axis configuration, machine parameters (incl. axis pairing), Wizard preferences |
 | `resources/vcp/`, `resources/colors/` | VCP skins, buttons, images and `options.xml`; color themes |
 
 ## Reference skills

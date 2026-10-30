@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WizardSettings>
+  <StartLocation value="TopLeft" />
+  <StartupSize value="Maximized" />
+  <AlwaysOnTop value="False" />
+  <ForcePlcWrite value="False" />
+  <CustomPLC value="False" />
+  <CustomVCP value="False" />
+  <VCPorJogPanel value="0" />
+  <JTechON value="0" />
+  <CustomToolChangeMacro value="False" />
+  <TouchPlateType value="DefineYourOwn" />
+  <ATCWritten value="False" />
+  <HomingFileType value="Simple" />
+  <UnitsWrittenIn value="Imperial" />
+  <IgnoreLimitSwitches value="False" />
+  <ProbeAsRefTool value="" />
+  <GenericTouchPlateDiameter value="3" />
+  <GenericTouchPlateHeight value="0.75" />
+  <GenericTouchPlateBore value="0.75" />
+  <AvidTouchPlateDiameter value="2.2" />
+  <AvidTouchPlateHeight value="1" />
+  <AvidTouchPlateThickness value="0.3125" />
+  <SurfacePlateHeight value="0.75" />
+  <Axis1HardwarePaired value="False" />
+  <Axis2HardwarePaired value="False" />
+  <Axis3HardwarePaired value="False" />
+  <Axis4HardwarePaired value="False" />
+  <CustomToolChangeMacro value="False" />
+  <LimitAllIsHomeAll value="False" />
+  <Warned value="False" />
+  <CopyProbeInput value="False" />
+  <CopyProbeDetect value="False" />
+</WizardSettings>
