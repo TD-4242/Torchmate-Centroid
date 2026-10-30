@@ -5,7 +5,7 @@ ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'resources
 # Stock cell pitch is 126 x 116.6 with 100 x 100 cells; each button is 2x2 cells, the housing 2x4.
 W, BH = 226, 216.6
 H = 449.8
-CAP = 156                    # both caps are square
+CAP = 164                    # both caps are square
 LAMP = CAP * 0.25            # lamp height as a share of a cap
 SEP = 6                      # housing showing between each cap and the lamp
 CX = (W - CAP) / 2
@@ -80,11 +80,11 @@ def write(path, text):
 write(os.path.join(ROOT, 'images', 'cycle_pushbutton_housing.svg'), housing(False))
 write(os.path.join(ROOT, 'images', 'cycle_pushbutton_housing_lit.svg'), housing(True))
 write(os.path.join(ROOT, 'Buttons', 'cycle_cancel_pb', 'cycle_cancel_pb.svg'),
-      cap_svg('red', RED_Y, ('#ff6b6b', '#e8262c', '#a3161b'), '#5c0d10', [RING, FRAME], 120))
+      cap_svg('red', RED_Y, ('#ff6b6b', '#e8262c', '#a3161b'), '#5c0d10', [RING, FRAME], 126))
 write(os.path.join(ROOT, 'Buttons', 'cycle_cancel_pb', 'cycle_cancel_pb.xml'),
       '<vcp_button>\n\t<skin_event_num>46</skin_event_num>\n</vcp_button>\n')
 write(os.path.join(ROOT, 'Buttons', 'cycle_start_pb', 'cycle_start_pb.svg'),
-      cap_svg('green', GREEN_Y - START_Y, ('#4fd17f', '#0f8a45', '#045228'), '#02331a', [BAR, FRAME], 120))
+      cap_svg('green', GREEN_Y - START_Y, ('#4fd17f', '#0f8a45', '#045228'), '#02331a', [BAR, FRAME], 126))
 # The lamp lives in the housing image; the PLC bit swaps the lit and unlit housing groups.
 write(os.path.join(ROOT, 'Buttons', 'cycle_start_pb', 'cycle_start_pb.xml'), f'''<vcp_button>
 \t<skin_event_num>50</skin_event_num>
