@@ -19,10 +19,10 @@ overwrites the edits; see `centroid-plc-programming`, [acorn-plc.md](../.claude/
 
 ### Items
 
-- [ ] **VCP run lamp.** The `cycle_start_pb` button lights its amber lens on `OUT1100`
-  (`UnusedR9C4LED`), which the PLC declares but never drives. Add
-  `IF SV_PROGRAM_RUNNING THEN (UnusedR9C4LED)`. Check on the machine whether the lamp should
-  stay lit during Feed Hold.
+- [ ] **VCP run lamp.** The `cycle_start_pb` button swaps the lit and unlit pushbutton housing
+  on `MEM1020`, which the Wizard PLC leaves unused. Declare it (for example
+  `RunLamp_M IS MEM1020`) and add `IF SV_PROGRAM_RUNNING THEN (RunLamp_M)`. Check on the
+  machine whether the lamp should stay lit during Feed Hold.
 - [ ] **VCP tool-number display.** Get the current tool number into a PLC word the VCP can show:
   call `M107` in the tool-change macro so the number reaches `SV_TOOL_NUMBER` (Router Manual
   §13.38, p.294), copy it into a free `W` word in the PLC, and add a `<plc_word>` display with a
