@@ -1,5 +1,13 @@
+N100 ;Check for open home switch
+IF !#[50000 + #9822] THEN M225 #100 "HomeAll switch tripped!!!\nPlease clear before Homing.\n\nPress Cycle Cancel to end Homing"
+IF !#[50000 + #9822] THEN GOTO 100
+
+;Perform Homing commands
 M225 #100 "Manually align/square paired axes and press Cycle Start to continue."
 
+M92/Z L1
 M26/Z
+M92/Y L1
 M26/Y
+M91/X L1
 M26/X

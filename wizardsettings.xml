@@ -11,7 +11,7 @@
   <CustomToolChangeMacro value="False" />
   <TouchPlateType value="DefineYourOwn" />
   <ATCWritten value="False" />
-  <HomingFileType value="Simple" />
+  <HomingFileType value="Automatic" />
   <UnitsWrittenIn value="Imperial" />
   <IgnoreLimitSwitches value="False" />
   <ProbeAsRefTool value="" />
