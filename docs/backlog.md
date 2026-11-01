@@ -10,9 +10,10 @@ overwrites the edits; see `centroid-plc-programming`, [acorn-plc.md](../.claude/
 
 ### Precondition
 
-- [ ] **Home switches wired and configured.** Home-only switches (no limits): assign the home
-  inputs in the Wizard, switch homing from Simple to switch-based (`cncm.hom`), and update the
-  "No home or limit switches" note in `CLAUDE.md`.
+- [x] **Home switches configured.** `HomeAll` on `IN1` with automatic homing and no limit switches
+  (`9e27b11`, PR 17).
+- [ ] **Confirm homing on the machine.** Run a full home, set the software travel limits, and
+  confirm the touch probe's `IN7` polarity (`P911` no longer inverts it).
 - [ ] **Final Wizard pass, then set Custom PLC.** Leave the `Bench Test` preset, save the
   Wizard once more, commit the regenerated PLC as the custom baseline, then set Custom PLC.
   From then on a Wizard I/O change means regenerating and re-applying the items below by hand.
