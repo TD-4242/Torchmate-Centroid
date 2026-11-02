@@ -156,6 +156,7 @@
   <button row="3" column="6">laser_on_off</button>
   <button row="3" column="1">change_tool</button>
   <button row="3" column="2">tool_check</button>
+  <button row="3" column="3">measure_tool</button>
   <button row="4" column="1" row_span="2">jog_toggle</button>
   <button row="4" column="2">jog_step_x1</button>
   <button row="5" column="2">jog_step_x10</button>
