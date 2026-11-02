@@ -1,0 +1,8 @@
+<vcp_button>
+	<skin_event_num>2</skin_event_num>
+	<plc_output>
+		<number>1058</number>
+		<image_on>spindle_toggle_auto.svg</image_on>
+		<image_off>spindle_toggle_man.svg</image_off>
+	</plc_output>
+</vcp_button>

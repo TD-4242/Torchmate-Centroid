@@ -9,8 +9,8 @@ fully working. Modeled on [Acroloc-Centroid](https://github.com/TD-4242/Acroloc-
 | Sub-project | State |
 | --- | --- |
 | 1. Repo foundation + Acorn skill set | Done: [spec](docs/superpowers/specs/2026-09-14-acorn-skill-set-design.md), [plan](docs/superpowers/plans/2026-09-14-acorn-skill-set.md) |
-| 2. Router baseline (Wizard PLC, macros, config from the control PC) | In progress: control-PC files committed |
-| 3. Router customizations | Not started |
+| 2. Router baseline (Wizard PLC, macros, config from the control PC) | In progress: home switches configured (automatic homing, no limit switches); PLC preset is still `Bench Test` |
+| 3. Router customizations | In progress: custom VCP skin; PLC customizations wait on Custom PLC |
 | 4. Plasma | Not started |
 
 ## Machine files
@@ -24,7 +24,7 @@ files; CNC12's binaries, jobs, logs and compiler output stay untracked.
 | `cncm.hom`, `mfunc*.mac` | Home program and M-code macros |
 | `plcmsg.txt`, `language.msg`, `mpucomp.exe` | PLC messages, message strings, PLC compiler |
 | `cncmcfg.xml`, `cncm.prm.xml`, `wizardsettings.xml` | Axis configuration, machine parameters (incl. axis pairing), Wizard preferences |
-| `resources/vcp/`, `resources/colors/` | VCP skins, buttons, images and `options.xml`; color themes |
+| `resources/vcp/`, `resources/colors/` | VCP skins (active: `torchmate_router_skin`), buttons, images and `options.xml`; color themes |
 
 ## Reference skills
 
@@ -58,3 +58,7 @@ manual section and page. Skills land one per PR, and each adds its row here.
     python3 tools/check_skill_links.py        # broken links / unknown skill names in skill docs
     python3 tools/test_check_skill_links.py   # its tests
     ./compile.sh [-v] [-o out.plc]            # compile-check acorn_router_plc.src (Windows, or Wine)
+    python3 tools/gen_toggle_switches.py      # AUTO/MAN and INCR/CONT toggle switches
+    python3 tools/gen_cycle_buttons.py        # Cycle Cancel / Cycle Start pushbutton and run lamp housing
+    python3 tools/gen_jog_speed_button.py     # turtle/rabbit jog speed button
+    python3 tools/gen_jog_step_switch.py      # x1/x10/x100 3-position switch
