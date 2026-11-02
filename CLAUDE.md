@@ -41,9 +41,8 @@ Read these before "fixing" the config; each is deliberate.
 - **Paired X.** Axis 4 is slaved to X in software (`P554 = 1` in `cncm.prm.xml`); there is no 4th
   axis to jog.
 - **I/O.** `IN1` `HomeAll`, `IN5` `DriveOk` (motor alarm outputs), `IN7` `ToolTouchOffTriggered`
-  (touch probe), `IN8` `EStopOk`. IN5 and IN7 are inverted on the
-  machine (`P911 = 80`, with `P407 = 1`); touch-off works from the tool library (operator-tested
-  2026-11). Tracked `cncm.prm.xml` still shows 16 until the control PC commits its copy.
+  (touch probe), `IN8` `EStopOk`. `P911 = 80` inverts IN5 and IN7
+  (with `P407 = 1`); touch-off works from the tool library (operator-tested 2026-11).
   `OUT1` `NoFaultOut`, `OUT2` `SpinFWD` driving the trim-router contactor (M3 only; no speed or
   reverse control).
 - **Motors.** Rattm TST57/TST60 integrated closed-loop steppers at 4000 counts/turn; manuals in
