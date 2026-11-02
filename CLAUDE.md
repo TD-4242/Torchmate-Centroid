@@ -7,8 +7,46 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Centroid CNC12 source and reference skills for a Torchmate CNC router on a Centroid **Acorn**
 (step/direction, CNC12 Router, install directory `c:\cncr`). The repo holds the machine's CNC12
 files as checked out on the control PC, generic Acorn knowledge skills, the vendor manuals they
-cite, and a link checker. Plasma comes after the router works. See [README.md](README.md) for
+cite, a link checker and generators for the custom VCP buttons. Plasma comes after the router works. See [README.md](README.md) for
 status.
+
+## Commands
+
+```bash
+python3 tools/check_skill_links.py       # links, #anchors, skill names; must print OK: and exit 0
+python3 tools/test_check_skill_links.py  # checker tests (stdlib unittest)
+python3 tools/test_check_skill_links.py CheckTreeTest.test_missing_anchor_is_reported  # one test
+./compile.sh [-v] [-o out.plc]           # compile-check acorn_router_plc.src (Windows, or Wine)
+python3 tools/gen_toggle_switches.py     # regenerate custom VCP art; also gen_cycle_buttons, gen_jog_speed_button, gen_jog_step_switch
+```
+
+Run `compile.sh` after any PLC edit, before loading the program on the machine. A Wizard save
+rewrites `acorn_router_plc.src` and reorders its lines, so a plain diff is mostly noise. This
+shows only the real changes (I/O reassignments and logic):
+
+```bash
+n() { tr -d '\r' | sed 's/[[:space:]]\+/ /g; s/^ //; s/ $//' | grep -v '^;\|^$' | LC_ALL=C sort; }
+diff <(git show HEAD~1:acorn_router_plc.src | n) <(n < acorn_router_plc.src)
+```
+
+## This machine
+
+Read these before "fixing" the config; each is deliberate.
+
+- **Bench testing.** The PLC header's Wizard Drive and PLC Preset are still `Bench Test`.
+- **Home switches only, no limit switches.** All home switches share `HomeAll` on `IN1`. `cncm.hom`
+  prompts (`M225`) to square the gantry by hand, then homes Z+, Y+, X- with `M91`/`M92 L1` and `M26`.
+  Over-travel protection is software travel limits only, so `LimitAll` is unassigned and
+  `cncmcfg.xml` has zero limit inputs.
+- **Paired X.** Axis 4 is slaved to X in software (`P554 = 1` in `cncm.prm.xml`); there is no 4th
+  axis to jog.
+- **I/O.** `IN1` `HomeAll`, `IN5` `DriveOk` (motor alarm outputs), `IN7` `ToolTouchOffTriggered`
+  (touch probe), `IN8` `EStopOk`. `P911 = 16` inverts IN5 only.
+  With `P407 = 1` and IN7 uninverted, touch-off works from the tool library (operator-tested 2026-11).
+  `OUT1` `NoFaultOut`, `OUT2` `SpinFWD` driving the trim-router contactor (M3 only; no speed or
+  reverse control).
+- **Motors.** Rattm TST57/TST60 integrated closed-loop steppers at 4000 counts/turn; manuals in
+  `docs/official/`, and the README notes the DIP switch SW6 the manuals omit.
 
 ## Layout
 
@@ -20,14 +58,14 @@ status.
   (including axis pairing) and Wizard preferences.
 - `resources/vcp/`, `resources/colors/` -- the VCP (skins, buttons, images, `options.xml`) and
   color themes.
+- `resources/vcp/skins/torchmate_router_skin.vcp` -- the active skin, a trimmed copy of the stock
+  rapid skin. `CustomVCP` is still `False`, so a Wizard save can switch back to the stock skin.
+- `tools/gen_*.py` -- generate the custom VCP buttons and images; change the generator, not the SVG.
 - `.claude/skills/` -- generic Centroid skills: `SKILL.md` plus `reference/*.md`.
-- `docs/official/` -- vendor manuals the skills cite. The router manual PDF is gitignored; its
-  `.md` stub holds the download command.
+- `docs/official/` -- vendor manuals: the Centroid manuals the skills cite and the motor manuals.
+  The router manual PDF is gitignored; its `.md` stub holds the download command.
 - `docs/superpowers/specs/`, `docs/superpowers/plans/` -- design specs and implementation
   plans. They are the historical record and may be annotated.
-- `tools/check_skill_links.py` -- link checker (`python3 tools/test_check_skill_links.py`).
-- `compile.sh` -- compile-checks `acorn_router_plc.src` with `mpucomp.exe`, natively or via Wine.
-  Run it after any PLC edit, before loading the program on the machine.
 
 ## Skill conventions
 
@@ -59,5 +97,10 @@ Extract text with `pdftotext -layout -f <pdf page> -l <pdf page> docs/official/<
 
 ## Git
 
-The repo root will double as the CNC12 install directory, so `.gitignore` ignores everything
-and allowlists tracked paths. A new top-level tracked path needs its own `!/path` line.
+The repo root is also the control PC's `c:\cncr` checkout, so `.gitignore` ignores everything and
+allowlists tracked paths. A new top-level tracked path needs its own `!/path` line, and on the
+control PC `git add -A --dry-run` shows exactly what the allowlist will stage.
+
+`.gitattributes` keeps CNC12's text files (`.src`, `.mac`, `.hom`, VCP `.xml`/`.vcp`/`.svg`) CRLF,
+stores the Wizard XML files byte-for-byte (`-text`), and keeps `compile.sh` LF. Give any new
+tracked file a line-ending rule there too.
