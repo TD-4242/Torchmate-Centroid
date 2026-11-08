@@ -1,0 +1,5 @@
+; M6: manual tool change. Parks at the touch-off and re-measures (see mfunc76.mac).
+IF #50001                         ;Prevent lookahead from parsing past here
+IF #4201 || #4202 THEN GOTO 1000  ;Skip if graphing or searching
+M76
+N1000

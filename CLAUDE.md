@@ -45,6 +45,12 @@ Read these before "fixing" the config; each is deliberate.
   (with `P407 = 1`); touch-off works from the tool library (operator-tested 2026-11).
   `OUT1` `NoFaultOut`, `OUT2` `SpinFWD` driving the trim-router contactor (M3 only; no speed or
   reverse control).
+- **Tool changes.** Manual, with tools in collets that can't be pre-measured. `mfunc6.mac` calls
+  `mfunc76.mac`, which parks at the touch-off (`G30 P3`, Z at machine zero), prompts, and writes the
+  measured Z to the tool's height offset. The VCP `measure_tool` button runs the same macro. The
+  macro's `M115` signs assume IN7 is inverted, so change them if that changes. Programs come from
+  VCarve Pro 12.5 with `posts/Torchmate_Centroid_inch.pp`, which outputs `T_ M6`, `G43 H_` (H = T)
+  for every tool and sets `#300` to the tool name for the macro's prompt.
 - **Motors.** Rattm TST57/TST60 integrated closed-loop steppers at 4000 counts/turn; manuals in
   `docs/official/`, and the README notes the DIP switch SW6 the manuals omit.
 
@@ -56,6 +62,7 @@ Read these before "fixing" the config; each is deliberate.
   macros, PLC messages and the PLC compiler, from `c:\cncr`.
 - `cncmcfg.xml`, `cncm.prm.xml`, `wizardsettings.xml` -- axis configuration, machine parameters
   (including axis pairing) and Wizard preferences.
+- `posts/` -- the VCarve post processor; copy it into VCarve's PostP folder after changing it.
 - `resources/vcp/`, `resources/colors/` -- the VCP (skins, buttons, images, `options.xml`) and
   color themes.
 - `resources/vcp/skins/torchmate_router_skin.vcp` -- the active skin, a trimmed copy of the stock

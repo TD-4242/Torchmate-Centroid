@@ -1,0 +1,35 @@
+; M76: load or check the tool at the touch-off, then measure it into its height offset.
+; Also run by the VCP measure_tool button.
+IF #50001                         ;Prevent lookahead from parsing past here
+IF #4201 || #4202 THEN GOTO 1000  ;Skip if graphing or searching
+
+#149 = 0                          ;M225 time; 0 waits for Cycle Start
+; These loop rather than skip, so a job can't continue on the old tool's offset.
+N100
+IF !#23703 THEN M225 #149 "Machine is not homed.\nPress Cycle Cancel, then home the machine."
+IF !#23703 THEN GOTO 100
+N200
+IF #4203 == 0 THEN M225 #149 "No tool number is set.\nPress Cycle Cancel, then set the tool number."
+IF #4203 == 0 THEN GOTO 200
+
+M5
+M25                               ;Z to machine zero, which leaves room for the swap
+G30 P3 G91 X0 Y0                  ;Touch-off location; same return point as P17
+G90
+; #300 is the tool name from the post (posts/Torchmate_Centroid_inch.pp); cleared after measuring.
+M225 #149 "Spindle stopped. Load or check tool %.0f  %s\nthen press Cycle Start to measure it." #4203 #300
+
+; IN7 is inverted on this machine (P911), so a trip reads 1.
+N300
+IF #50001                         ;Read the input only after the prompt
+IF #50007 THEN M225 #149 "Touch-off reads tripped before moving.\nClear it and press Cycle Start, or press Cycle Cancel."
+IF #50007 THEN GOTO 300
+
+M115 /Z P7 F[#9014]               ;Fast until tripped
+M116 /Z P-7 F[#9015]              ;Slow until clear
+M115 /Z P7 F[#9015]               ;Slow until tripped
+IF #50001                         ;Read the position only after the probe move ends
+G10 H[#4203] R[#5023]             ;Z home is the Z reference (P3 bit 1), so offset = machine Z
+#300 = " "
+M25
+N1000
