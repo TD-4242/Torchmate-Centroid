@@ -24,6 +24,7 @@ files; CNC12's binaries, jobs, logs and compiler output stay untracked.
 | `cncm.hom`, `mfunc*.mac` | Home program and M-code macros |
 | `plcmsg.txt`, `language.msg`, `mpucomp.exe` | PLC messages, message strings, PLC compiler |
 | `cncmcfg.xml`, `cncm.prm.xml`, `wizardsettings.xml` | Axis configuration, machine parameters (incl. axis pairing), Wizard preferences |
+| `posts/` | VCarve Pro 12.5 post processor: `T_ M6` and `G43 H_` for every tool, tool name in the M6 prompt |
 | `resources/vcp/`, `resources/colors/` | VCP skins (active: `torchmate_router_skin`), buttons, images and `options.xml`; color themes |
 
 ## Reference skills

@@ -16,7 +16,8 @@ M5
 M25                               ;Z to machine zero, which leaves room for the swap
 G30 P3 G91 X0 Y0                  ;Touch-off location; same return point as P17
 G90
-M225 #149 "Spindle stopped. Load or check tool %.0f, then press Cycle Start to measure it." #4203
+; #300 is the tool name from the post (posts/Torchmate_Centroid_inch.pp); cleared after measuring.
+M225 #149 "Spindle stopped. Load or check tool %.0f  %s\nthen press Cycle Start to measure it." #4203 #300
 
 ; IN7 is inverted on this machine (P911), so a trip reads 1.
 N300
@@ -29,5 +30,6 @@ M116 /Z P-7 F[#9015]              ;Slow until clear
 M115 /Z P7 F[#9015]               ;Slow until tripped
 IF #50001                         ;Read the position only after the probe move ends
 G10 H[#4203] R[#5023]             ;Z home is the Z reference (P3 bit 1), so offset = machine Z
+#300 = " "
 M25
 N1000

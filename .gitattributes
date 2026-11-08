@@ -14,6 +14,7 @@
 /resources/**/*.vcp text eol=crlf
 /resources/**/*.svg text eol=crlf
 /resources/**/*.xaml text eol=crlf
+/posts/*.pp text eol=crlf
 
 # CNC12 writes these with mixed line endings; store them byte-for-byte.
 /cncmcfg.xml -text
