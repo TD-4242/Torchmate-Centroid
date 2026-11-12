@@ -5,7 +5,7 @@
   <AlwaysOnTop value="False" />
   <ForcePlcWrite value="False" />
   <CustomPLC value="False" />
-  <CustomVCP value="False" />
+  <CustomVCP value="True" />
   <VCPorJogPanel value="0" />
   <JTechON value="0" />
   <CustomToolChangeMacro value="False" />
